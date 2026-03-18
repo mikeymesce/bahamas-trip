@@ -244,66 +244,71 @@
         })(dayToggles[t]);
     }
 
-    // ========== PACKING LIST ==========
-    var PACKING_KEY = 'bahamas_packing_list';
-    var DEFAULT_ITEMS = [
-        { text: 'Disposable camera', checked: false }
-    ];
+    // ========== PACKING LIST (Supabase) ==========
+    var SUPA_URL = 'https://bvnkzimwskuruhdmzpbt.supabase.co';
+    var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2bmt6aW13c2t1cnVoZG16cGJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MTc3NzgsImV4cCI6MjA4OTE5Mzc3OH0.6layiAl75f5YeAQRzU55j41JBAS9_e1QL0tpq-l3DpE';
+    var SUPA_TABLE = SUPA_URL + '/rest/v1/bahamas_packing';
+    var supaHeaders = {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+    };
 
-    function loadPackingList() {
-        var saved = localStorage.getItem(PACKING_KEY);
-        if (saved) {
-            try { return JSON.parse(saved); } catch(e) {}
-        }
-        return DEFAULT_ITEMS.slice();
+    function fetchPackingList() {
+        return fetch(SUPA_TABLE + '?order=created_at.asc', {
+            headers: supaHeaders
+        }).then(function(r) { return r.json(); });
     }
 
-    function savePackingList(items) {
-        localStorage.setItem(PACKING_KEY, JSON.stringify(items));
-    }
-
-    function renderPackingList() {
-        var items = loadPackingList();
+    function renderPackingItems(items) {
         var ul = document.getElementById('packing-items');
         if (!ul) return;
         ul.innerHTML = '';
 
         for (var i = 0; i < items.length; i++) {
-            (function(index) {
+            (function(item) {
                 var li = document.createElement('li');
-                if (items[index].checked) li.classList.add('checked');
+                if (item.checked) li.classList.add('checked');
 
                 var check = document.createElement('div');
-                check.className = 'packing-check' + (items[index].checked ? ' done' : '');
-                check.textContent = items[index].checked ? '✓' : '';
+                check.className = 'packing-check' + (item.checked ? ' done' : '');
+                check.textContent = item.checked ? '✓' : '';
                 check.addEventListener('click', function() {
-                    items[index].checked = !items[index].checked;
-                    savePackingList(items);
-                    renderPackingList();
+                    fetch(SUPA_TABLE + '?id=eq.' + item.id, {
+                        method: 'PATCH',
+                        headers: supaHeaders,
+                        body: JSON.stringify({ checked: !item.checked })
+                    }).then(function() { loadAndRender(); });
                 });
 
                 var text = document.createElement('span');
                 text.className = 'packing-text';
-                text.textContent = items[index].text;
+                text.textContent = item.text;
 
                 var del = document.createElement('span');
                 del.className = 'packing-delete';
                 del.textContent = '×';
                 del.addEventListener('click', function() {
-                    items.splice(index, 1);
-                    savePackingList(items);
-                    renderPackingList();
+                    fetch(SUPA_TABLE + '?id=eq.' + item.id, {
+                        method: 'DELETE',
+                        headers: supaHeaders
+                    }).then(function() { loadAndRender(); });
                 });
 
                 li.appendChild(check);
                 li.appendChild(text);
                 li.appendChild(del);
                 ul.appendChild(li);
-            })(i);
+            })(items[i]);
         }
     }
 
-    renderPackingList();
+    function loadAndRender() {
+        fetchPackingList().then(renderPackingItems);
+    }
+
+    loadAndRender();
 
     var packingInput = document.getElementById('packing-input');
     var packingAddBtn = document.getElementById('packing-add-btn');
@@ -312,11 +317,12 @@
         if (!packingInput) return;
         var val = packingInput.value.trim();
         if (!val) return;
-        var items = loadPackingList();
-        items.push({ text: val, checked: false });
-        savePackingList(items);
         packingInput.value = '';
-        renderPackingList();
+        fetch(SUPA_TABLE, {
+            method: 'POST',
+            headers: supaHeaders,
+            body: JSON.stringify({ text: val })
+        }).then(function() { loadAndRender(); });
     }
 
     if (packingAddBtn) {
