@@ -16,7 +16,7 @@
     --pink: #e8839a;
     --pink-light: #f4b4c4;
     --pink-bg: #fdf0f3;
-    --pink-gradient: linear-gradient(180deg, #b2ebf2 0%, #e0f7fa 25%, #f0fbff 50%, #faf6f0 100%);
+    --hero-gradient: linear-gradient(135deg, #023e8a 0%, #0077b6 30%, #00b4d8 60%, #48cae4 100%);
 
     /* Category colors */
     --cat-beach: #26c6da;
@@ -81,14 +81,15 @@ button {
 /* ========== HERO ========== */
 
 .hero {
-    background: var(--pink-gradient);
+    background: var(--hero-gradient);
     text-align: center;
-    padding: 5rem 1.5rem 3.5rem;
+    padding: 5rem 1.5rem 5rem;
     position: relative;
     min-height: 100svh;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .hero-content {
@@ -101,54 +102,58 @@ button {
     font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: #0097a7;
-    margin-bottom: 1rem;
+    color: var(--white);
+    opacity: 0.9;
+    margin-bottom: 0.75rem;
 }
 
 .hero-title {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Pacifico', cursive;
     font-size: 3.2rem;
-    font-weight: 600;
-    color: var(--text);
+    font-weight: 400;
+    color: var(--white);
     line-height: 1.15;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.15);
 }
 
 .hero-destinations {
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--white);
+    opacity: 0.9;
+    margin-bottom: 1.75rem;
     letter-spacing: 0.5px;
 }
 
 .hero-destinations .dot {
     margin: 0 0.3rem;
-    color: var(--pink);
+    opacity: 0.7;
 }
 
 .countdown {
     display: flex;
     gap: 0.75rem;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .cd-unit {
-    background: rgba(0, 151, 167, 0.1);
+    background: rgba(255,255,255,0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: var(--radius-sm);
     padding: 0.6rem 0.8rem;
-    min-width: 60px;
+    min-width: 62px;
     text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
 }
 
 .cd-unit span {
     display: block;
     font-size: 1.6rem;
     font-weight: 700;
-    color: #0097a7;
+    color: var(--white);
     line-height: 1;
 }
 
@@ -156,7 +161,7 @@ button {
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.8);
     font-weight: 600;
 }
 
@@ -164,14 +169,14 @@ button {
     font-size: 0.88rem;
     font-weight: 300;
     font-style: italic;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.75);
     margin-bottom: 2rem;
 }
 
 .hero-btn {
     display: inline-block;
-    background: var(--text);
-    color: var(--white);
+    background: var(--white);
+    color: var(--text);
     font-size: 0.9rem;
     font-weight: 600;
     padding: 0.85rem 2rem;
@@ -199,7 +204,7 @@ button {
 }
 
 .hero-arrow {
-    color: var(--text-muted);
+    color: var(--white);
     opacity: 0.5;
     animation: bounceDown 2s ease infinite;
     cursor: pointer;
@@ -498,6 +503,17 @@ main {
     color: var(--pink);
     font-weight: 600;
     margin-bottom: 0.25rem;
+}
+
+.cottage-link {
+    color: var(--pink);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: opacity var(--transition);
+}
+
+.cottage-link:hover {
+    opacity: 0.7;
 }
 
 .accom-dates {
