@@ -1,12 +1,12 @@
 // Service Worker — Eleuthera Trip (Offline Support)
-const CACHE_NAME = 'eleuthera-v1';
+const CACHE_NAME = 'eleuthera-v2';
 const URLS_TO_CACHE = [
     '/',
     '/index.html',
     '/style.css',
     '/script.js',
     '/manifest.json',
-    'https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Pacifico&display=swap'
+    'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap'
 ];
 
 // Install — cache core files
@@ -39,7 +39,6 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('fetch', function(event) {
     event.respondWith(
         fetch(event.request).then(function(response) {
-            // Clone and cache successful responses
             if (response && response.status === 200) {
                 var responseClone = response.clone();
                 caches.open(CACHE_NAME).then(function(cache) {

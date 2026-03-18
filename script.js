@@ -10,168 +10,229 @@
     function updateCountdown() {
         var now = new Date();
         var diff = TRIP_DATE - now;
+        var el = document.getElementById('countdown-text');
+        if (!el) return;
 
         if (diff <= 0) {
-            document.getElementById('cd-days').textContent = '0';
-            document.getElementById('cd-hours').textContent = '0';
-            document.getElementById('cd-mins').textContent = '0';
-            document.getElementById('cd-secs').textContent = '0';
-            document.querySelector('.hero-tagline').textContent = 'The trip is HERE! Have an amazing time!';
+            el.textContent = "You're in paradise!";
             return;
         }
 
         var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        var secs = Math.floor((diff % (1000 * 60)) / 1000);
 
-        document.getElementById('cd-days').textContent = days;
-        document.getElementById('cd-hours').textContent = hours;
-        document.getElementById('cd-mins').textContent = mins;
-        document.getElementById('cd-secs').textContent = secs;
+        if (days === 0) {
+            var hours = Math.floor(diff / (1000 * 60 * 60));
+            el.textContent = hours + ' hours until takeoff';
+        } else if (days === 1) {
+            el.textContent = '1 day until takeoff';
+        } else {
+            el.textContent = days + ' days until takeoff';
+        }
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-    // ========== COLLAPSIBLE TIMELINE ITEMS ==========
-    document.querySelectorAll('.tl-content h3').forEach(function(h3) {
-        h3.addEventListener('click', function() {
-            var details = this.nextElementSibling;
-            if (!details || !details.classList.contains('tl-details')) return;
-
-            var isOpen = details.classList.contains('open');
-            if (isOpen) {
-                details.classList.remove('open');
-                this.classList.remove('expanded');
-            } else {
-                details.classList.add('open');
-                this.classList.add('expanded');
-            }
-        });
-    });
+    setInterval(updateCountdown, 60000);
 
     // ========== MOOD SELECTOR ==========
-    document.querySelectorAll('.mood-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var mood = this.dataset.mood;
-            var day = this.dataset.day;
+    var moodBtns = document.querySelectorAll('.mood-card');
+    for (var i = 0; i < moodBtns.length; i++) {
+        moodBtns[i].addEventListener('click', function() {
+            var mood = this.getAttribute('data-mood');
+            var day = this.getAttribute('data-day');
 
-            var siblings = this.parentElement.querySelectorAll('.mood-btn');
-            siblings.forEach(function(s) { s.classList.remove('active'); });
+            // Toggle active state on siblings
+            var siblings = this.parentElement.querySelectorAll('.mood-card');
+            for (var j = 0; j < siblings.length; j++) {
+                siblings[j].classList.remove('active');
+            }
             this.classList.add('active');
 
+            // Show/hide mood content
             var adventureEl = document.getElementById('mood-' + day + '-adventure');
             var chillEl = document.getElementById('mood-' + day + '-chill');
 
-            if (mood === 'adventure') {
-                adventureEl.style.display = 'block';
-                chillEl.style.display = 'none';
-            } else {
-                adventureEl.style.display = 'none';
-                chillEl.style.display = 'block';
-            }
-        });
-    });
-
-    // ========== STICKY NAV — SCROLL SHADOW ==========
-    var nav = document.getElementById('sticky-nav');
-
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 100) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-    }, { passive: true });
-
-    // ========== STICKY NAV — ACTIVE STATE ==========
-    var sections = document.querySelectorAll('.day-section, .info-section');
-    var navLinks = document.querySelectorAll('.nav-link');
-
-    function updateActiveNav() {
-        var scrollPos = window.scrollY + 120;
-
-        sections.forEach(function(section) {
-            var top = section.offsetTop;
-            var bottom = top + section.offsetHeight;
-            var id = section.id;
-
-            if (scrollPos >= top && scrollPos < bottom) {
-                navLinks.forEach(function(link) {
-                    link.classList.remove('active');
-                    var href = link.getAttribute('href');
-                    if (href === '#' + id) {
-                        link.classList.add('active');
-                    }
-                    if (href === '#info' && ['info', 'quickref'].includes(id)) {
-                        link.classList.add('active');
-                    }
-                    if (href === '#flights' && ['flights', 'accommodation', 'costs', 'restaurants'].includes(id)) {
-                        link.classList.add('active');
-                    }
-                });
+            if (adventureEl && chillEl) {
+                if (mood === 'adventure') {
+                    adventureEl.style.display = 'block';
+                    chillEl.style.display = 'none';
+                } else {
+                    adventureEl.style.display = 'none';
+                    chillEl.style.display = 'block';
+                }
             }
         });
     }
 
-    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    // ========== STICKY NAV — SCROLL SHADOW + ACTIVE STATE ==========
+    var nav = document.getElementById('day-nav');
+    var dayTabs = document.querySelectorAll('.day-tab');
+    var allSections = [];
+
+    // Build section map
+    for (var k = 0; k < dayTabs.length; k++) {
+        var targetId = dayTabs[k].getAttribute('data-target');
+        var section = document.getElementById(targetId);
+        if (section) {
+            allSections.push({ el: section, tab: dayTabs[k] });
+        }
+    }
+
+    function onScroll() {
+        // Shadow on nav
+        if (nav) {
+            if (window.pageYOffset > 200) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }
+
+        // Active tab
+        var scrollPos = window.scrollY + 150;
+        var activeTab = null;
+
+        for (var m = 0; m < allSections.length; m++) {
+            var rect = allSections[m].el.getBoundingClientRect();
+            var top = rect.top + window.scrollY;
+            var bottom = top + allSections[m].el.offsetHeight;
+
+            if (scrollPos >= top && scrollPos < bottom) {
+                activeTab = allSections[m].tab;
+            }
+        }
+
+        if (activeTab) {
+            for (var n = 0; n < dayTabs.length; n++) {
+                dayTabs[n].classList.remove('active');
+            }
+            activeTab.classList.add('active');
+
+            // Scroll the active tab into view in the nav
+            var navInner = document.querySelector('.day-nav-inner');
+            if (navInner) {
+                var tabLeft = activeTab.offsetLeft;
+                var tabWidth = activeTab.offsetWidth;
+                var navWidth = navInner.offsetWidth;
+                var scrollLeft = tabLeft - (navWidth / 2) + (tabWidth / 2);
+                navInner.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+            }
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // ========== HERO ARROW CLICK ==========
+    var heroArrow = document.getElementById('hero-arrow');
+    if (heroArrow) {
+        heroArrow.addEventListener('click', function() {
+            var target = document.getElementById('flights-section');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
 
     // ========== COPY TO CLIPBOARD ==========
-    window.copyText = function(elementId) {
-        var el = document.getElementById(elementId);
-        var text = el.querySelector('span').textContent.trim();
-        var btn = el.querySelector('.copy-btn') || el.parentElement.querySelector('.copy-btn');
+    window.copyToClipboard = function(text, btn) {
+        if (!btn) return;
 
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(text).then(function() {
-                btn.textContent = 'Copied!';
-                btn.classList.add('copied');
-                setTimeout(function() {
-                    btn.textContent = 'Copy';
-                    btn.classList.remove('copied');
-                }, 2000);
+                showCopied(btn);
+            }).catch(function() {
+                fallbackCopy(text, btn);
             });
         } else {
-            var textarea = document.createElement('textarea');
-            textarea.value = text;
-            textarea.style.position = 'fixed';
-            textarea.style.left = '-9999px';
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand('copy');
-                btn.textContent = 'Copied!';
-                btn.classList.add('copied');
-                setTimeout(function() {
-                    btn.textContent = 'Copy';
-                    btn.classList.remove('copied');
-                }, 2000);
-            } catch (e) {
-                btn.textContent = 'Failed';
-            }
-            document.body.removeChild(textarea);
+            fallbackCopy(text, btn);
         }
     };
+
+    function fallbackCopy(text, btn) {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            showCopied(btn);
+        } catch (e) {
+            btn.textContent = 'Failed';
+        }
+        document.body.removeChild(textarea);
+    }
+
+    function showCopied(btn) {
+        var orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+            btn.textContent = orig;
+            btn.classList.remove('copied');
+        }, 2000);
+    }
+
+    // ========== BOTTOM SHEET ==========
+    var fab = document.getElementById('fab-btn');
+    var overlay = document.getElementById('sheet-overlay');
+    var sheet = document.getElementById('bottom-sheet');
+
+    function openSheet() {
+        if (overlay) overlay.classList.add('visible');
+        if (sheet) sheet.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSheet() {
+        if (overlay) overlay.classList.remove('visible');
+        if (sheet) sheet.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    if (fab) fab.addEventListener('click', openSheet);
+    if (overlay) overlay.addEventListener('click', closeSheet);
+
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeSheet();
+    });
+
+    // Swipe down to close
+    var sheetStartY = 0;
+    if (sheet) {
+        sheet.addEventListener('touchstart', function(e) {
+            sheetStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        sheet.addEventListener('touchmove', function(e) {
+            var deltaY = e.touches[0].clientY - sheetStartY;
+            // Only close if swiped down significantly and sheet is at scroll top
+            if (deltaY > 80 && sheet.scrollTop <= 0) {
+                closeSheet();
+            }
+        }, { passive: true });
+    }
 
     // ========== INTERSECTION OBSERVER — FADE IN ==========
     if ('IntersectionObserver' in window) {
         var observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    observer.unobserve(entry.target);
+            for (var p = 0; p < entries.length; p++) {
+                if (entries[p].isIntersecting) {
+                    entries[p].target.style.opacity = '1';
+                    entries[p].target.style.transform = 'translateY(0)';
+                    observer.unobserve(entries[p].target);
                 }
-            });
-        }, { threshold: 0.1 });
+            }
+        }, { threshold: 0.05 });
 
-        document.querySelectorAll('.day-section, .info-section').forEach(function(section) {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(20px)';
-            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(section);
-        });
+        var animSections = document.querySelectorAll('.day-section, .content-section');
+        for (var q = 0; q < animSections.length; q++) {
+            animSections[q].style.opacity = '0';
+            animSections[q].style.transform = 'translateY(20px)';
+            animSections[q].style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(animSections[q]);
+        }
     }
 
     // ========== SERVICE WORKER REGISTRATION ==========
@@ -182,4 +243,5 @@
             });
         });
     }
+
 })();

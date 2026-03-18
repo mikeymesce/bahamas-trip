@@ -5,352 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mike & Morgan — Eleuthera 2026</title>
     <meta name="description" content="Mike & Morgan's Bahamas trip itinerary — Eleuthera, May 5-9, 2026">
-    <meta name="theme-color" content="#0077b6">
+    <meta name="theme-color" content="#e8839a">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌴</text></svg>">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌴</text></svg>">
+    <link rel="apple-touch-icon" href="icon-192.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- ========== HERO ========== -->
 <header class="hero" id="top">
-    <div class="hero-overlay"></div>
     <div class="hero-content">
-        <p class="hero-pretitle">May 5 – 9, 2026</p>
-        <h1 class="hero-title"><span class="script-font">Mike & Morgan</span></h1>
-        <p class="hero-subtitle">Eleuthera, Bahamas</p>
-        <div class="countdown" id="countdown">
-            <div class="cd-unit"><span id="cd-days">--</span><small>days</small></div>
-            <div class="cd-unit"><span id="cd-hours">--</span><small>hrs</small></div>
-            <div class="cd-unit"><span id="cd-mins">--</span><small>min</small></div>
-            <div class="cd-unit"><span id="cd-secs">--</span><small>sec</small></div>
+        <p class="hero-date">MAY 5 &ndash; 9, 2026</p>
+        <h1 class="hero-title">Mike & Morgan</h1>
+        <p class="hero-destinations">Eleuthera <span class="dot">&middot;</span> Bahamas</p>
+        <div class="countdown-pill" id="countdown">
+            <span id="countdown-text">-- days until takeoff</span>
         </div>
-        <p class="hero-tagline">Pink sand. Turquoise water. Zero plans to check email.</p>
-    </div>
-    <div class="hero-wave">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,64 C360,120 720,0 1080,64 C1260,96 1380,80 1440,64 L1440,120 L0,120 Z" fill="var(--sand)"/>
-        </svg>
+        <a href="#flights-section" class="hero-btn">View Itinerary</a>
+        <div class="hero-arrow" id="hero-arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
     </div>
 </header>
 
-<!-- ========== STICKY NAV ========== -->
-<nav class="sticky-nav" id="sticky-nav">
-    <div class="nav-inner">
-        <a href="#day1" class="nav-link active" data-day="1">Day 1</a>
-        <a href="#day2" class="nav-link" data-day="2">Day 2</a>
-        <a href="#day3" class="nav-link" data-day="3">Day 3</a>
-        <a href="#day4" class="nav-link" data-day="4">Day 4</a>
-        <a href="#day5" class="nav-link" data-day="5">Day 5</a>
-        <a href="#flights" class="nav-link">Flights</a>
-        <a href="#info" class="nav-link">Info</a>
+<!-- ========== STICKY DAY NAV ========== -->
+<nav class="day-nav" id="day-nav">
+    <div class="day-nav-inner">
+        <a href="#flights-section" class="day-tab" data-target="flights-section">
+            <span class="day-tab-num">&#9992;</span>
+            <span class="day-tab-label">Flights</span>
+        </a>
+        <a href="#day-0" class="day-tab" data-target="day-0">
+            <span class="day-tab-num">D0</span>
+            <span class="day-tab-date">May 5</span>
+            <span class="day-tab-label">Travel</span>
+        </a>
+        <a href="#day-1" class="day-tab" data-target="day-1">
+            <span class="day-tab-num">D1</span>
+            <span class="day-tab-date">May 6</span>
+            <span class="day-tab-label">Explore</span>
+        </a>
+        <a href="#day-2" class="day-tab" data-target="day-2">
+            <span class="day-tab-num">D2</span>
+            <span class="day-tab-date">May 7</span>
+            <span class="day-tab-label">Water</span>
+        </a>
+        <a href="#day-3" class="day-tab" data-target="day-3">
+            <span class="day-tab-num">D3</span>
+            <span class="day-tab-date">May 8</span>
+            <span class="day-tab-label">Fish Fry</span>
+        </a>
+        <a href="#day-4" class="day-tab" data-target="day-4">
+            <span class="day-tab-num">D4</span>
+            <span class="day-tab-date">May 9</span>
+            <span class="day-tab-label">Home</span>
+        </a>
+        <a href="#restaurants" class="day-tab" data-target="restaurants">
+            <span class="day-tab-num">&#127860;</span>
+            <span class="day-tab-label">Food</span>
+        </a>
     </div>
 </nav>
 
-<!-- ========== MAIN CONTENT ========== -->
+<!-- ========== MAIN ========== -->
 <main>
 
-    <!-- ===== DAY 1 ===== -->
-    <section class="day-section" id="day1">
-        <div class="day-header">
-            <div class="day-badge">1</div>
-            <div>
-                <h2>Arrival Day</h2>
-                <p class="day-date">Tuesday, May 5</p>
-            </div>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">11:15 AM</div>
-                <div class="tl-content">
-                    <h3>Land at Governor's Harbour</h3>
-                    <div class="tl-details">
-                        <p>Wheels down in paradise. Pick up the car (arranged through Mike's cousin) near GHB airport.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">~12:00 PM</div>
-                <div class="tl-content">
-                    <h3>Grocery Run</h3>
-                    <div class="tl-details">
-                        <p>Stop at <strong>Burrows One Stop</strong> or <strong>Eleuthera Supply</strong> (both 5-8 min drive). Stock up on breakfast/lunch supplies + <em>bottled water</em> — don't drink the tap!</p>
-                    </div>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">~1:30 PM</div>
-                <div class="tl-content">
-                    <h3>Settle Into the Cottage</h3>
-                    <div class="tl-details">
-                        <p>Check in at <strong>Shooting Star</strong> at Bird of Paradise. 2 bed / 3 bath, infinity pool, beachfront pink sand. Explore Bird Point Beach right out front — snorkel gear included.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">Evening</div>
-                <div class="tl-content">
-                    <h3>Dinner at Tippy's</h3>
-                    <div class="tl-details">
-                        <p>Steps from the cottage — easy first night. Great food, island vibes.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== DAY 2 ===== -->
-    <section class="day-section" id="day2">
-        <div class="day-header">
-            <div class="day-badge">2</div>
-            <div>
-                <h2>First Full Day</h2>
-                <p class="day-date">Wednesday, May 6</p>
-            </div>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">Morning</div>
-                <div class="tl-content">
-                    <h3>Breakfast at the Cottage</h3>
-                    <div class="tl-details">
-                        <p>Cook up something good in the full kitchen. Coffee on the patio with an ocean view.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <p class="mood-prompt">What's the vibe today?</p>
-        <div class="mood-selector">
-            <button class="mood-btn mood-adventure active" data-mood="adventure" data-day="2">
-                <span class="mood-icon">🤿</span>
-                <span class="mood-label">Adventure</span>
-            </button>
-            <button class="mood-btn mood-chill" data-mood="chill" data-day="2">
-                <span class="mood-icon">🏖️</span>
-                <span class="mood-label">Chill</span>
-            </button>
-        </div>
-        <div class="mood-content" id="mood-2-adventure" style="display:block;">
-            <div class="timeline">
-                <div class="tl-item">
-                    <div class="tl-time">Mid-day</div>
-                    <div class="tl-content">
-                        <h3>Glass Window Bridge</h3>
-                        <div class="tl-details">
-                            <p>Drive north to see where the dark Atlantic meets the turquoise Caribbean — one of the most photographed spots in the Bahamas.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tl-item">
-                    <div class="tl-time">Afternoon</div>
-                    <div class="tl-content">
-                        <h3>Queen's Baths + Preacher's Cave</h3>
-                        <div class="tl-details">
-                            <p>Natural tidal pools carved into the rock, then explore the historic cave where shipwreck survivors sheltered in 1648.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mood-content" id="mood-2-chill" style="display:none;">
-            <div class="timeline">
-                <div class="tl-item">
-                    <div class="tl-time">All Day</div>
-                    <div class="tl-content">
-                        <h3>French Leave Beach</h3>
-                        <div class="tl-details">
-                            <p>Massive stretch of pink sand right near Governors Harbour. One of the best beaches in the Caribbean. Bring a book, a towel, and zero ambition.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">Evening</div>
-                <div class="tl-content">
-                    <h3>Dinner at 1648</h3>
-                    <div class="tl-details">
-                        <p>Waterfront dining with sunset cocktails. Named after the year Eleuthera was first settled.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== DAY 3 ===== -->
-    <section class="day-section" id="day3">
-        <div class="day-header">
-            <div class="day-badge">3</div>
-            <div>
-                <h2>Second Full Day</h2>
-                <p class="day-date">Thursday, May 7</p>
-            </div>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">Morning</div>
-                <div class="tl-content">
-                    <h3>Breakfast at the Cottage</h3>
-                    <div class="tl-details">
-                        <p>Another morning in paradise. Take your time.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <p class="mood-prompt">What's the vibe today?</p>
-        <div class="mood-selector">
-            <button class="mood-btn mood-adventure active" data-mood="adventure" data-day="3">
-                <span class="mood-icon">🚤</span>
-                <span class="mood-label">Adventure</span>
-            </button>
-            <button class="mood-btn mood-chill" data-mood="chill" data-day="3">
-                <span class="mood-icon">🐚</span>
-                <span class="mood-label">Chill</span>
-            </button>
-        </div>
-        <div class="mood-content" id="mood-3-adventure" style="display:block;">
-            <div class="timeline">
-                <div class="tl-item">
-                    <div class="tl-time">Mid-day</div>
-                    <div class="tl-content">
-                        <h3>Jet Skis & Kayaks at Buccaneer Club</h3>
-                        <div class="tl-details">
-                            <p>Rent jet skis or kayaks and hit the water. They also have snorkel gear and paddle boards.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tl-item">
-                    <div class="tl-time">Afternoon</div>
-                    <div class="tl-content">
-                        <h3>Snorkel a Remote Beach</h3>
-                        <div class="tl-details">
-                            <p>Try Twin Coves — two small coves connected by a sand bridge. Amazing snorkeling in the northern cove. 5-10 min from the cottage.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mood-content" id="mood-3-chill" style="display:none;">
-            <div class="timeline">
-                <div class="tl-item">
-                    <div class="tl-time">All Day</div>
-                    <div class="tl-content">
-                        <h3>Ten Bay Beach</h3>
-                        <div class="tl-details">
-                            <p>Calm, shallow, crystal-clear water on the Caribbean side. 20 min south. Perfect for wading, floating, and doing absolutely nothing. Great snorkeling along the rock ledges too.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">Evening</div>
-                <div class="tl-content">
-                    <h3>Dinner at Pascal's</h3>
-                    <div class="tl-details">
-                        <p>Infinity pool with a swim-up cocktail bar. Yes, really. Come for the food, stay for the pool.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== DAY 4 ===== -->
-    <section class="day-section" id="day4">
-        <div class="day-header">
-            <div class="day-badge">4</div>
-            <div>
-                <h2>Last Full Day</h2>
-                <p class="day-date">Friday, May 8</p>
-            </div>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">Morning</div>
-                <div class="tl-content">
-                    <h3>Beach Morning</h3>
-                    <div class="tl-details">
-                        <p>Last full day of beach mornings. Soak it in.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">Afternoon</div>
-                <div class="tl-content">
-                    <h3>Explore Governors Harbour</h3>
-                    <div class="tl-details">
-                        <p>Walk through the charming colonial town. Colorful buildings, friendly locals, maybe grab a souvenir.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="tl-item highlight-item">
-                <div class="tl-time">6 PM – Late</div>
-                <div class="tl-content">
-                    <h3 class="expanded">FRIDAY NIGHT FISH FRY</h3>
-                    <div class="tl-details open">
-                        <p><strong>THIS IS THE THING.</strong> Cupid's Cay — 6 PM to midnight. Fresh grilled fish, cold Kaliks, live Caribbean music, the whole island comes out. Don't miss this.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== DAY 5 ===== -->
-    <section class="day-section" id="day5">
-        <div class="day-header">
-            <div class="day-badge">5</div>
-            <div>
-                <h2>Departure Day</h2>
-                <p class="day-date">Saturday, May 9</p>
-            </div>
-        </div>
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">Morning</div>
-                <div class="tl-content">
-                    <h3>Last Swim</h3>
-                    <div class="tl-details">
-                        <p>One final dip in the ocean or the infinity pool. Take it slow.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">~10:30 AM</div>
-                <div class="tl-content">
-                    <h3>Pack Up & Head Out</h3>
-                    <div class="tl-details">
-                        <p>Leave for the airport by ~11 AM. Flight departs at 12:15 PM.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-time">12:15 PM</div>
-                <div class="tl-content">
-                    <h3>Fly Home</h3>
-                    <div class="tl-details">
-                        <p>GHB → MIA → LGA. Home by 6:29 PM. Already planning the next trip.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ===== FLIGHTS ===== -->
-    <section class="info-section" id="flights">
-        <h2 class="section-title">Flight Details</h2>
-        <div class="confirmation-badge">
-            Confirmation: <strong>UXGSTJ</strong>
-            <button class="copy-btn copy-btn-inline" onclick="copyText('conf-hidden')">Copy</button>
+    <section class="content-section" id="flights-section">
+        <h2 class="section-heading">Flights</h2>
+        <div class="confirmation-bar">
+            <span class="conf-label">Confirmation</span>
+            <span class="conf-code" id="conf-code">UXGSTJ</span>
+            <button class="copy-btn" onclick="copyToClipboard('UXGSTJ', this)">Copy</button>
         </div>
-        <span id="conf-hidden" style="display:none;"><span>UXGSTJ</span></span>
 
         <div class="flight-card">
             <div class="flight-header outbound">
@@ -365,7 +98,8 @@
                     </div>
                     <div class="flight-line">
                         <span class="flight-num">AA 1196</span>
-                        <div class="plane-line"><span>✈</span></div>
+                        <div class="plane-track"><span class="plane-icon">&#9992;</span></div>
+                        <span class="flight-dur">~3h 07m</span>
                     </div>
                     <div class="airport">
                         <span class="airport-code">MIA</span>
@@ -373,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <div class="layover-badge">1h 21m layover in Miami</div>
+            <div class="layover-bar">1h 21m layover in Miami</div>
             <div class="flight-leg">
                 <div class="flight-route">
                     <div class="airport">
@@ -382,7 +116,8 @@
                     </div>
                     <div class="flight-line">
                         <span class="flight-num">AA 4020</span>
-                        <div class="plane-line"><span>✈</span></div>
+                        <div class="plane-track"><span class="plane-icon">&#9992;</span></div>
+                        <span class="flight-dur">~1h 15m</span>
                     </div>
                     <div class="airport">
                         <span class="airport-code">GHB</span>
@@ -405,7 +140,8 @@
                     </div>
                     <div class="flight-line">
                         <span class="flight-num">AA 3646</span>
-                        <div class="plane-line"><span>✈</span></div>
+                        <div class="plane-track"><span class="plane-icon">&#9992;</span></div>
+                        <span class="flight-dur">~1h 09m</span>
                     </div>
                     <div class="airport">
                         <span class="airport-code">MIA</span>
@@ -413,7 +149,7 @@
                     </div>
                 </div>
             </div>
-            <div class="layover-badge">2h 06m layover in Miami</div>
+            <div class="layover-bar">2h 06m layover in Miami</div>
             <div class="flight-leg">
                 <div class="flight-route">
                     <div class="airport">
@@ -422,7 +158,8 @@
                     </div>
                     <div class="flight-line">
                         <span class="flight-num">AA 3162</span>
-                        <div class="plane-line"><span>✈</span></div>
+                        <div class="plane-track"><span class="plane-icon">&#9992;</span></div>
+                        <span class="flight-dur">~2h 59m</span>
                     </div>
                     <div class="airport">
                         <span class="airport-code">LGA</span>
@@ -431,193 +168,551 @@
                 </div>
             </div>
         </div>
-        <p class="flight-cost">Total (2 passengers): <strong>$1,370.26</strong></p>
+        <p class="flight-total">Total (2 passengers): <strong>$1,370.26</strong></p>
     </section>
 
     <!-- ===== ACCOMMODATION ===== -->
-    <section class="info-section" id="accommodation">
-        <h2 class="section-title">Where We're Staying</h2>
-        <div class="accommodation-card">
-            <div class="accom-header">
-                <h3>Bird of Paradise Beachfront Cottages</h3>
+    <section class="content-section" id="accommodation">
+        <h2 class="section-heading">Accommodation</h2>
+        <div class="accom-card">
+            <div class="accom-top">
+                <h3 class="accom-name">Bird of Paradise Beachfront Cottages</h3>
                 <p class="accom-cottage">Shooting Star Cottage</p>
+                <p class="accom-dates">May 5&ndash;9 &middot; 4 nights</p>
+                <p class="accom-address">Banks Road, Governors Harbour, Eleuthera, Bahamas</p>
+                <a href="https://www.google.com/maps/place/25.19832290%2c-76.23671540" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Directions
+                </a>
             </div>
             <div class="accom-details">
-                <div class="accom-features">
-                    <span class="feature">2 Bed</span>
-                    <span class="feature">3 Bath</span>
-                    <span class="feature">Beachfront</span>
-                    <span class="feature">Infinity Pool</span>
-                    <span class="feature">Full Kitchen</span>
-                    <span class="feature">Snorkel Gear</span>
-                    <span class="feature">WiFi</span>
-                    <span class="feature">AC</span>
+                <div class="accom-check">
+                    <span>Check-in: ~1:30 PM (after grocery run)</span>
                 </div>
                 <div class="accom-price">
-                    <span class="price-strike">$3,560</span>
+                    <span class="price-old">$3,560</span>
                     <span class="price-free">FREE</span>
-                    <span class="price-note">Mike's uncle owns the place ayyyye</span>
+                    <span class="price-why">Mike's uncle owns the place ayyyye</span>
                 </div>
-                <a href="https://www.google.com/maps/place/25.19832290%2c-76.23671540" target="_blank" rel="noopener" class="btn btn-map">View on Google Maps</a>
+                <div class="accom-features">
+                    <span class="feature-tag">2 Bed</span>
+                    <span class="feature-tag">3 Bath</span>
+                    <span class="feature-tag">Beachfront</span>
+                    <span class="feature-tag">Pool</span>
+                    <span class="feature-tag">Kitchen</span>
+                    <span class="feature-tag">Snorkel Gear</span>
+                    <span class="feature-tag">WiFi</span>
+                    <span class="feature-tag">AC</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ===== COST TRACKER ===== -->
-    <section class="info-section" id="costs">
-        <h2 class="section-title">Trip Costs</h2>
+    <section class="content-section" id="costs">
+        <h2 class="section-heading">Trip Costs</h2>
         <div class="cost-card">
             <div class="cost-row">
                 <span>Flights (2 passengers)</span>
-                <span class="cost-amount">$1,370.26</span>
+                <span class="cost-val">$1,370.26</span>
             </div>
             <div class="cost-row">
                 <span>Cottage (4 nights)</span>
-                <span class="cost-amount cost-free"><s>$3,560</s> FREE</span>
+                <span class="cost-val cost-free"><s>$3,560</s> FREE</span>
             </div>
             <div class="cost-row">
                 <span>Car Rental</span>
-                <span class="cost-amount cost-free">FREE</span>
+                <span class="cost-val cost-free">FREE</span>
             </div>
             <div class="cost-divider"></div>
-            <div class="cost-row cost-total">
+            <div class="cost-row cost-total-row">
                 <span>Total (before food/activities)</span>
-                <span class="cost-amount">$1,370.26</span>
+                <span class="cost-val">$1,370.26</span>
             </div>
         </div>
     </section>
 
-    <!-- ===== RESTAURANTS ===== -->
-    <section class="info-section" id="restaurants">
-        <h2 class="section-title">Dinner Spots</h2>
+    <!-- ===== DAY 0 — Travel + Arrival ===== -->
+    <section class="day-section" id="day-0">
+        <div class="day-header">
+            <div class="day-badge" style="background: var(--cat-transport);">D0</div>
+            <div class="day-meta">
+                <span class="day-date-label">TUESDAY, MAY 5</span>
+                <h2 class="day-title">Travel Day</h2>
+                <p class="day-subtitle">Newark to paradise</p>
+                <span class="location-tag tag-travel">TRAVEL</span>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-time">5:32 AM</div>
+                <div class="tl-card border-transport">
+                    <div class="tl-card-head">
+                        <h3>Flight: EWR &rarr; MIA</h3>
+                        <span class="cat-pill cat-transport">Transport</span>
+                    </div>
+                    <p>AA 1196 &middot; ~3h 07m</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">8:39 AM</div>
+                <div class="tl-card border-transport">
+                    <div class="tl-card-head">
+                        <h3>Miami Layover</h3>
+                        <span class="cat-pill cat-transport">Transport</span>
+                    </div>
+                    <p>1h 21m connection</p>
+                    <div class="pro-tip">
+                        <strong>Pro tip:</strong> Grab food, stretch legs
+                    </div>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">10:00 AM</div>
+                <div class="tl-card border-transport">
+                    <div class="tl-card-head">
+                        <h3>Flight: MIA &rarr; GHB</h3>
+                        <span class="cat-pill cat-transport">Transport</span>
+                    </div>
+                    <p>AA 4020 &middot; ~1h 15m</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">11:15 AM</div>
+                <div class="tl-card border-transport">
+                    <div class="tl-card-head">
+                        <h3>Land in Eleuthera</h3>
+                        <span class="cat-pill cat-transport">Transport</span>
+                    </div>
+                    <p>Welcome to paradise! Pick up the rental car near GHB airport (arranged through Mike's cousin).</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">~12:00 PM</div>
+                <div class="tl-card border-shopping">
+                    <div class="tl-card-head">
+                        <h3>Grocery Run</h3>
+                        <span class="cat-pill cat-shopping">Shopping</span>
+                    </div>
+                    <p>Burrows One Stop or Eleuthera Supply (5-8 min drive). Stock up on breakfast/lunch supplies + bottled water &mdash; don't drink the tap!</p>
+                    <div class="pro-tip">
+                        <strong>Pro tip:</strong> Get enough water for the whole trip. Also grab snacks, coffee, eggs, bread basics.
+                    </div>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">~1:30 PM</div>
+                <div class="tl-card border-accom">
+                    <div class="tl-card-head">
+                        <h3>Check in: Shooting Star Cottage</h3>
+                    </div>
+                    <p>Bird of Paradise Beachfront Cottages. Your home for 4 nights &mdash; 2 bed, 3 bath, infinity pool, beachfront pink sand, snorkel gear included.</p>
+                    <a href="https://www.google.com/maps/place/25.19832290%2c-76.23671540" target="_blank" rel="noopener" class="maps-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Open in Maps
+                    </a>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">~2:30 PM</div>
+                <div class="tl-card border-beach">
+                    <div class="tl-card-head">
+                        <h3>Bird Point Beach</h3>
+                        <span class="cat-pill cat-beach">Beach</span>
+                    </div>
+                    <p>Your private beach is literally out front. First swim in turquoise Bahamian water. Snorkel gear in the cottage.</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">Evening</div>
+                <div class="tl-card border-food">
+                    <div class="tl-card-head">
+                        <h3>Dinner: Tippy's</h3>
+                        <span class="cat-pill cat-food">Food</span>
+                    </div>
+                    <p>Steps from the cottage. Beach bar, great food, easy first night. Weekend live music.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 1 — First Full Day ===== -->
+    <section class="day-section" id="day-1">
+        <div class="day-header">
+            <div class="day-badge" style="background: var(--cat-adventure);">D1</div>
+            <div class="day-meta">
+                <span class="day-date-label">WEDNESDAY, MAY 6</span>
+                <h2 class="day-title">Explore the Island</h2>
+                <p class="day-subtitle">Cliffs, caves, or pink sand &mdash; your call</p>
+                <span class="location-tag tag-eleuthera">ELEUTHERA</span>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-time">Morning</div>
+                <div class="tl-card border-food">
+                    <div class="tl-card-head">
+                        <h3>Breakfast at the Cottage</h3>
+                        <span class="cat-pill cat-food">Food</span>
+                    </div>
+                    <p>Full kitchen, ocean view patio. Take your time.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="mood-prompt">What's the vibe?</p>
+        <div class="mood-selector">
+            <button class="mood-card mood-adventure active" data-mood="adventure" data-day="1">
+                <span class="mood-emoji">&#129343;</span>
+                <span class="mood-name">Adventure</span>
+                <span class="mood-desc">Cliffs, caves & bridges</span>
+            </button>
+            <button class="mood-card mood-chill" data-mood="chill" data-day="1">
+                <span class="mood-emoji">&#127958;</span>
+                <span class="mood-name">Chill</span>
+                <span class="mood-desc">Pink sand all day</span>
+            </button>
+        </div>
+
+        <div class="mood-content" id="mood-1-adventure">
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">10:00 AM</div>
+                    <div class="tl-card border-adventure">
+                        <div class="tl-card-head">
+                            <h3>Glass Window Bridge</h3>
+                            <span class="cat-pill cat-adventure">Adventure</span>
+                        </div>
+                        <p>Drive north (~45 min). Where the dark Atlantic meets the turquoise Caribbean &mdash; one of the most photographed spots in the Bahamas.</p>
+                        <a href="https://www.google.com/maps/search/Glass+Window+Bridge+Eleuthera" target="_blank" rel="noopener" class="maps-link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Open in Maps
+                        </a>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">12:00 PM</div>
+                    <div class="tl-card border-adventure">
+                        <div class="tl-card-head">
+                            <h3>Queen's Baths</h3>
+                            <span class="cat-pill cat-adventure">Adventure</span>
+                        </div>
+                        <p>Natural tidal pools carved into rock. Stunning. Bring water shoes.</p>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">2:00 PM</div>
+                    <div class="tl-card border-adventure">
+                        <div class="tl-card-head">
+                            <h3>Preacher's Cave</h3>
+                            <span class="cat-pill cat-adventure">Adventure</span>
+                        </div>
+                        <p>Historic cave where shipwreck survivors sheltered in 1648. Beautiful beach nearby.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mood-content" id="mood-1-chill" style="display:none;">
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">10:00 AM</div>
+                    <div class="tl-card border-beach">
+                        <div class="tl-card-head">
+                            <h3>French Leave Beach</h3>
+                            <span class="cat-pill cat-beach">Beach</span>
+                        </div>
+                        <p>Massive stretch of pink sand, 5 min from the cottage. One of the best beaches in the Caribbean. Bring a book, a towel, and zero ambition.</p>
+                        <a href="https://www.google.com/maps/search/French+Leave+Beach+Eleuthera" target="_blank" rel="noopener" class="maps-link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Open in Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-time">Evening</div>
+                <div class="tl-card border-food">
+                    <div class="tl-card-head">
+                        <h3>Dinner: 1648 An Island Restaurant</h3>
+                        <span class="cat-pill cat-food">Food</span>
+                    </div>
+                    <p>Waterfront dining with sunset cocktails. Named after the year Eleuthera was first settled.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 2 — Water Day ===== -->
+    <section class="day-section" id="day-2">
+        <div class="day-header">
+            <div class="day-badge" style="background: var(--cat-beach);">D2</div>
+            <div class="day-meta">
+                <span class="day-date-label">THURSDAY, MAY 7</span>
+                <h2 class="day-title">Water Day</h2>
+                <p class="day-subtitle">Jet skis, snorkeling, or crystal-clear calm</p>
+                <span class="location-tag tag-eleuthera">ELEUTHERA</span>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-time">Morning</div>
+                <div class="tl-card border-food">
+                    <div class="tl-card-head">
+                        <h3>Breakfast at the Cottage</h3>
+                        <span class="cat-pill cat-food">Food</span>
+                    </div>
+                    <p>Another morning in paradise. Take your time.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="mood-prompt">What's the vibe?</p>
+        <div class="mood-selector">
+            <button class="mood-card mood-adventure active" data-mood="adventure" data-day="2">
+                <span class="mood-emoji">&#128676;</span>
+                <span class="mood-name">Adventure</span>
+                <span class="mood-desc">Jet skis & kayaks</span>
+            </button>
+            <button class="mood-card mood-chill" data-mood="chill" data-day="2">
+                <span class="mood-emoji">&#128026;</span>
+                <span class="mood-name">Chill</span>
+                <span class="mood-desc">Crystal-clear calm</span>
+            </button>
+        </div>
+
+        <div class="mood-content" id="mood-2-adventure">
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">10:00 AM</div>
+                    <div class="tl-card border-adventure">
+                        <div class="tl-card-head">
+                            <h3>Buccaneer Club &mdash; Jet Skis & Kayaks</h3>
+                            <span class="cat-pill cat-adventure">Adventure</span>
+                        </div>
+                        <p>Rent jet skis, kayaks, or paddle boards and hit the water. They also have snorkel gear.</p>
+                    </div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-time">1:00 PM</div>
+                    <div class="tl-card border-beach">
+                        <div class="tl-card-head">
+                            <h3>Twin Coves Beach</h3>
+                            <span class="cat-pill cat-beach">Beach</span>
+                        </div>
+                        <p>Two small coves connected by a sand bridge to a tiny cay. Amazing snorkeling in the northern cove. 5-10 min from the cottage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mood-content" id="mood-2-chill" style="display:none;">
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">10:00 AM</div>
+                    <div class="tl-card border-beach">
+                        <div class="tl-card-head">
+                            <h3>Ten Bay Beach</h3>
+                            <span class="cat-pill cat-beach">Beach</span>
+                        </div>
+                        <p>20 min south, Caribbean side. Calm, shallow, crystal-clear water like a swimming pool. Amazing snorkeling along the rock ledges &mdash; parrotfish, stingrays, turtles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-time">Evening</div>
+                <div class="tl-card border-food">
+                    <div class="tl-card-head">
+                        <h3>Dinner: Pascal's Seafood Restaurant</h3>
+                        <span class="cat-pill cat-food">Food</span>
+                    </div>
+                    <p>Infinity pool with a swim-up cocktail bar. Come for the food, stay for the pool.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 3 — Fish Fry Friday ===== -->
+    <section class="day-section" id="day-3">
+        <div class="day-header">
+            <div class="day-badge" style="background: var(--cat-nightlife);">D3</div>
+            <div class="day-meta">
+                <span class="day-date-label">FRIDAY, MAY 8</span>
+                <h2 class="day-title">Fish Fry Friday</h2>
+                <p class="day-subtitle">The best night of the trip</p>
+                <span class="location-tag tag-eleuthera">ELEUTHERA</span>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-time">Morning</div>
+                <div class="tl-card border-beach">
+                    <div class="tl-card-head">
+                        <h3>Beach Morning</h3>
+                        <span class="cat-pill cat-beach">Beach</span>
+                    </div>
+                    <p>Last full day of waking up to the ocean. Soak it in.</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">Afternoon</div>
+                <div class="tl-card border-adventure">
+                    <div class="tl-card-head">
+                        <h3>Explore Governors Harbour</h3>
+                        <span class="cat-pill cat-adventure">Adventure</span>
+                    </div>
+                    <p>Walk through the charming colonial town. Colorful buildings, friendly locals.</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">6:00 PM</div>
+                <div class="tl-card tl-card-highlight border-nightlife">
+                    <div class="tl-card-head">
+                        <h3>FRIDAY NIGHT FISH FRY</h3>
+                        <span class="cat-pill cat-nightlife">Nightlife</span>
+                    </div>
+                    <p class="highlight-location">Cupid's Cay &mdash; 6 PM to midnight</p>
+                    <p>Fresh grilled fish and seafood, cold Kaliks, live Caribbean music. The whole island comes out. <strong>THIS IS THE EVENT OF THE TRIP.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 4 — Departure ===== -->
+    <section class="day-section" id="day-4">
+        <div class="day-header">
+            <div class="day-badge" style="background: var(--cat-transport);">D4</div>
+            <div class="day-meta">
+                <span class="day-date-label">SATURDAY, MAY 9</span>
+                <h2 class="day-title">Heading Home</h2>
+                <p class="day-subtitle">One last swim, then back to reality</p>
+                <span class="location-tag tag-travel">TRAVEL</span>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-time">Morning</div>
+                <div class="tl-card border-beach">
+                    <div class="tl-card-head">
+                        <h3>Last Swim</h3>
+                        <span class="cat-pill cat-beach">Beach</span>
+                    </div>
+                    <p>One final dip in the ocean or the infinity pool.</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">~10:30 AM</div>
+                <div class="tl-card border-transport">
+                    <div class="tl-card-head">
+                        <h3>Pack Up</h3>
+                        <span class="cat-pill cat-transport">Transport</span>
+                    </div>
+                    <p>Leave for airport by ~11 AM</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">12:15 PM</div>
+                <div class="tl-card border-transport">
+                    <div class="tl-card-head">
+                        <h3>Flight: GHB &rarr; MIA</h3>
+                        <span class="cat-pill cat-transport">Transport</span>
+                    </div>
+                    <p>AA 3646 &middot; ~1h 09m</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">1:24 PM</div>
+                <div class="tl-card border-transport">
+                    <div class="tl-card-head">
+                        <h3>Miami Layover</h3>
+                        <span class="cat-pill cat-transport">Transport</span>
+                    </div>
+                    <p>2h 06m connection</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">3:30 PM</div>
+                <div class="tl-card border-transport">
+                    <div class="tl-card-head">
+                        <h3>Flight: MIA &rarr; LGA</h3>
+                        <span class="cat-pill cat-transport">Transport</span>
+                    </div>
+                    <p>AA 3162 &middot; ~2h 59m</p>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">6:29 PM</div>
+                <div class="tl-card border-transport">
+                    <div class="tl-card-head">
+                        <h3>Home</h3>
+                        <span class="cat-pill cat-transport">Transport</span>
+                    </div>
+                    <p>Back in New York. Already planning the next trip.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RESTAURANT GUIDE ===== -->
+    <section class="content-section" id="restaurants">
+        <h2 class="section-heading">Restaurant Guide</h2>
         <div class="restaurant-grid">
-            <div class="restaurant-card">
-                <div class="rest-name">Tippy's</div>
+            <div class="rest-card">
+                <div class="rest-day">Day 0 Dinner</div>
+                <h3 class="rest-name">Tippy's</h3>
+                <p class="rest-desc">Steps from cottage, lunch & dinner, weekend live music.</p>
                 <div class="rest-tags">
-                    <span class="tag">Steps from cottage</span>
-                    <span class="tag">Lunch & Dinner</span>
+                    <span class="rest-tag">Beach Bar</span>
+                    <span class="rest-tag">Live Music</span>
                 </div>
-                <p>Beach bar right next door. Weekend live music.</p>
             </div>
-            <div class="restaurant-card">
-                <div class="rest-name">1648 An Island Restaurant</div>
+            <div class="rest-card">
+                <div class="rest-day">Day 1 Dinner</div>
+                <h3 class="rest-name">1648 An Island Restaurant</h3>
+                <p class="rest-desc">Waterfront dining with sunset cocktails. Named after the year Eleuthera was first settled.</p>
                 <div class="rest-tags">
-                    <span class="tag">Waterfront</span>
-                    <span class="tag">Sunset Cocktails</span>
+                    <span class="rest-tag">Waterfront</span>
+                    <span class="rest-tag">Sunset</span>
                 </div>
-                <p>Waterfront dining, amazing views. Named after the year Eleuthera was settled.</p>
             </div>
-            <div class="restaurant-card">
-                <div class="rest-name">Pascal's Seafood</div>
+            <div class="rest-card">
+                <div class="rest-day">Day 2 Dinner</div>
+                <h3 class="rest-name">Pascal's Seafood Restaurant</h3>
+                <p class="rest-desc">Swim-up cocktail bar, infinity pool. Come for the food, stay for the pool.</p>
                 <div class="rest-tags">
-                    <span class="tag">Swim-Up Bar</span>
-                    <span class="tag">Infinity Pool</span>
+                    <span class="rest-tag">Swim-Up Bar</span>
+                    <span class="rest-tag">Pool</span>
                 </div>
-                <p>Infinity pool with a swim-up cocktail bar. Come for the food, stay for the pool.</p>
             </div>
-            <div class="restaurant-card">
-                <div class="rest-name">Buccaneer Club</div>
+            <div class="rest-card">
+                <div class="rest-day">Day 2 Adventure</div>
+                <h3 class="rest-name">Buccaneer Club</h3>
+                <p class="rest-desc">Water sports rentals + beach bar. Jet skis, kayaks, snorkel gear.</p>
                 <div class="rest-tags">
-                    <span class="tag">Water Sports</span>
-                    <span class="tag">Beach Bar</span>
+                    <span class="rest-tag">Water Sports</span>
+                    <span class="rest-tag">Beach Bar</span>
                 </div>
-                <p>Rents jet skis, kayaks, and snorkel gear too.</p>
             </div>
-            <div class="restaurant-card highlight-restaurant">
-                <div class="rest-name">Friday Fish Fry — Cupid's Cay</div>
+            <div class="rest-card rest-card-highlight">
+                <div class="rest-day">Day 3 &mdash; DON'T MISS</div>
+                <h3 class="rest-name">Friday Fish Fry at Cupid's Cay</h3>
+                <p class="rest-desc">6PM&ndash;midnight, Fridays only. Fresh grilled everything, cold Kaliks, live Caribbean music. The whole island shows up.</p>
                 <div class="rest-tags">
-                    <span class="tag tag-hot">Don't Miss</span>
-                    <span class="tag">Live Music</span>
-                    <span class="tag">Fridays 6PM</span>
+                    <span class="rest-tag tag-hot">Must Do</span>
+                    <span class="rest-tag">Live Music</span>
+                    <span class="rest-tag">Fridays</span>
                 </div>
-                <p>Fresh grilled everything, cold Kaliks, live Caribbean music. The whole island shows up.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== KNOW BEFORE YOU GO ===== -->
-    <section class="info-section" id="info">
-        <h2 class="section-title">Know Before You Go</h2>
-        <div class="tips-grid">
-            <div class="tip-card">
-                <span class="tip-icon">💧</span>
-                <h4>No Tap Water</h4>
-                <p>Buy bottled. Stock up Day 1.</p>
-            </div>
-            <div class="tip-card">
-                <span class="tip-icon">🦟</span>
-                <h4>Bug Spray</h4>
-                <p>Picaridin for no-see-ums. Worst at dusk.</p>
-            </div>
-            <div class="tip-card">
-                <span class="tip-icon">🚗</span>
-                <h4>Drive on the LEFT</h4>
-                <p>British rules. Stay alert.</p>
-            </div>
-            <div class="tip-card">
-                <span class="tip-icon">⚡</span>
-                <h4>Expect Outages</h4>
-                <p>Power, water, internet can be spotty. Island life.</p>
-            </div>
-            <div class="tip-card">
-                <span class="tip-icon">🍳</span>
-                <h4>Cook In, Dine Out</h4>
-                <p>Breakfast & lunch at cottage. Dinners out.</p>
-            </div>
-        </div>
-
-        <h3 class="subsection-title">Helpful Links</h3>
-        <div class="links-grid">
-            <a href="https://www.birdofparadisecottages.com/traveling" target="_blank" rel="noopener" class="link-card">Travel Guide</a>
-            <a href="https://www.birdofparadisecottages.com/grocery-stores" target="_blank" rel="noopener" class="link-card">Groceries</a>
-            <a href="https://www.birdofparadisecottages.com/copy-of-restaurants-bars" target="_blank" rel="noopener" class="link-card">Restaurants</a>
-            <a href="https://www.birdofparadisecottages.com/beaches" target="_blank" rel="noopener" class="link-card">Beaches</a>
-            <a href="https://www.birdofparadisecottages.com/island-activities" target="_blank" rel="noopener" class="link-card">Activities</a>
-            <a href="https://www.birdofparadisecottages.com/suv-by-the-sea" target="_blank" rel="noopener" class="link-card">Car Rental</a>
-        </div>
-    </section>
-
-    <!-- ===== QUICK REFERENCE ===== -->
-    <section class="info-section" id="quickref">
-        <h2 class="section-title">Quick Reference</h2>
-
-        <div class="ref-card">
-            <h4>Cottage Address</h4>
-            <div class="copyable" id="address-copy">
-                <span>BANKS ROAD, GOVERNORS HARBOUR, ELEUTHERA, BAHAMAS</span>
-                <button class="copy-btn" onclick="copyText('address-copy')">Copy</button>
-            </div>
-            <a href="https://www.google.com/maps/place/25.19832290%2c-76.23671540" target="_blank" rel="noopener" class="small-link">Open in Google Maps</a>
-        </div>
-
-        <div class="ref-card">
-            <h4>Flight Confirmation</h4>
-            <div class="copyable" id="conf-copy">
-                <span class="conf-code">UXGSTJ</span>
-                <button class="copy-btn" onclick="copyText('conf-copy')">Copy</button>
-            </div>
-        </div>
-
-        <div class="ref-card">
-            <h4>Emergency Numbers</h4>
-            <div class="emergency-list">
-                <p><strong>Police:</strong> 919 or 911</p>
-                <p><strong>Ambulance:</strong> 919</p>
-                <p><strong>US Embassy (Nassau):</strong> +1 242-322-1181</p>
-            </div>
-        </div>
-
-        <div class="ref-card">
-            <h4>Grocery Stores</h4>
-            <div class="grocery-store">
-                <strong>Burrows One Stop</strong>
-                <p>M-F 6AM–6PM | Sat 6AM–7PM | Sun 6AM–10AM</p>
-                <a href="tel:+12423322929" class="phone-link">242-332-2929</a>
-            </div>
-            <div class="grocery-store">
-                <strong>Eleuthera Supply</strong>
-                <p>M-Th 6AM–6PM | Fri 6AM–6:30PM | Sat 6AM–7:30PM | Sun 6AM–3PM</p>
-                <a href="tel:+12423322728" class="phone-link">242-332-2728</a>
             </div>
         </div>
     </section>
@@ -626,9 +721,82 @@
 
 <!-- ========== FOOTER ========== -->
 <footer>
-    <p class="script-font" style="font-size:1.3rem;">Mike & Morgan</p>
-    <p style="font-size:0.85rem; opacity:0.8; margin-top:0.25rem;">Eleuthera 2026</p>
+    <p class="footer-title">Mike & Morgan</p>
+    <p class="footer-sub">Eleuthera 2026</p>
 </footer>
+
+<!-- ========== FLOATING QUICK REF BUTTON ========== -->
+<button class="fab-btn" id="fab-btn" aria-label="Quick Reference">?</button>
+
+<!-- ========== QUICK REFERENCE BOTTOM SHEET ========== -->
+<div class="sheet-overlay" id="sheet-overlay"></div>
+<div class="bottom-sheet" id="bottom-sheet">
+    <div class="sheet-handle"></div>
+    <h3 class="sheet-title">Quick Reference</h3>
+
+    <div class="sheet-section">
+        <h4>Cottage Address</h4>
+        <div class="sheet-copyable">
+            <span>BANKS ROAD, GOVERNORS HARBOUR, ELEUTHERA, BAHAMAS</span>
+            <button class="copy-btn" onclick="copyToClipboard('BANKS ROAD, GOVERNORS HARBOUR, ELEUTHERA, BAHAMAS', this)">Copy</button>
+        </div>
+        <a href="https://www.google.com/maps/place/25.19832290%2c-76.23671540" target="_blank" rel="noopener" class="maps-link" style="margin-top:0.5rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Google Maps
+        </a>
+    </div>
+
+    <div class="sheet-section">
+        <h4>Confirmation Code</h4>
+        <div class="sheet-copyable">
+            <span class="sheet-code">UXGSTJ</span>
+            <button class="copy-btn" onclick="copyToClipboard('UXGSTJ', this)">Copy</button>
+        </div>
+    </div>
+
+    <div class="sheet-section">
+        <h4>Emergency Numbers</h4>
+        <p>Police: <strong>919</strong> or <strong>911</strong></p>
+        <p>Ambulance: <strong>919</strong></p>
+        <p>US Embassy Nassau: <a href="tel:+12423221181"><strong>+1 242-322-1181</strong></a></p>
+    </div>
+
+    <div class="sheet-section">
+        <h4>Grocery Stores</h4>
+        <div class="sheet-store">
+            <strong>Burrows One Stop</strong>
+            <p>M-F 6AM-6PM, Sat 6AM-7PM, Sun 6AM-10AM</p>
+            <a href="tel:+12423322929">242-332-2929</a>
+        </div>
+        <div class="sheet-store">
+            <strong>Eleuthera Supply</strong>
+            <p>M-Th 6AM-6PM, F 6AM-6:30PM, Sat 6AM-7:30PM, Sun 6AM-3PM</p>
+            <a href="tel:+12423322728">242-332-2728</a>
+        </div>
+    </div>
+
+    <div class="sheet-section">
+        <h4>Tips</h4>
+        <ul class="sheet-tips">
+            <li>Don't drink tap water</li>
+            <li>Bug spray with Picaridin</li>
+            <li>Drive on the LEFT</li>
+            <li>Expect power/water outages</li>
+            <li>Cook breakfast/lunch at cottage</li>
+        </ul>
+    </div>
+
+    <div class="sheet-section">
+        <h4>Helpful Links</h4>
+        <div class="sheet-links">
+            <a href="https://www.birdofparadisecottages.com/traveling" target="_blank" rel="noopener">Travel Guide</a>
+            <a href="https://www.birdofparadisecottages.com/grocery-stores" target="_blank" rel="noopener">Groceries</a>
+            <a href="https://www.birdofparadisecottages.com/copy-of-restaurants-bars" target="_blank" rel="noopener">Restaurants</a>
+            <a href="https://www.birdofparadisecottages.com/beaches" target="_blank" rel="noopener">Beaches</a>
+            <a href="https://www.birdofparadisecottages.com/island-activities" target="_blank" rel="noopener">Activities</a>
+        </div>
+    </div>
+</div>
 
 <script src="script.js"></script>
 </body>
