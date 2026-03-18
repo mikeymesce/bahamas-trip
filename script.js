@@ -273,6 +273,90 @@
         })(dayToggles[t]);
     }
 
+    // ========== PACKING LIST ==========
+    var PACKING_KEY = 'bahamas_packing_list';
+    var DEFAULT_ITEMS = [
+        { text: 'Disposable camera', checked: false }
+    ];
+
+    function loadPackingList() {
+        var saved = localStorage.getItem(PACKING_KEY);
+        if (saved) {
+            try { return JSON.parse(saved); } catch(e) {}
+        }
+        return DEFAULT_ITEMS.slice();
+    }
+
+    function savePackingList(items) {
+        localStorage.setItem(PACKING_KEY, JSON.stringify(items));
+    }
+
+    function renderPackingList() {
+        var items = loadPackingList();
+        var ul = document.getElementById('packing-items');
+        if (!ul) return;
+        ul.innerHTML = '';
+
+        for (var i = 0; i < items.length; i++) {
+            (function(index) {
+                var li = document.createElement('li');
+                if (items[index].checked) li.classList.add('checked');
+
+                var check = document.createElement('div');
+                check.className = 'packing-check' + (items[index].checked ? ' done' : '');
+                check.textContent = items[index].checked ? '✓' : '';
+                check.addEventListener('click', function() {
+                    items[index].checked = !items[index].checked;
+                    savePackingList(items);
+                    renderPackingList();
+                });
+
+                var text = document.createElement('span');
+                text.className = 'packing-text';
+                text.textContent = items[index].text;
+
+                var del = document.createElement('span');
+                del.className = 'packing-delete';
+                del.textContent = '×';
+                del.addEventListener('click', function() {
+                    items.splice(index, 1);
+                    savePackingList(items);
+                    renderPackingList();
+                });
+
+                li.appendChild(check);
+                li.appendChild(text);
+                li.appendChild(del);
+                ul.appendChild(li);
+            })(i);
+        }
+    }
+
+    renderPackingList();
+
+    var packingInput = document.getElementById('packing-input');
+    var packingAddBtn = document.getElementById('packing-add-btn');
+
+    function addPackingItem() {
+        if (!packingInput) return;
+        var val = packingInput.value.trim();
+        if (!val) return;
+        var items = loadPackingList();
+        items.push({ text: val, checked: false });
+        savePackingList(items);
+        packingInput.value = '';
+        renderPackingList();
+    }
+
+    if (packingAddBtn) {
+        packingAddBtn.addEventListener('click', addPackingItem);
+    }
+    if (packingInput) {
+        packingInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') addPackingItem();
+        });
+    }
+
     // ========== INTERSECTION OBSERVER — FADE IN ==========
     if ('IntersectionObserver' in window) {
         var observer = new IntersectionObserver(function(entries) {

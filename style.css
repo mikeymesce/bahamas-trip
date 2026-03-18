@@ -1042,6 +1042,114 @@ main {
     color: var(--cat-nightlife);
 }
 
+/* ========== PACKING LIST ========== */
+
+.packing-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+}
+
+.packing-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+}
+
+.packing-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text);
+}
+
+.packing-list li:last-child {
+    border-bottom: none;
+}
+
+.packing-list li.checked {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.packing-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.packing-check.done {
+    background: #2ecc71;
+    border-color: #2ecc71;
+    color: var(--white);
+    font-size: 0.65rem;
+}
+
+.packing-text {
+    flex: 1;
+}
+
+.packing-delete {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity var(--transition);
+    padding: 0 0.25rem;
+}
+
+.packing-delete:hover {
+    opacity: 1;
+    color: #e74c3c;
+}
+
+.packing-add {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.packing-input {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 0.85rem;
+    font-size: 0.85rem;
+    font-family: inherit;
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+    transition: border-color var(--transition);
+}
+
+.packing-input:focus {
+    border-color: var(--pink);
+}
+
+.packing-add-btn {
+    background: var(--pink);
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    transition: opacity var(--transition);
+}
+
+.packing-add-btn:hover {
+    opacity: 0.85;
+}
+
 /* ========== FOOTER ========== */
 
 footer {
