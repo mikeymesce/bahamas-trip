@@ -229,45 +229,16 @@
                 if (chevron) chevron.classList.add('rotated');
             }
 
-            toggle.addEventListener('click', function() {
-                if (body.classList.contains('open')) {
-                    // CLOSING: set max-height to current scrollHeight, then animate to 0
-                    body.style.maxHeight = body.scrollHeight + 'px';
-                    body.classList.add('animating');
-                    // Force reflow
-                    body.offsetHeight;
-                    body.style.maxHeight = '0px';
-                    body.style.opacity = '0';
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                var isOpen = body.classList.contains('open');
+
+                if (isOpen) {
                     body.classList.remove('open');
                     if (chevron) chevron.classList.remove('rotated');
-
-                    // Clean up after transition
-                    var onClose = function() {
-                        body.removeEventListener('transitionend', onClose);
-                        body.classList.remove('animating');
-                        body.style.maxHeight = '';
-                        body.style.opacity = '';
-                    };
-                    body.addEventListener('transitionend', onClose);
                 } else {
-                    // OPENING: set max-height to scrollHeight, then after transition set to none
-                    body.classList.add('animating');
-                    body.style.maxHeight = '0px';
-                    body.style.opacity = '0';
-                    // Force reflow
-                    body.offsetHeight;
                     body.classList.add('open');
-                    body.style.maxHeight = body.scrollHeight + 'px';
-                    body.style.opacity = '1';
                     if (chevron) chevron.classList.add('rotated');
-
-                    var onOpen = function() {
-                        body.removeEventListener('transitionend', onOpen);
-                        body.classList.remove('animating');
-                        body.style.maxHeight = '';
-                        body.style.opacity = '';
-                    };
-                    body.addEventListener('transitionend', onOpen);
                 }
             });
         })(dayToggles[t]);
