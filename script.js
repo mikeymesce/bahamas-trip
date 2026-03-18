@@ -10,28 +10,29 @@
     function updateCountdown() {
         var now = new Date();
         var diff = TRIP_DATE - now;
-        var el = document.getElementById('countdown-text');
-        if (!el) return;
+
+        var daysEl = document.getElementById('cd-days');
+        var hoursEl = document.getElementById('cd-hours');
+        var minsEl = document.getElementById('cd-mins');
+        var secsEl = document.getElementById('cd-secs');
+        if (!daysEl) return;
 
         if (diff <= 0) {
-            el.textContent = "You're in paradise!";
+            daysEl.textContent = '0';
+            hoursEl.textContent = '0';
+            minsEl.textContent = '0';
+            secsEl.textContent = '0';
             return;
         }
 
-        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-        if (days === 0) {
-            var hours = Math.floor(diff / (1000 * 60 * 60));
-            el.textContent = hours + ' hours until takeoff';
-        } else if (days === 1) {
-            el.textContent = '1 day until takeoff';
-        } else {
-            el.textContent = days + ' days until takeoff';
-        }
+        daysEl.textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+        hoursEl.textContent = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        minsEl.textContent = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        secsEl.textContent = Math.floor((diff % (1000 * 60)) / 1000);
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 60000);
+    setInterval(updateCountdown, 1000);
 
     // ========== MOOD SELECTOR ==========
     var moodBtns = document.querySelectorAll('.mood-card');

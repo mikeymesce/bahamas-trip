@@ -127,14 +127,44 @@ button {
     color: var(--pink);
 }
 
-.countdown-pill {
-    display: inline-block;
+.countdown {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.cd-unit {
     background: rgba(0, 151, 167, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 0.8rem;
+    min-width: 60px;
+    text-align: center;
+}
+
+.cd-unit span {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
     color: #0097a7;
-    font-size: 0.85rem;
+    line-height: 1;
+}
+
+.cd-unit small {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
     font-weight: 600;
-    padding: 0.5rem 1.25rem;
-    border-radius: var(--radius-pill);
+}
+
+.hero-tagline {
+    font-size: 0.88rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-muted);
     margin-bottom: 2rem;
 }
 
@@ -153,6 +183,19 @@ button {
 .hero-btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+}
+
+.hero-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+}
+
+.hero-wave svg {
+    display: block;
+    width: 100%;
+    height: 60px;
 }
 
 .hero-arrow {
