@@ -1268,6 +1268,50 @@ footer {
     background: var(--pink-bg);
 }
 
+/* ========== COLLAPSIBLE DAY SECTIONS ========== */
+
+.day-toggle {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+.day-chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    align-self: center;
+}
+
+.day-chevron.rotated {
+    transform: rotate(90deg);
+}
+
+.day-body {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.35s ease;
+}
+
+.day-body.open {
+    max-height: none;
+    overflow: visible;
+    opacity: 1;
+}
+
+.day-body.animating {
+    overflow: hidden;
+}
+
 /* ========== ANIMATIONS ========== */
 
 @keyframes fadeIn {

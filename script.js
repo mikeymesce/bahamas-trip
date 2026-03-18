@@ -215,6 +215,64 @@
         }, { passive: true });
     }
 
+    // ========== COLLAPSIBLE DAY SECTIONS ==========
+    var dayToggles = document.querySelectorAll('.day-toggle');
+    for (var t = 0; t < dayToggles.length; t++) {
+        (function(toggle) {
+            var targetId = toggle.getAttribute('data-target');
+            var body = document.getElementById(targetId);
+            var chevron = toggle.querySelector('.day-chevron');
+            if (!body) return;
+
+            // Set initial chevron state
+            if (body.classList.contains('open')) {
+                if (chevron) chevron.classList.add('rotated');
+            }
+
+            toggle.addEventListener('click', function() {
+                if (body.classList.contains('open')) {
+                    // CLOSING: set max-height to current scrollHeight, then animate to 0
+                    body.style.maxHeight = body.scrollHeight + 'px';
+                    body.classList.add('animating');
+                    // Force reflow
+                    body.offsetHeight;
+                    body.style.maxHeight = '0px';
+                    body.style.opacity = '0';
+                    body.classList.remove('open');
+                    if (chevron) chevron.classList.remove('rotated');
+
+                    // Clean up after transition
+                    var onClose = function() {
+                        body.removeEventListener('transitionend', onClose);
+                        body.classList.remove('animating');
+                        body.style.maxHeight = '';
+                        body.style.opacity = '';
+                    };
+                    body.addEventListener('transitionend', onClose);
+                } else {
+                    // OPENING: set max-height to scrollHeight, then after transition set to none
+                    body.classList.add('animating');
+                    body.style.maxHeight = '0px';
+                    body.style.opacity = '0';
+                    // Force reflow
+                    body.offsetHeight;
+                    body.classList.add('open');
+                    body.style.maxHeight = body.scrollHeight + 'px';
+                    body.style.opacity = '1';
+                    if (chevron) chevron.classList.add('rotated');
+
+                    var onOpen = function() {
+                        body.removeEventListener('transitionend', onOpen);
+                        body.classList.remove('animating');
+                        body.style.maxHeight = '';
+                        body.style.opacity = '';
+                    };
+                    body.addEventListener('transitionend', onOpen);
+                }
+            });
+        })(dayToggles[t]);
+    }
+
     // ========== INTERSECTION OBSERVER — FADE IN ==========
     if ('IntersectionObserver' in window) {
         var observer = new IntersectionObserver(function(entries) {
