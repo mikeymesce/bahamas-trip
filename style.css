@@ -1,35 +1,1014 @@
+/* ============================================
+   Mike & Morgan — Eleuthera 2026
+   Tropical Travel Itinerary
+   ============================================ */
+
+:root {
+    --turquoise: #00b4d8;
+    --ocean: #0077b6;
+    --ocean-deep: #023e8a;
+    --coral: #ff6b6b;
+    --coral-light: #ff8787;
+    --sunset: #ff922b;
+    --sand: #f8f0e3;
+    --sand-dark: #e8d5b8;
+    --white: #ffffff;
+    --text: #1a1a2e;
+    --text-light: #555;
+    --text-muted: #888;
+    --shadow: 0 2px 16px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 60px;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #f0f4f8;
-    color: #1a1a2e;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--sand);
+    color: var(--text);
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
-header {
-    background: linear-gradient(135deg, #0077b6, #00b4d8);
-    color: white;
+.script-font {
+    font-family: 'Pacifico', cursive;
+    font-weight: 400;
+}
+
+/* ========== HERO ========== */
+
+.hero {
+    position: relative;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 3rem 1rem;
+    color: var(--white);
+    overflow: hidden;
+    background: linear-gradient(135deg, #023e8a 0%, #0077b6 30%, #00b4d8 60%, #48cae4 100%);
 }
 
-header h1 {
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 80%, rgba(255,107,107,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(255,146,43,0.12) 0%, transparent 50%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 3rem 1.5rem 4rem;
+}
+
+.hero-pretitle {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 0.75rem;
+}
+
+.hero-title {
+    font-size: 2.8rem;
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.hero-tagline {
+    font-size: 0.9rem;
+    font-weight: 300;
+    opacity: 0.7;
+    font-style: italic;
+    margin-top: 1.5rem;
+}
+
+/* Countdown */
+.countdown {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.cd-unit {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 0.8rem;
+    min-width: 60px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.cd-unit span {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.cd-unit small {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+/* Wave divider */
+.hero-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+.hero-wave svg {
+    display: block;
+    width: 100%;
+    height: 60px;
+}
+
+/* ========== STICKY NAV ========== */
+
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: box-shadow var(--transition);
+}
+
+.sticky-nav.scrolled {
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+
+.nav-inner {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 0.5rem;
+}
+
+.nav-inner::-webkit-scrollbar { display: none; }
+
+.nav-link {
+    flex-shrink: 0;
+    padding: 0.85rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-light);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all var(--transition);
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    color: var(--ocean);
+}
+
+.nav-link.active {
+    color: var(--ocean);
+    border-bottom-color: var(--ocean);
+    font-weight: 600;
+}
+
+/* ========== MAIN ========== */
+
+main {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+}
+
+/* ========== DAY SECTIONS ========== */
+
+.day-section {
+    margin-bottom: 2.5rem;
+    animation: fadeInUp 0.5s ease both;
+}
+
+.day-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.day-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ocean), var(--turquoise));
+    color: var(--white);
+    font-size: 1.3rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,119,182,0.3);
+}
+
+.day-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.day-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* ========== TIMELINE ========== */
+
+.timeline {
+    position: relative;
+    padding-left: 1rem;
+    margin-left: 0.5rem;
+    border-left: 2px solid var(--sand-dark);
+}
+
+.tl-item {
+    position: relative;
+    padding: 0 0 1.5rem 1.25rem;
+}
+
+.tl-item::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--turquoise);
+    border: 2px solid var(--sand);
+}
+
+.tl-item:last-child {
+    padding-bottom: 0.5rem;
+}
+
+.tl-time {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--ocean);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.tl-content h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.tl-content p {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+/* Highlight item (Fish Fry!) */
+.highlight-item {
+    background: linear-gradient(135deg, rgba(255,107,107,0.08), rgba(255,146,43,0.08));
+    margin-left: -1rem;
+    padding: 1rem 1rem 1rem 2.25rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255,107,107,0.2);
+}
+
+.highlight-item::before {
+    background: var(--coral);
+    box-shadow: 0 0 0 4px rgba(255,107,107,0.2);
+}
+
+.highlight-text {
+    font-weight: 700;
+    color: var(--coral) !important;
+    font-size: 0.95rem !important;
+    margin-bottom: 0.3rem !important;
+}
+
+/* ========== MOOD SELECTOR ========== */
+
+.mood-prompt {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin: 1.25rem 0 0.75rem;
+}
+
+.mood-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.mood-btn {
+    border: 2px solid transparent;
+    border-radius: var(--radius);
+    padding: 1rem 0.75rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all var(--transition);
+    font-family: inherit;
+    background: var(--white);
+    box-shadow: var(--shadow);
+}
+
+.mood-btn .mood-icon {
+    display: block;
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+}
+
+.mood-btn .mood-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.mood-adventure.active {
+    border-color: var(--ocean);
+    background: linear-gradient(135deg, rgba(0,180,216,0.08), rgba(0,119,182,0.08));
+}
+
+.mood-adventure.active .mood-label {
+    color: var(--ocean);
+}
+
+.mood-chill.active {
+    border-color: var(--sunset);
+    background: linear-gradient(135deg, rgba(255,146,43,0.08), rgba(255,107,107,0.08));
+}
+
+.mood-chill.active .mood-label {
+    color: var(--sunset);
+}
+
+.mood-btn:not(.active):hover {
+    border-color: var(--sand-dark);
+    transform: translateY(-2px);
+}
+
+.mood-content {
+    animation: fadeIn 0.3s ease;
+}
+
+/* ========== INFO SECTIONS ========== */
+
+.info-section {
+    margin-bottom: 2.5rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    padding-top: 1rem;
+}
+
+.subsection-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--text);
+}
+
+/* ========== FLIGHTS ========== */
+
+.confirmation-badge {
+    background: linear-gradient(135deg, var(--ocean-deep), var(--ocean));
+    color: var(--white);
+    text-align: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    letter-spacing: 1px;
+}
+
+.confirmation-badge strong {
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+}
+
+.flight-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+}
+
+.flight-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.flight-header.outbound {
+    background: linear-gradient(135deg, var(--ocean), var(--turquoise));
+    color: var(--white);
+}
+
+.flight-header.return {
+    background: linear-gradient(135deg, var(--coral), var(--sunset));
+    color: var(--white);
+}
+
+.flight-leg {
+    padding: 1rem;
+}
+
+.flight-route {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.airport {
+    text-align: center;
+    min-width: 60px;
+}
+
+.airport-code {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.airport-time {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.flight-line {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.flight-num {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+.plane-line {
+    position: relative;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.plane-line::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: var(--sand-dark);
+}
+
+.plane-line span {
+    position: relative;
+    font-size: 1rem;
+    z-index: 1;
+    background: var(--white);
+    padding: 0 4px;
+}
+
+.layover-badge {
+    text-align: center;
+    padding: 0.5rem;
+    background: var(--sand);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.flight-cost {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+}
+
+/* ========== ACCOMMODATION ========== */
+
+.accommodation-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.accom-header {
+    background: linear-gradient(135deg, var(--ocean), var(--turquoise));
+    color: var(--white);
+    padding: 1.25rem 1.25rem 1rem;
+}
+
+.accom-header h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.accom-cottage {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin-top: 0.25rem;
+    font-style: italic;
+}
+
+.accom-details {
+    padding: 1.25rem;
+}
+
+.accom-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.feature {
+    background: var(--sand);
+    padding: 0.35rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+.accom-price {
+    text-align: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(0,180,216,0.05), rgba(255,146,43,0.05));
+    border-radius: var(--radius-sm);
+    margin-bottom: 1rem;
+}
+
+.price-strike {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    text-decoration: line-through;
+}
+
+.price-free {
     font-size: 2rem;
+    font-weight: 700;
+    color: #2ecc71;
+    display: block;
+    margin: 0.25rem 0;
+}
+
+.price-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+    transition: all var(--transition);
+}
+
+.btn-map {
+    background: var(--ocean);
+    color: var(--white);
+    width: 100%;
+}
+
+.btn-map:hover {
+    background: var(--ocean-deep);
+    transform: translateY(-1px);
+}
+
+/* ========== COST TRACKER ========== */
+
+.cost-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+}
+
+.cost-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    font-size: 0.95rem;
+}
+
+.cost-amount {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.cost-free {
+    color: #2ecc71;
+}
+
+.cost-divider {
+    height: 1px;
+    background: var(--sand-dark);
+    margin: 0.25rem 0;
+}
+
+.cost-total {
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.cost-total .cost-amount {
+    color: var(--ocean);
+    font-size: 1.15rem;
+}
+
+/* ========== RESTAURANTS ========== */
+
+.restaurant-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.restaurant-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+    transition: transform var(--transition);
+}
+
+.restaurant-card:hover {
+    transform: translateY(-2px);
+}
+
+.rest-name {
+    font-size: 1.1rem;
+    font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
-.subtitle {
-    font-size: 1.1rem;
-    opacity: 0.9;
+.rest-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.6rem;
 }
 
-main {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+.tag {
+    background: var(--sand);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tag-hot {
+    background: var(--coral);
+    color: var(--white);
+}
+
+.restaurant-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.rest-when {
+    margin-top: 0.5rem;
+    font-size: 0.82rem !important;
+    font-weight: 500;
+    color: var(--ocean) !important;
+}
+
+.highlight-restaurant {
+    border: 2px solid var(--coral);
+    background: linear-gradient(135deg, rgba(255,107,107,0.04), rgba(255,146,43,0.04));
+}
+
+/* ========== TIPS ========== */
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.tip-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.tip-icon {
+    font-size: 1.6rem;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.tip-card h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.tip-card p {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+.links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.link-card {
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: var(--shadow);
+    transition: all var(--transition);
+    border: 1px solid transparent;
+}
+
+.link-card:hover {
+    border-color: var(--turquoise);
+    transform: translateY(-2px);
+    color: var(--ocean);
+}
+
+/* ========== QUICK REFERENCE ========== */
+
+.ref-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 0.75rem;
+}
+
+.ref-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.copyable {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--sand);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+.copyable span {
+    flex: 1;
+}
+
+.conf-code {
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 3px;
+    color: var(--ocean);
+}
+
+.copy-btn {
+    flex-shrink: 0;
+    background: var(--ocean);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all var(--transition);
+}
+
+.copy-btn:hover {
+    background: var(--ocean-deep);
+}
+
+.copy-btn.copied {
+    background: #2ecc71;
+}
+
+.small-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--ocean);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.small-link:hover {
+    text-decoration: underline;
+}
+
+.emergency-list p {
+    font-size: 0.9rem;
+    padding: 0.25rem 0;
+    color: var(--text-light);
+}
+
+.grocery-store {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--sand);
+}
+
+.grocery-store:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.grocery-store strong {
+    font-size: 0.95rem;
+}
+
+.grocery-store p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+}
+
+.phone-link {
+    display: inline-block;
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    color: var(--ocean);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* ========== FOOTER ========== */
+
+footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, var(--ocean-deep), var(--ocean));
+    color: var(--white);
+}
+
+footer p {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.footer-sub {
+    font-size: 0.8rem !important;
+    opacity: 0.6;
+    margin-top: 0.25rem;
+}
+
+/* ========== ANIMATIONS ========== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .countdown {
+        gap: 0.5rem;
+    }
+
+    .cd-unit {
+        min-width: 52px;
+        padding: 0.5rem 0.6rem;
+    }
+
+    .cd-unit span {
+        font-size: 1.3rem;
+    }
+
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .links-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 768px) {
+    .hero {
+        min-height: 480px;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
+
+    .tips-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .links-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
