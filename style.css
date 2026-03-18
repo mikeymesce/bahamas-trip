@@ -9,15 +9,18 @@
     --ocean-deep: #023e8a;
     --coral: #ff6b6b;
     --coral-light: #ff8787;
+    --pink: #f7a8b8;
+    --pink-deep: #e8839a;
+    --pink-glow: rgba(247,168,184,0.15);
     --sunset: #ff922b;
-    --sand: #f8f0e3;
+    --sand: #faf6f0;
     --sand-dark: #e8d5b8;
     --white: #ffffff;
     --text: #1a1a2e;
     --text-light: #555;
     --text-muted: #888;
-    --shadow: 0 2px 16px rgba(0,0,0,0.08);
-    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+    --shadow: 0 2px 16px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
     --radius: 16px;
     --radius-sm: 10px;
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -59,15 +62,15 @@ body {
     text-align: center;
     color: var(--white);
     overflow: hidden;
-    background: linear-gradient(135deg, #023e8a 0%, #0077b6 30%, #00b4d8 60%, #48cae4 100%);
+    background: linear-gradient(135deg, #023e8a 0%, #0077b6 30%, #00b4d8 60%, #48cae4 80%, #f7a8b8 100%);
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse at 20% 80%, rgba(255,107,107,0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(255,146,43,0.12) 0%, transparent 50%);
+        radial-gradient(ellipse at 20% 80%, rgba(247,168,184,0.25) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(0,180,216,0.15) 0%, transparent 50%);
 }
 
 .hero-content {
@@ -300,6 +303,43 @@ main {
     font-size: 1.05rem;
     font-weight: 600;
     margin-bottom: 0.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.tl-content h3::after {
+    content: '›';
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: transform var(--transition);
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.tl-content h3.expanded::after {
+    transform: rotate(90deg);
+    color: var(--ocean);
+}
+
+.tl-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.25s ease;
+    opacity: 0;
+}
+
+.tl-details.open {
+    max-height: 200px;
+    opacity: 1;
+}
+
+.tl-details p {
+    font-size: 0.88rem;
+    color: var(--text-light);
+    line-height: 1.5;
+    padding-top: 0.3rem;
 }
 
 .tl-content p {
@@ -380,12 +420,12 @@ main {
 }
 
 .mood-chill.active {
-    border-color: var(--sunset);
-    background: linear-gradient(135deg, rgba(255,146,43,0.08), rgba(255,107,107,0.08));
+    border-color: var(--pink-deep);
+    background: linear-gradient(135deg, var(--pink-glow), rgba(232,131,154,0.08));
 }
 
 .mood-chill.active .mood-label {
-    color: var(--sunset);
+    color: var(--pink-deep);
 }
 
 .mood-btn:not(.active):hover {
@@ -459,7 +499,7 @@ main {
 }
 
 .flight-header.return {
-    background: linear-gradient(135deg, var(--coral), var(--sunset));
+    background: linear-gradient(135deg, var(--pink-deep), var(--pink));
     color: var(--white);
 }
 
@@ -925,7 +965,7 @@ main {
 footer {
     text-align: center;
     padding: 2rem 1rem;
-    background: linear-gradient(135deg, var(--ocean-deep), var(--ocean));
+    background: linear-gradient(135deg, var(--ocean-deep), var(--ocean), var(--pink-deep));
     color: var(--white);
 }
 

@@ -5,25 +5,25 @@
     'use strict';
 
     // ========== COUNTDOWN ==========
-    const TRIP_DATE = new Date('2026-05-05T05:32:00-04:00'); // Departure time EST
+    var TRIP_DATE = new Date('2026-05-05T05:32:00-04:00');
 
     function updateCountdown() {
-        const now = new Date();
-        const diff = TRIP_DATE - now;
+        var now = new Date();
+        var diff = TRIP_DATE - now;
 
         if (diff <= 0) {
             document.getElementById('cd-days').textContent = '0';
             document.getElementById('cd-hours').textContent = '0';
             document.getElementById('cd-mins').textContent = '0';
             document.getElementById('cd-secs').textContent = '0';
-            document.querySelector('.hero-tagline').textContent = 'The trip is HERE! Have an amazing time! 🌴';
+            document.querySelector('.hero-tagline').textContent = 'The trip is HERE! Have an amazing time!';
             return;
         }
 
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var secs = Math.floor((diff % (1000 * 60)) / 1000);
 
         document.getElementById('cd-days').textContent = days;
         document.getElementById('cd-hours').textContent = hours;
@@ -34,18 +34,33 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
+    // ========== COLLAPSIBLE TIMELINE ITEMS ==========
+    document.querySelectorAll('.tl-content h3').forEach(function(h3) {
+        h3.addEventListener('click', function() {
+            var details = this.nextElementSibling;
+            if (!details || !details.classList.contains('tl-details')) return;
+
+            var isOpen = details.classList.contains('open');
+            if (isOpen) {
+                details.classList.remove('open');
+                this.classList.remove('expanded');
+            } else {
+                details.classList.add('open');
+                this.classList.add('expanded');
+            }
+        });
+    });
+
     // ========== MOOD SELECTOR ==========
     document.querySelectorAll('.mood-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
             var mood = this.dataset.mood;
             var day = this.dataset.day;
 
-            // Update active button
             var siblings = this.parentElement.querySelectorAll('.mood-btn');
             siblings.forEach(function(s) { s.classList.remove('active'); });
             this.classList.add('active');
 
-            // Show/hide content
             var adventureEl = document.getElementById('mood-' + day + '-adventure');
             var chillEl = document.getElementById('mood-' + day + '-chill');
 
@@ -61,16 +76,13 @@
 
     // ========== STICKY NAV — SCROLL SHADOW ==========
     var nav = document.getElementById('sticky-nav');
-    var lastScroll = 0;
 
     window.addEventListener('scroll', function() {
-        var st = window.pageYOffset || document.documentElement.scrollTop;
-        if (st > 100) {
+        if (window.pageYOffset > 100) {
             nav.classList.add('scrolled');
         } else {
             nav.classList.remove('scrolled');
         }
-        lastScroll = st;
     }, { passive: true });
 
     // ========== STICKY NAV — ACTIVE STATE ==========
@@ -92,7 +104,6 @@
                     if (href === '#' + id) {
                         link.classList.add('active');
                     }
-                    // Map flights/accommodation/costs/restaurants/info/quickref to the info nav link
                     if (href === '#info' && ['info', 'quickref'].includes(id)) {
                         link.classList.add('active');
                     }
@@ -110,7 +121,7 @@
     window.copyText = function(elementId) {
         var el = document.getElementById(elementId);
         var text = el.querySelector('span').textContent.trim();
-        var btn = el.querySelector('.copy-btn');
+        var btn = el.querySelector('.copy-btn') || el.parentElement.querySelector('.copy-btn');
 
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(text).then(function() {
@@ -122,7 +133,6 @@
                 }, 2000);
             });
         } else {
-            // Fallback for older browsers / no HTTPS
             var textarea = document.createElement('textarea');
             textarea.value = text;
             textarea.style.position = 'fixed';
@@ -172,6 +182,4 @@
             });
         });
     }
-
-    console.log('🌴 Bahamas trip site loaded! See you in Eleuthera.');
 })();
