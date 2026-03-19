@@ -217,6 +217,20 @@
         </div>
     </section>
 
+    <!-- ===== MORGAN AA REMINDER ===== -->
+    <div class="aa-reminder" id="aa-reminder" style="display:none;">
+        <div class="aa-reminder-content">
+            <span class="aa-reminder-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </span>
+            <div class="aa-reminder-text">
+                <strong>Morgan</strong> &mdash; don't forget to add your emergency contact info on the AA reservation!
+                <a href="https://www.aa.com" target="_blank" rel="noopener">Go to aa.com</a> &middot; Confirmation: <strong>UXGSTJ</strong>
+            </div>
+            <button class="aa-reminder-close" id="aa-reminder-close" aria-label="Dismiss">&times;</button>
+        </div>
+    </div>
+
     <!-- ===== COST TRACKER ===== -->
     <section class="content-section" id="costs">
         <h2 class="section-heading">Trip Costs</h2>
@@ -238,6 +252,15 @@
                 <span>Total (before food/activities)</span>
                 <span class="cost-val">$1,370.26</span>
             </div>
+        </div>
+    </section>
+
+    <!-- ===== WEATHER WIDGET ===== -->
+    <section class="content-section" id="weather">
+        <h2 class="section-heading">Weather Forecast</h2>
+        <div class="weather-card" id="weather-card">
+            <p class="weather-placeholder" id="weather-placeholder">Loading weather info...</p>
+            <div class="weather-grid" id="weather-grid" style="display:none;"></div>
         </div>
     </section>
 
@@ -310,6 +333,14 @@
                     <div class="pro-tip">
                         <strong>Pro tip:</strong> Get enough water for the whole trip. Also grab snacks, coffee, eggs, bread basics.
                     </div>
+                    <a href="https://www.google.com/maps/search/Burrows+One+Stop+Governors+Harbour+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Burrows One Stop
+                    </a>
+                    <a href="https://www.google.com/maps/search/Eleuthera+Supply+Governors+Harbour+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Eleuthera Supply
+                    </a>
                 </div>
             </div>
             <div class="tl-item">
@@ -336,6 +367,10 @@
                         <span class="cat-pill cat-beach">Beach</span>
                     </div>
                     <p>Your private beach is literally out front. First swim in turquoise Bahamian water. Snorkel gear in the cottage.</p>
+                    <a href="https://www.google.com/maps/search/Bird+Point+Beach+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Open in Maps
+                    </a>
                 </div>
             </div>
             <div class="tl-item">
@@ -346,6 +381,10 @@
                         <span class="cat-pill cat-food">Food</span>
                     </div>
                     <p>Steps from the cottage. Beach bar, great food, easy first night. Weekend live music.</p>
+                    <a href="https://www.google.com/maps/search/Tippy's+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Open in Maps
+                    </a>
                 </div>
             </div>
         </div>
@@ -417,6 +456,10 @@
                             <span class="cat-pill cat-adventure">Adventure</span>
                         </div>
                         <p>Natural tidal pools carved into rock. Stunning. Bring water shoes.</p>
+                        <a href="https://www.google.com/maps/search/Queen's+Baths+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Open in Maps
+                        </a>
                     </div>
                 </div>
                 <div class="tl-item">
@@ -427,6 +470,10 @@
                             <span class="cat-pill cat-adventure">Adventure</span>
                         </div>
                         <p>Historic cave where shipwreck survivors sheltered in 1648. Beautiful beach nearby.</p>
+                        <a href="https://www.google.com/maps/search/Preacher's+Cave+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Open in Maps
+                        </a>
                     </div>
                 </div>
             </div>
@@ -460,6 +507,10 @@
                         <span class="cat-pill cat-food">Food</span>
                     </div>
                     <p>Waterfront dining with sunset cocktails. Named after the year Eleuthera was first settled.</p>
+                    <a href="https://www.google.com/maps/search/1648+An+Island+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Open in Maps
+                    </a>
                 </div>
             </div>
         </div>
@@ -517,6 +568,10 @@
                             <span class="cat-pill cat-adventure">Adventure</span>
                         </div>
                         <p>Rent jet skis, kayaks, or paddle boards and hit the water. They also have snorkel gear.</p>
+                        <a href="https://www.google.com/maps/search/Buccaneer+Club+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Open in Maps
+                        </a>
                     </div>
                 </div>
                 <div class="tl-item">
@@ -527,6 +582,10 @@
                             <span class="cat-pill cat-beach">Beach</span>
                         </div>
                         <p>Two small coves connected by a sand bridge to a tiny cay. Amazing snorkeling in the northern cove. 5-10 min from the cottage.</p>
+                        <a href="https://www.google.com/maps/search/Twin+Coves+Beach+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Open in Maps
+                        </a>
                     </div>
                 </div>
             </div>
@@ -542,6 +601,10 @@
                             <span class="cat-pill cat-beach">Beach</span>
                         </div>
                         <p>20 min south, Caribbean side. Calm, shallow, crystal-clear water like a swimming pool. Amazing snorkeling along the rock ledges &mdash; parrotfish, stingrays, turtles.</p>
+                        <a href="https://www.google.com/maps/search/Ten+Bay+Beach+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Open in Maps
+                        </a>
                     </div>
                 </div>
             </div>
@@ -556,6 +619,10 @@
                         <span class="cat-pill cat-food">Food</span>
                     </div>
                     <p>Infinity pool with a swim-up cocktail bar. Come for the food, stay for the pool.</p>
+                    <a href="https://www.google.com/maps/search/Pascal's+Seafood+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Open in Maps
+                    </a>
                 </div>
             </div>
         </div>
@@ -595,6 +662,10 @@
                         <span class="cat-pill cat-adventure">Adventure</span>
                     </div>
                     <p>Walk through the charming colonial town. Colorful buildings, friendly locals.</p>
+                    <a href="https://www.google.com/maps/search/Governors+Harbour+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Open in Maps
+                    </a>
                 </div>
             </div>
             <div class="tl-item">
@@ -606,6 +677,10 @@
                     </div>
                     <p class="highlight-location">Cupid's Cay &mdash; 6 PM to midnight</p>
                     <p>Fresh grilled fish and seafood, cold Kaliks, live Caribbean music. The whole island comes out. <strong>THIS IS THE EVENT OF THE TRIP.</strong></p>
+                    <a href="https://www.google.com/maps/search/Cupid's+Cay+Governors+Harbour+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Open in Maps
+                    </a>
                 </div>
             </div>
         </div>
@@ -703,6 +778,10 @@
                     <span class="rest-tag">Beach Bar</span>
                     <span class="rest-tag">Live Music</span>
                 </div>
+                <a href="https://www.google.com/maps/search/Tippy's+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
             </div>
             <div class="rest-card">
                 <div class="rest-day">Day 1 Dinner</div>
@@ -712,6 +791,10 @@
                     <span class="rest-tag">Waterfront</span>
                     <span class="rest-tag">Sunset</span>
                 </div>
+                <a href="https://www.google.com/maps/search/1648+An+Island+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
             </div>
             <div class="rest-card">
                 <div class="rest-day">Day 2 Dinner</div>
@@ -721,6 +804,10 @@
                     <span class="rest-tag">Swim-Up Bar</span>
                     <span class="rest-tag">Pool</span>
                 </div>
+                <a href="https://www.google.com/maps/search/Pascal's+Seafood+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
             </div>
             <div class="rest-card">
                 <div class="rest-day">Day 2 Adventure</div>
@@ -730,6 +817,10 @@
                     <span class="rest-tag">Water Sports</span>
                     <span class="rest-tag">Beach Bar</span>
                 </div>
+                <a href="https://www.google.com/maps/search/Buccaneer+Club+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
             </div>
             <div class="rest-card rest-card-highlight">
                 <div class="rest-day">Day 3 &mdash; DON'T MISS</div>
@@ -740,6 +831,10 @@
                     <span class="rest-tag">Live Music</span>
                     <span class="rest-tag">Fridays</span>
                 </div>
+                <a href="https://www.google.com/maps/search/Cupid's+Cay+Governors+Harbour+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
             </div>
         </div>
     </section>
@@ -808,11 +903,19 @@
             <strong>Burrows One Stop</strong>
             <p>M-F 6AM-6PM, Sat 6AM-7PM, Sun 6AM-10AM</p>
             <a href="tel:+12423322929">242-332-2929</a>
+            <a href="https://www.google.com/maps/search/Burrows+One+Stop+Governors+Harbour+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link" style="margin-top:0.3rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Open in Maps
+            </a>
         </div>
         <div class="sheet-store">
             <strong>Eleuthera Supply</strong>
             <p>M-Th 6AM-6PM, F 6AM-6:30PM, Sat 6AM-7:30PM, Sun 6AM-3PM</p>
             <a href="tel:+12423322728">242-332-2728</a>
+            <a href="https://www.google.com/maps/search/Eleuthera+Supply+Governors+Harbour+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link" style="margin-top:0.3rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Open in Maps
+            </a>
         </div>
     </div>
 

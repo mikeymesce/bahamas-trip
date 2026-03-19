@@ -334,6 +334,97 @@
         });
     }
 
+    // ========== MORGAN AA REMINDER ==========
+    var aaReminder = document.getElementById('aa-reminder');
+    var aaCloseBtn = document.getElementById('aa-reminder-close');
+
+    if (aaReminder) {
+        var dismissed = localStorage.getItem('aa_reminder_dismissed');
+        if (!dismissed) {
+            aaReminder.style.display = 'block';
+        }
+    }
+
+    if (aaCloseBtn) {
+        aaCloseBtn.addEventListener('click', function() {
+            if (aaReminder) aaReminder.style.display = 'none';
+            localStorage.setItem('aa_reminder_dismissed', 'true');
+        });
+    }
+
+    // ========== WEATHER WIDGET ==========
+    var TRIP_START = new Date('2026-05-05');
+    var weatherPlaceholder = document.getElementById('weather-placeholder');
+    var weatherGrid = document.getElementById('weather-grid');
+
+    function getWeatherIcon(code) {
+        if (code === 0) return { icon: '\u2600\uFE0F', desc: 'Clear' };
+        if (code >= 1 && code <= 3) return { icon: '\u26C5', desc: 'Partly cloudy' };
+        if (code >= 45 && code <= 48) return { icon: '\uD83C\uDF2B\uFE0F', desc: 'Fog' };
+        if (code >= 51 && code <= 55) return { icon: '\uD83C\uDF26\uFE0F', desc: 'Drizzle' };
+        if (code >= 61 && code <= 65) return { icon: '\uD83C\uDF27\uFE0F', desc: 'Rain' };
+        if (code >= 80 && code <= 82) return { icon: '\uD83C\uDF26\uFE0F', desc: 'Showers' };
+        if (code >= 95 && code <= 99) return { icon: '\u26C8\uFE0F', desc: 'Thunderstorm' };
+        return { icon: '\u2601\uFE0F', desc: 'Cloudy' };
+    }
+
+    function getDayName(dateStr) {
+        var d = new Date(dateStr + 'T12:00:00');
+        return d.toLocaleDateString('en-US', { weekday: 'short' });
+    }
+
+    function loadWeather() {
+        if (!weatherPlaceholder || !weatherGrid) return;
+
+        var now = new Date();
+        var msUntilTrip = TRIP_START - now;
+        var daysUntilTrip = Math.ceil(msUntilTrip / (1000 * 60 * 60 * 24));
+
+        if (daysUntilTrip > 7) {
+            weatherPlaceholder.textContent = 'Weather forecast will appear 7 days before the trip (May 5). Check back ' + (daysUntilTrip <= 14 ? 'soon!' : 'closer to departure.');
+            return;
+        }
+
+        weatherPlaceholder.textContent = 'Loading forecast...';
+
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=25.198&longitude=-76.237&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&temperature_unit=fahrenheit&timezone=America/Nassau&forecast_days=7')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (!data.daily || !data.daily.time) {
+                    weatherPlaceholder.textContent = 'Could not load forecast. Try again later.';
+                    return;
+                }
+
+                weatherPlaceholder.style.display = 'none';
+                weatherGrid.style.display = 'grid';
+                weatherGrid.innerHTML = '';
+
+                var days = data.daily;
+                for (var i = 0; i < days.time.length; i++) {
+                    var wx = getWeatherIcon(days.weathercode[i]);
+                    var hi = Math.round(days.temperature_2m_max[i]);
+                    var lo = Math.round(days.temperature_2m_min[i]);
+                    var rain = days.precipitation_probability_max[i];
+
+                    var div = document.createElement('div');
+                    div.className = 'weather-day';
+                    div.innerHTML =
+                        '<span class="weather-day-name">' + getDayName(days.time[i]) + '</span>' +
+                        '<span class="weather-day-icon">' + wx.icon + '</span>' +
+                        '<span class="weather-day-temps">' + hi + '&deg; <span class="lo">' + lo + '&deg;</span></span>' +
+                        '<span class="weather-day-desc">' + wx.desc + '</span>' +
+                        (rain > 0 ? '<span class="weather-day-rain">' + rain + '% rain</span>' : '');
+
+                    weatherGrid.appendChild(div);
+                }
+            })
+            .catch(function() {
+                weatherPlaceholder.textContent = 'Could not load forecast. Try again later.';
+            });
+    }
+
+    loadWeather();
+
     // ========== INTERSECTION OBSERVER — FADE IN ==========
     if ('IntersectionObserver' in window) {
         var observer = new IntersectionObserver(function(entries) {

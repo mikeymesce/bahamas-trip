@@ -591,6 +591,136 @@ main {
     color: var(--text-secondary);
 }
 
+/* ========== AA REMINDER BANNER ========== */
+
+.aa-reminder {
+    margin-bottom: 2rem;
+}
+
+.aa-reminder-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: #fffbeb;
+    border: 1px solid #fbbf24;
+    border-left: 4px solid #f59e0b;
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.aa-reminder-icon {
+    flex-shrink: 0;
+    color: #f59e0b;
+    margin-top: 1px;
+}
+
+.aa-reminder-text {
+    flex: 1;
+    font-size: 0.85rem;
+    color: #78350f;
+    line-height: 1.55;
+}
+
+.aa-reminder-text a {
+    color: #d97706;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.aa-reminder-close {
+    flex-shrink: 0;
+    font-size: 1.4rem;
+    color: #92400e;
+    opacity: 0.5;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 0.2rem;
+    transition: opacity var(--transition);
+}
+
+.aa-reminder-close:hover {
+    opacity: 1;
+}
+
+/* ========== WEATHER WIDGET ========== */
+
+.weather-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+}
+
+.weather-placeholder {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding: 1rem 0;
+}
+
+.weather-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    gap: 0.5rem;
+}
+
+.weather-day {
+    text-align: center;
+    padding: 0.75rem 0.25rem;
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+}
+
+.weather-day-name {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 0.35rem;
+}
+
+.weather-day-icon {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.weather-day-temps {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.weather-day-temps .lo {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.weather-day-desc {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+}
+
+.weather-day-rain {
+    display: block;
+    font-size: 0.65rem;
+    color: var(--cat-adventure);
+    margin-top: 0.1rem;
+}
+
+/* ========== RESTAURANT CARD MAPS LINK ========== */
+
+.rest-card .maps-link {
+    margin-top: 0.5rem;
+}
+
 /* ========== COST TRACKER ========== */
 
 .cost-card {
