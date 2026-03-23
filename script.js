@@ -51,16 +51,16 @@
             // Show/hide mood content
             var adventureEl = document.getElementById('mood-' + day + '-adventure');
             var chillEl = document.getElementById('mood-' + day + '-chill');
+            var ambitiousEl = document.getElementById('mood-' + day + '-ambitious');
 
-            if (adventureEl && chillEl) {
-                if (mood === 'adventure') {
-                    adventureEl.style.display = 'block';
-                    chillEl.style.display = 'none';
-                } else {
-                    adventureEl.style.display = 'none';
-                    chillEl.style.display = 'block';
-                }
-            }
+            // Hide all mood content for this day
+            if (adventureEl) adventureEl.style.display = 'none';
+            if (chillEl) chillEl.style.display = 'none';
+            if (ambitiousEl) ambitiousEl.style.display = 'none';
+
+            // Show the selected one
+            var selectedEl = document.getElementById('mood-' + day + '-' + mood);
+            if (selectedEl) selectedEl.style.display = 'block';
         });
     }
 
@@ -334,21 +334,31 @@
         });
     }
 
-    // ========== MORGAN AA REMINDER ==========
-    var aaReminder = document.getElementById('aa-reminder');
-    var aaCloseBtn = document.getElementById('aa-reminder-close');
+    // ========== MORGAN PRE-TRIP POPUP ==========
+    var morganOverlay = document.getElementById('morgan-popup-overlay');
+    var morganDismiss = document.getElementById('morgan-popup-dismiss');
 
-    if (aaReminder) {
-        var dismissed = localStorage.getItem('aa_reminder_dismissed');
-        if (!dismissed) {
-            aaReminder.style.display = 'block';
+    if (morganOverlay) {
+        var morganDismissed = localStorage.getItem('morgan_todo_dismissed');
+        if (!morganDismissed) {
+            morganOverlay.classList.add('visible');
         }
     }
 
-    if (aaCloseBtn) {
-        aaCloseBtn.addEventListener('click', function() {
-            if (aaReminder) aaReminder.style.display = 'none';
-            localStorage.setItem('aa_reminder_dismissed', 'true');
+    if (morganDismiss) {
+        morganDismiss.addEventListener('click', function() {
+            if (morganOverlay) morganOverlay.classList.remove('visible');
+            localStorage.setItem('morgan_todo_dismissed', 'true');
+        });
+    }
+
+    // Close popup on overlay click
+    if (morganOverlay) {
+        morganOverlay.addEventListener('click', function(e) {
+            if (e.target === morganOverlay) {
+                morganOverlay.classList.remove('visible');
+                localStorage.setItem('morgan_todo_dismissed', 'true');
+            }
         });
     }
 

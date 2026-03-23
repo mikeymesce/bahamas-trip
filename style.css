@@ -591,57 +591,97 @@ main {
     color: var(--text-secondary);
 }
 
-/* ========== AA REMINDER BANNER ========== */
+/* ========== MORGAN PRE-TRIP POPUP ========== */
 
-.aa-reminder {
-    margin-bottom: 2rem;
+.morgan-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.aa-reminder-content {
+.morgan-popup-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.morgan-popup {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.75rem 1.5rem 1.5rem;
+    max-width: 380px;
+    width: 100%;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+.morgan-popup-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+}
+
+.morgan-popup-body {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.morgan-todo-item {
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
-    background: #fffbeb;
-    border: 1px solid #fbbf24;
-    border-left: 4px solid #f59e0b;
-    border-radius: var(--radius-sm);
-    padding: 0.85rem 1rem;
-    box-shadow: var(--shadow-sm);
+    gap: 0.6rem;
 }
 
-.aa-reminder-icon {
+.morgan-todo-check {
+    font-size: 1.2rem;
+    line-height: 1.4;
     flex-shrink: 0;
-    color: #f59e0b;
-    margin-top: 1px;
 }
 
-.aa-reminder-text {
-    flex: 1;
-    font-size: 0.85rem;
-    color: #78350f;
-    line-height: 1.55;
+.morgan-todo-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.25rem;
 }
 
-.aa-reminder-text a {
-    color: #d97706;
+.morgan-todo-detail {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.morgan-todo-detail a {
+    color: var(--pink);
     font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 2px;
 }
 
-.aa-reminder-close {
-    flex-shrink: 0;
-    font-size: 1.4rem;
-    color: #92400e;
-    opacity: 0.5;
+.morgan-popup-btn {
+    display: inline-block;
+    background: var(--pink);
+    color: var(--white);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.75rem 2.5rem;
+    border-radius: var(--radius-pill);
+    border: none;
     cursor: pointer;
-    line-height: 1;
-    padding: 0 0.2rem;
     transition: opacity var(--transition);
 }
 
-.aa-reminder-close:hover {
-    opacity: 1;
+.morgan-popup-btn:hover {
+    opacity: 0.85;
 }
 
 /* ========== WEATHER WIDGET ========== */
@@ -1080,6 +1120,16 @@ main {
 }
 
 .mood-chill.active .mood-name { color: var(--cat-beach); }
+
+.mood-ambitious.active {
+    border-color: #ff8a65;
+    background: rgba(255,138,101,0.06);
+}
+.mood-ambitious.active .mood-name { color: #ff8a65; }
+
+.mood-selector-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
 
 .mood-content {
     animation: fadeIn 0.3s ease;

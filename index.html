@@ -217,17 +217,21 @@
         </div>
     </section>
 
-    <!-- ===== MORGAN AA REMINDER ===== -->
-    <div class="aa-reminder" id="aa-reminder" style="display:none;">
-        <div class="aa-reminder-content">
-            <span class="aa-reminder-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-            </span>
-            <div class="aa-reminder-text">
-                <strong>Morgan</strong> &mdash; don't forget to add your emergency contact info on the AA reservation!
-                <a href="https://www.aa.com" target="_blank" rel="noopener">Go to aa.com</a> &middot; Confirmation: <strong>UXGSTJ</strong>
+    <!-- ===== MORGAN PRE-TRIP TO-DO POPUP ===== -->
+    <div class="morgan-popup-overlay" id="morgan-popup-overlay">
+        <div class="morgan-popup">
+            <h3 class="morgan-popup-title">Pre-Trip To-Do: Morgan</h3>
+            <div class="morgan-popup-body">
+                <div class="morgan-todo-item">
+                    <span class="morgan-todo-check">&#9744;</span>
+                    <div>
+                        <p class="morgan-todo-text">Add emergency contact info on AA reservation</p>
+                        <p class="morgan-todo-detail">&rarr; Mom's phone number (aside from Reagan's)</p>
+                        <p class="morgan-todo-detail">&rarr; Go to <a href="https://www.aa.com" target="_blank" rel="noopener">aa.com</a>, confirmation code <strong>UXGSTJ</strong></p>
+                    </div>
+                </div>
             </div>
-            <button class="aa-reminder-close" id="aa-reminder-close" aria-label="Dismiss">&times;</button>
+            <button class="morgan-popup-btn" id="morgan-popup-dismiss">Got it</button>
         </div>
     </div>
 
@@ -320,6 +324,10 @@
                         <span class="cat-pill cat-transport">Transport</span>
                     </div>
                     <p>Welcome to paradise! Pick up the rental car near GHB airport (arranged through Mike's cousin).</p>
+                    <a href="https://www.google.com/maps/search/Governor's+Harbour+Airport+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Open in Maps
+                    </a>
                 </div>
             </div>
             <div class="tl-item">
@@ -419,7 +427,7 @@
         </div>
 
         <p class="mood-prompt">What's the vibe?</p>
-        <div class="mood-selector">
+        <div class="mood-selector mood-selector-3">
             <button class="mood-card mood-adventure active" data-mood="adventure" data-day="1">
                 <span class="mood-emoji">&#129343;</span>
                 <span class="mood-name">Adventure</span>
@@ -429,6 +437,11 @@
                 <span class="mood-emoji">&#127958;</span>
                 <span class="mood-name">Chill</span>
                 <span class="mood-desc">Pink sand all day</span>
+            </button>
+            <button class="mood-card mood-ambitious" data-mood="ambitious" data-day="1">
+                <span class="mood-emoji">&#127796;</span>
+                <span class="mood-name">Ambitious</span>
+                <span class="mood-desc">Bucket list beach</span>
             </button>
         </div>
 
@@ -490,6 +503,28 @@
                         </div>
                         <p>Massive stretch of pink sand, 5 min from the cottage. One of the best beaches in the Caribbean. Bring a book, a towel, and zero ambition.</p>
                         <a href="https://www.google.com/maps/search/French+Leave+Beach+Eleuthera" target="_blank" rel="noopener" class="maps-link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Open in Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mood-content" id="mood-1-ambitious" style="display:none;">
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">8:00 AM</div>
+                    <div class="tl-card border-adventure">
+                        <div class="tl-card-head">
+                            <h3>Lighthouse Beach — Full Day Trip</h3>
+                            <span class="cat-pill cat-adventure">Adventure</span>
+                        </div>
+                        <p>THE bucket list beach of Eleuthera. ~2 hour drive south, last 3 miles on rough dirt road. Endless pink sand, nearly deserted. Atlantic on one side, Caribbean on the other. Hidden caves, great shelling, excellent snorkeling.</p>
+                        <div class="pro-tip">
+                            <strong>Pro tip:</strong> Leave early. Pack at least 1 gallon of water per person, food, sunscreen, snorkel gear. Need decent car clearance. Do NOT drive up the final hill — park at the bottom and walk. This is a full day commitment but absolutely worth it.
+                        </div>
+                        <a href="https://www.google.com/maps/search/Lighthouse+Beach+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                             Open in Maps
                         </a>
