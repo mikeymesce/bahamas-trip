@@ -8,9 +8,7 @@
     var morgOverlay = document.getElementById('morg-overlay');
     var morgCanvas = document.getElementById('morg-canvas');
 
-    if (morgOverlay && localStorage.getItem('morg_note_seen_v4') === 'true') {
-        morgOverlay.remove();
-    } else if (morgOverlay && morgCanvas) {
+    if (morgOverlay && morgCanvas) {
         document.body.style.overflow = 'hidden';
 
         var ctx = morgCanvas.getContext('2d');
@@ -112,7 +110,6 @@
             if (scratched / total > 0.85) {
                 isRevealed = true;
                 cancelAnimationFrame(animId);
-                localStorage.setItem('morg_note_seen_v4', 'true');
                 document.body.style.overflow = '';
                 morgCanvas.style.transition = 'opacity 0.6s ease';
                 morgCanvas.style.opacity = '0';
@@ -173,6 +170,18 @@
             scratch(p.x, p.y);
         }, { passive: false });
         morgCanvas.addEventListener('touchend', function() { isDrawing = false; });
+
+        // Skip button
+        var morgSkip = document.getElementById('morg-skip');
+        if (morgSkip) {
+            morgSkip.addEventListener('click', function() {
+                isRevealed = true;
+                cancelAnimationFrame(animId);
+                document.body.style.overflow = '';
+                morgOverlay.classList.add('bye');
+                setTimeout(function() { morgOverlay.remove(); }, 900);
+            });
+        }
     }
 
     // ========== COUNTDOWN ==========

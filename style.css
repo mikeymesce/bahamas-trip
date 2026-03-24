@@ -152,6 +152,23 @@ button {
     margin-top: 0.5rem;
 }
 
+.morg-skip {
+    margin-top: 1.25rem;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.82rem;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    transition: color 0.2s ease;
+}
+
+.morg-skip:hover {
+    color: rgba(255,255,255,0.8);
+}
+
 /* ========== HERO ========== */
 
 .hero {
