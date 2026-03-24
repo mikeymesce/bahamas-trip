@@ -1,5 +1,5 @@
 // Service Worker — Eleuthera Trip (Offline Support)
-const CACHE_NAME = 'eleuthera-v2';
+const CACHE_NAME = 'eleuthera-v3';
 const URLS_TO_CACHE = [
     '/',
     '/index.html',
