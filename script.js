@@ -725,12 +725,17 @@
         }
     }
 
-    // ========== SERVICE WORKER REGISTRATION ==========
+    // ========== UNREGISTER OLD SERVICE WORKER ==========
     if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('sw.js').catch(function(err) {
-                console.log('SW registration failed:', err);
-            });
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for (var i = 0; i < registrations.length; i++) {
+                registrations[i].unregister();
+            }
+        });
+        caches.keys().then(function(names) {
+            for (var i = 0; i < names.length; i++) {
+                caches.delete(names[i]);
+            }
         });
     }
 
