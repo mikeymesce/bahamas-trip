@@ -435,6 +435,71 @@
 
     loadWeather();
 
+    // ========== PRIVATE SECTION ==========
+    var privateLocked = document.getElementById('private-locked');
+    var privateContent = document.getElementById('private-content');
+    var privatePwInput = document.getElementById('private-pw');
+    var privatePwBtn = document.getElementById('private-pw-btn');
+    var privatePwError = document.getElementById('private-pw-error');
+    var PRIVATE_PW = 'ilovemorganinthebahamas';
+
+    // Check if already unlocked this session
+    if (sessionStorage.getItem('private_unlocked') === 'true') {
+        if (privateLocked) privateLocked.style.display = 'none';
+        if (privateContent) privateContent.style.display = 'block';
+    }
+
+    function unlockPrivate() {
+        if (!privatePwInput) return;
+        var val = privatePwInput.value.trim().toLowerCase();
+        if (val === PRIVATE_PW) {
+            privateLocked.style.display = 'none';
+            privateContent.style.display = 'block';
+            sessionStorage.setItem('private_unlocked', 'true');
+        } else {
+            privatePwError.textContent = 'Wrong password';
+            privatePwInput.value = '';
+            setTimeout(function() { privatePwError.textContent = ''; }, 2000);
+        }
+    }
+
+    if (privatePwBtn) {
+        privatePwBtn.addEventListener('click', unlockPrivate);
+    }
+    if (privatePwInput) {
+        privatePwInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') unlockPrivate();
+        });
+    }
+
+    // Private to-do checkboxes (localStorage)
+    var privateChecks = document.querySelectorAll('#private-items .packing-check');
+    for (var pc = 0; pc < privateChecks.length; pc++) {
+        (function(check) {
+            var key = 'private_todo_' + check.id;
+            var li = check.parentElement;
+            if (localStorage.getItem(key) === 'true') {
+                check.classList.add('done');
+                check.textContent = '✓';
+                li.classList.add('checked');
+            }
+            check.addEventListener('click', function() {
+                var isDone = check.classList.contains('done');
+                if (isDone) {
+                    check.classList.remove('done');
+                    check.textContent = '';
+                    li.classList.remove('checked');
+                    localStorage.setItem(key, 'false');
+                } else {
+                    check.classList.add('done');
+                    check.textContent = '✓';
+                    li.classList.add('checked');
+                    localStorage.setItem(key, 'true');
+                }
+            });
+        })(privateChecks[pc]);
+    }
+
     // ========== INTERSECTION OBSERVER — FADE IN ==========
     if ('IntersectionObserver' in window) {
         var observer = new IntersectionObserver(function(entries) {
