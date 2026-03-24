@@ -20,14 +20,13 @@
 
 <!-- ========== MORGAN'S WELCOME NOTE ========== -->
 <div class="morg-overlay" id="morg-overlay">
-    <div class="morg-note">
-        <p class="morg-hey">Hey Morg,</p>
-        <p class="morg-body">I love you. Here's our itinerary because I know you get wet when things are planned and taken care of.</p>
-        <p class="morg-body">Here it is. Enjoy :)</p>
-        <p class="morg-sign">— Mike</p>
-        <div class="morg-scratch-area" id="morg-scratch-area">
-            <canvas id="morg-canvas"></canvas>
-            <div class="morg-scratch-text">Scribble here to continue</div>
+    <div class="morg-scratch-card" id="morg-scratch-card">
+        <canvas id="morg-canvas"></canvas>
+        <div class="morg-note-under">
+            <p class="morg-hey">Hey Morg,</p>
+            <p class="morg-body">I love you. Here's our itinerary because I know you get wet when things are planned and taken care of.</p>
+            <p class="morg-body">Here it is. Enjoy :)</p>
+            <p class="morg-sign">— Mike</p>
         </div>
     </div>
 </div>
@@ -246,6 +245,18 @@
                         <p class="morgan-todo-text">Add emergency contact info on AA reservation</p>
                         <p class="morgan-todo-detail">&rarr; Mom's phone number (aside from Reagan's)</p>
                         <p class="morgan-todo-detail">&rarr; Go to <a href="https://www.aa.com" target="_blank" rel="noopener">aa.com</a>, confirmation code <strong>UXGSTJ</strong></p>
+                    </div>
+                </div>
+                <div class="morgan-todo-item">
+                    <span class="morgan-todo-check">&#9744;</span>
+                    <div>
+                        <p class="morgan-todo-text">Fill in your passport number below</p>
+                        <p class="morgan-todo-detail">&rarr; Saved securely on your phone only</p>
+                        <div class="morgan-passport-row">
+                            <input type="text" id="morgan-passport" class="morgan-passport-input" placeholder="Passport #..." maxlength="20">
+                            <button class="morgan-passport-save" id="morgan-passport-save">Save</button>
+                        </div>
+                        <p class="morgan-passport-status" id="morgan-passport-status"></p>
                     </div>
                 </div>
             </div>

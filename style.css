@@ -93,19 +93,42 @@ button {
 
 .morg-overlay.bye {
     opacity: 0;
-    transition: opacity 0.6s ease;
+    transition: opacity 0.8s ease;
     pointer-events: none;
 }
 
-.morg-note {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 2.5rem 2rem 1.5rem;
-    max-width: 360px;
+.morg-scratch-card {
+    position: relative;
+    max-width: 340px;
     width: 100%;
+    min-height: 360px;
+    border-radius: 20px;
+    overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    text-align: center;
     transform: rotate(-1deg);
+}
+
+.morg-scratch-card canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.morg-note-under {
+    position: relative;
+    z-index: 1;
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    min-height: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .morg-hey {
@@ -126,39 +149,7 @@ button {
     font-family: 'Pacifico', cursive;
     font-size: 1.1rem;
     color: var(--text-muted);
-    margin-bottom: 1.5rem;
-}
-
-.morg-scratch-area {
-    position: relative;
-    width: 100%;
-    height: 60px;
-    border-radius: 12px;
-    overflow: hidden;
-    background: var(--bg);
-    border: 2px dashed var(--border);
-}
-
-.morg-scratch-area canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    cursor: crosshair;
-    z-index: 2;
-}
-
-.morg-scratch-text {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-muted);
-    letter-spacing: 0.5px;
-    z-index: 1;
+    margin-top: 0.5rem;
 }
 
 /* ========== HERO ========== */
@@ -765,6 +756,45 @@ main {
 
 .morgan-popup-btn:hover {
     opacity: 0.85;
+}
+
+.morgan-passport-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.morgan-passport-input {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    font-family: inherit;
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+    letter-spacing: 1px;
+}
+
+.morgan-passport-input:focus {
+    border-color: var(--pink);
+}
+
+.morgan-passport-save {
+    background: var(--text);
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.5rem 0.85rem;
+    border-radius: 8px;
+}
+
+.morgan-passport-status {
+    font-size: 0.75rem;
+    color: #2ecc71;
+    margin-top: 0.3rem;
+    min-height: 1rem;
 }
 
 /* ========== WEATHER WIDGET ========== */

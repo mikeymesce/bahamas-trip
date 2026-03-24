@@ -14,38 +14,66 @@
         document.body.style.overflow = 'hidden';
 
         var ctx = morgCanvas.getContext('2d');
-        var rect = morgCanvas.parentElement.getBoundingClientRect();
+        var card = morgCanvas.parentElement;
+        var rect = card.getBoundingClientRect();
         morgCanvas.width = rect.width;
         morgCanvas.height = rect.height;
+        var W = morgCanvas.width;
+        var H = morgCanvas.height;
 
-        // Fill canvas with a solid color (the "scratch" layer)
-        ctx.fillStyle = '#e8839a';
-        ctx.fillRect(0, 0, morgCanvas.width, morgCanvas.height);
+        // Pink-to-blue gradient background
+        var grad = ctx.createLinearGradient(0, 0, W, H);
+        grad.addColorStop(0, '#f4b4c4');
+        grad.addColorStop(0.4, '#e8839a');
+        grad.addColorStop(0.6, '#48cae4');
+        grad.addColorStop(1, '#0077b6');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, W, H);
 
-        // Draw "Scratch me!" text on the pink layer
-        ctx.fillStyle = '#ffffff';
-        ctx.font = '600 14px Outfit, sans-serif';
+        // Sparkle dust particles
+        for (var d = 0; d < 80; d++) {
+            var dx = Math.random() * W;
+            var dy = Math.random() * H;
+            var ds = Math.random() * 3 + 1;
+            ctx.beginPath();
+            ctx.arc(dx, dy, ds, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255,255,255,' + (Math.random() * 0.5 + 0.3) + ')';
+            ctx.fill();
+        }
+
+        // "Scratch Me!" text
+        ctx.fillStyle = 'rgba(255,255,255,0.95)';
+        ctx.font = '700 28px Outfit, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('~ scratch me ~', morgCanvas.width / 2, morgCanvas.height / 2);
+        ctx.fillText('Scratch Me!', W / 2, H / 2 - 10);
+
+        // Smaller subtitle
+        ctx.font = '400 14px Outfit, sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
+        ctx.fillText('Use your finger', W / 2, H / 2 + 20);
 
         var isDrawing = false;
-        var totalPixels = morgCanvas.width * morgCanvas.height;
+        var totalPixels = W * H;
         var scratchCount = 0;
 
         function scratch(x, y) {
             ctx.globalCompositeOperation = 'destination-out';
             ctx.beginPath();
-            ctx.arc(x, y, 18, 0, Math.PI * 2);
+            ctx.arc(x, y, 24, 0, Math.PI * 2);
             ctx.fill();
-            scratchCount += 18 * 18 * Math.PI;
+            scratchCount += 24 * 24 * Math.PI;
 
-            // If >40% scratched, dismiss
-            if (scratchCount / totalPixels > 0.4) {
+            if (scratchCount / totalPixels > 0.35) {
                 localStorage.setItem('morg_note_seen', 'true');
                 document.body.style.overflow = '';
-                morgOverlay.classList.add('bye');
-                setTimeout(function() { morgOverlay.remove(); }, 700);
+                // Fade out the canvas first, then the whole overlay
+                morgCanvas.style.transition = 'opacity 0.5s ease';
+                morgCanvas.style.opacity = '0';
+                setTimeout(function() {
+                    morgOverlay.classList.add('bye');
+                    setTimeout(function() { morgOverlay.remove(); }, 900);
+                }, 1500);
             }
         }
 
@@ -66,6 +94,7 @@
             scratch(p.x, p.y);
         });
         morgCanvas.addEventListener('mouseup', function() { isDrawing = false; });
+        morgCanvas.addEventListener('mouseleave', function() { isDrawing = false; });
 
         morgCanvas.addEventListener('touchstart', function(e) {
             e.preventDefault();
@@ -437,6 +466,39 @@
                 morganOverlay.classList.remove('visible');
                 localStorage.setItem('morgan_todo_dismissed', 'true');
             }
+        });
+    }
+
+    // ========== MORGAN PASSPORT ==========
+    var passportInput = document.getElementById('morgan-passport');
+    var passportSave = document.getElementById('morgan-passport-save');
+    var passportStatus = document.getElementById('morgan-passport-status');
+
+    // Load saved passport
+    if (passportInput) {
+        var savedPassport = localStorage.getItem('morgan_passport');
+        if (savedPassport) {
+            passportInput.value = savedPassport;
+        }
+    }
+
+    function savePassport() {
+        if (!passportInput) return;
+        var val = passportInput.value.trim();
+        if (!val) return;
+        localStorage.setItem('morgan_passport', val);
+        if (passportStatus) {
+            passportStatus.textContent = 'Saved!';
+            setTimeout(function() { passportStatus.textContent = ''; }, 2000);
+        }
+    }
+
+    if (passportSave) {
+        passportSave.addEventListener('click', savePassport);
+    }
+    if (passportInput) {
+        passportInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') savePassport();
         });
     }
 
