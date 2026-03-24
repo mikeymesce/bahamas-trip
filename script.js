@@ -4,6 +4,84 @@
 (function() {
     'use strict';
 
+    // ========== MORGAN WELCOME NOTE ==========
+    var morgOverlay = document.getElementById('morg-overlay');
+    var morgCanvas = document.getElementById('morg-canvas');
+
+    if (morgOverlay && localStorage.getItem('morg_note_seen') === 'true') {
+        morgOverlay.remove();
+    } else if (morgOverlay && morgCanvas) {
+        document.body.style.overflow = 'hidden';
+
+        var ctx = morgCanvas.getContext('2d');
+        var rect = morgCanvas.parentElement.getBoundingClientRect();
+        morgCanvas.width = rect.width;
+        morgCanvas.height = rect.height;
+
+        // Fill canvas with a solid color (the "scratch" layer)
+        ctx.fillStyle = '#e8839a';
+        ctx.fillRect(0, 0, morgCanvas.width, morgCanvas.height);
+
+        // Draw "Scratch me!" text on the pink layer
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '600 14px Outfit, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('~ scratch me ~', morgCanvas.width / 2, morgCanvas.height / 2);
+
+        var isDrawing = false;
+        var totalPixels = morgCanvas.width * morgCanvas.height;
+        var scratchCount = 0;
+
+        function scratch(x, y) {
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(x, y, 18, 0, Math.PI * 2);
+            ctx.fill();
+            scratchCount += 18 * 18 * Math.PI;
+
+            // If >40% scratched, dismiss
+            if (scratchCount / totalPixels > 0.4) {
+                localStorage.setItem('morg_note_seen', 'true');
+                document.body.style.overflow = '';
+                morgOverlay.classList.add('bye');
+                setTimeout(function() { morgOverlay.remove(); }, 700);
+            }
+        }
+
+        function getPos(e) {
+            var r = morgCanvas.getBoundingClientRect();
+            var touch = e.touches ? e.touches[0] : e;
+            return { x: touch.clientX - r.left, y: touch.clientY - r.top };
+        }
+
+        morgCanvas.addEventListener('mousedown', function(e) {
+            isDrawing = true;
+            var p = getPos(e);
+            scratch(p.x, p.y);
+        });
+        morgCanvas.addEventListener('mousemove', function(e) {
+            if (!isDrawing) return;
+            var p = getPos(e);
+            scratch(p.x, p.y);
+        });
+        morgCanvas.addEventListener('mouseup', function() { isDrawing = false; });
+
+        morgCanvas.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            isDrawing = true;
+            var p = getPos(e);
+            scratch(p.x, p.y);
+        }, { passive: false });
+        morgCanvas.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+            if (!isDrawing) return;
+            var p = getPos(e);
+            scratch(p.x, p.y);
+        }, { passive: false });
+        morgCanvas.addEventListener('touchend', function() { isDrawing = false; });
+    }
+
     // ========== COUNTDOWN ==========
     var TRIP_DATE = new Date('2026-05-05T05:32:00-04:00');
 
