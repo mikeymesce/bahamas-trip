@@ -115,7 +115,10 @@
                 morgCanvas.style.opacity = '0';
                 setTimeout(function() {
                     morgOverlay.classList.add('bye');
-                    setTimeout(function() { morgOverlay.remove(); }, 900);
+                    setTimeout(function() {
+                        morgOverlay.remove();
+                        if (window.showMorganPopup) window.showMorganPopup();
+                    }, 900);
                 }, 2000);
             }
         }
@@ -179,7 +182,10 @@
                 cancelAnimationFrame(animId);
                 document.body.style.overflow = '';
                 morgOverlay.classList.add('bye');
-                setTimeout(function() { morgOverlay.remove(); }, 900);
+                setTimeout(function() {
+                    morgOverlay.remove();
+                    if (window.showMorganPopup) window.showMorganPopup();
+                }, 900);
             });
         }
     }
@@ -517,27 +523,71 @@
     // ========== MORGAN PRE-TRIP POPUP ==========
     var morganOverlay = document.getElementById('morgan-popup-overlay');
     var morganDismiss = document.getElementById('morgan-popup-dismiss');
+    var morganItems = document.querySelectorAll('.morgan-todo-item[data-key]');
 
-    if (morganOverlay) {
-        var morganDismissed = localStorage.getItem('morgan_todo_dismissed');
-        if (!morganDismissed) {
-            morganOverlay.classList.add('visible');
+    // Check if all items are already done
+    function allMorganDone() {
+        for (var mi = 0; mi < morganItems.length; mi++) {
+            var key = morganItems[mi].getAttribute('data-key');
+            if (localStorage.getItem(key) !== 'true') return false;
         }
+        return true;
+    }
+
+    // Initialize checkboxes from localStorage
+    for (var mi = 0; mi < morganItems.length; mi++) {
+        (function(item) {
+            var key = item.getAttribute('data-key');
+            var check = item.querySelector('.morgan-check');
+            if (!check) return;
+
+            if (localStorage.getItem(key) === 'true') {
+                check.classList.add('done');
+                check.textContent = '✓';
+                item.classList.add('checked');
+            }
+
+            check.addEventListener('click', function() {
+                var isDone = check.classList.contains('done');
+                if (isDone) {
+                    check.classList.remove('done');
+                    check.textContent = '';
+                    item.classList.remove('checked');
+                    localStorage.setItem(key, 'false');
+                } else {
+                    check.classList.add('done');
+                    check.textContent = '✓';
+                    item.classList.add('checked');
+                    localStorage.setItem(key, 'true');
+                }
+            });
+        })(morganItems[mi]);
+    }
+
+    // Show Morgan popup (called after scratch-off dismisses, or immediately if no scratch-off)
+    window.showMorganPopup = function() {
+        if (morganOverlay && !allMorganDone()) {
+            setTimeout(function() {
+                morganOverlay.classList.add('visible');
+            }, 500);
+        }
+    };
+
+    // If scratch-off is not present (already removed), show popup now
+    if (!morgOverlay) {
+        window.showMorganPopup();
     }
 
     if (morganDismiss) {
         morganDismiss.addEventListener('click', function() {
             if (morganOverlay) morganOverlay.classList.remove('visible');
-            localStorage.setItem('morgan_todo_dismissed', 'true');
         });
     }
 
-    // Close popup on overlay click
     if (morganOverlay) {
         morganOverlay.addEventListener('click', function(e) {
             if (e.target === morganOverlay) {
                 morganOverlay.classList.remove('visible');
-                localStorage.setItem('morgan_todo_dismissed', 'true');
             }
         });
     }

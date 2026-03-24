@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -239,16 +239,16 @@
         <div class="morgan-popup">
             <h3 class="morgan-popup-title">Pre-Trip To-Do: Morgan</h3>
             <div class="morgan-popup-body">
-                <div class="morgan-todo-item">
-                    <span class="morgan-todo-check">&#9744;</span>
+                <div class="morgan-todo-item" data-key="morgan_todo_emergency">
+                    <div class="morgan-check" id="mcheck-1"></div>
                     <div>
                         <p class="morgan-todo-text">Add emergency contact info on AA reservation</p>
                         <p class="morgan-todo-detail">&rarr; Mom's phone number (aside from Reagan's)</p>
                         <p class="morgan-todo-detail">&rarr; Go to <a href="https://www.aa.com" target="_blank" rel="noopener">aa.com</a>, confirmation code <strong>UXGSTJ</strong></p>
                     </div>
                 </div>
-                <div class="morgan-todo-item">
-                    <span class="morgan-todo-check">&#9744;</span>
+                <div class="morgan-todo-item" data-key="morgan_todo_passport">
+                    <div class="morgan-check" id="mcheck-2"></div>
                     <div>
                         <p class="morgan-todo-text">Fill in your passport number below</p>
                         <p class="morgan-todo-detail">&rarr; Saved securely on your phone only</p>
@@ -1078,6 +1078,6 @@
     </div>
 </div>
 
-<script src="script.js?v=5"></script>
+<script src="script.js?v=6"></script>
 </body>
 </html>

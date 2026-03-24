@@ -739,6 +739,32 @@ main {
     flex-shrink: 0;
 }
 
+.morgan-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+.morgan-check.done {
+    background: #2ecc71;
+    border-color: #2ecc71;
+    color: var(--white);
+    font-size: 0.65rem;
+}
+
+.morgan-todo-item.checked .morgan-todo-text {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
 .morgan-todo-text {
     font-size: 0.9rem;
     font-weight: 600;
