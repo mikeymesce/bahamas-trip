@@ -8,7 +8,7 @@
     var morgOverlay = document.getElementById('morg-overlay');
     var morgCanvas = document.getElementById('morg-canvas');
 
-    if (morgOverlay && localStorage.getItem('morg_note_seen') === 'true') {
+    if (morgOverlay && localStorage.getItem('morg_note_seen_v2') === 'true') {
         morgOverlay.remove();
     } else if (morgOverlay && morgCanvas) {
         document.body.style.overflow = 'hidden';
@@ -65,7 +65,7 @@
             scratchCount += 24 * 24 * Math.PI;
 
             if (scratchCount / totalPixels > 0.35) {
-                localStorage.setItem('morg_note_seen', 'true');
+                localStorage.setItem('morg_note_seen_v2', 'true');
                 document.body.style.overflow = '';
                 // Fade out the canvas first, then the whole overlay
                 morgCanvas.style.transition = 'opacity 0.5s ease';
