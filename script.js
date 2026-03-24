@@ -592,6 +592,71 @@
         });
     }
 
+    // ========== MORGAN EXPORT TRIP INFO ==========
+    var exportBtn = document.getElementById('morgan-export-btn');
+    var exportStatus = document.getElementById('morgan-export-status');
+
+    if (exportBtn) {
+        exportBtn.addEventListener('click', function() {
+            var tripInfo = [
+                'MIKE & MORGAN — ELEUTHERA TRIP',
+                '================================',
+                '',
+                'FLIGHTS (Confirmation: UXGSTJ)',
+                '---',
+                'OUTBOUND — Tue, May 5:',
+                '  EWR 5:32 AM → MIA 8:39 AM (AA 1196)',
+                '  1h 21m layover in Miami',
+                '  MIA 10:00 AM → GHB 11:15 AM (AA 4020)',
+                '',
+                'RETURN — Sat, May 9:',
+                '  GHB 12:15 PM → MIA 1:24 PM (AA 3646)',
+                '  2h 06m layover in Miami',
+                '  MIA 3:30 PM → LGA 6:29 PM (AA 3162)',
+                '',
+                'ACCOMMODATION',
+                '---',
+                'Bird of Paradise Beachfront Cottages',
+                'Shooting Star Cottage',
+                'BANKS ROAD, GOVERNORS HARBOUR, ELEUTHERA, BAHAMAS',
+                'Google Maps: https://www.google.com/maps/place/25.19832290%2c-76.23671540',
+                '',
+                'EMERGENCY NUMBERS',
+                '---',
+                'Police: 919 or 911',
+                'Ambulance: 919',
+                'US Embassy Nassau: +1 242-322-1181',
+                '',
+                'GROCERY STORES',
+                '---',
+                'Burrows One Stop: 242-332-2929',
+                'Eleuthera Supply: 242-332-2728'
+            ].join('\n');
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(tripInfo).then(function() {
+                    if (exportStatus) {
+                        exportStatus.textContent = 'Copied! Now open Notes and paste.';
+                        setTimeout(function() { exportStatus.textContent = ''; }, 4000);
+                    }
+                });
+            } else {
+                var ta = document.createElement('textarea');
+                ta.value = tripInfo;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                if (exportStatus) {
+                    exportStatus.textContent = 'Copied! Now open Notes and paste.';
+                    setTimeout(function() { exportStatus.textContent = ''; }, 4000);
+                }
+            }
+        });
+    }
+
     // ========== MORGAN PASSPORT ==========
     var passportInput = document.getElementById('morgan-passport');
     var passportSave = document.getElementById('morgan-passport-save');

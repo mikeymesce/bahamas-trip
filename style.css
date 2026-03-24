@@ -825,6 +825,31 @@ main {
     border-color: var(--pink);
 }
 
+.morgan-export-btn {
+    display: inline-block;
+    margin-top: 0.5rem;
+    background: var(--text);
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.55rem 1rem;
+    border-radius: 8px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.morgan-export-btn:hover {
+    opacity: 0.85;
+}
+
+.morgan-export-status {
+    font-size: 0.75rem;
+    color: #2ecc71;
+    margin-top: 0.3rem;
+    min-height: 1rem;
+}
+
 .morgan-passport-save {
     background: var(--text);
     color: var(--white);
