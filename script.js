@@ -8,7 +8,7 @@
     var morgOverlay = document.getElementById('morg-overlay');
     var morgCanvas = document.getElementById('morg-canvas');
 
-    if (morgOverlay && localStorage.getItem('morg_note_seen_v3') === 'true') {
+    if (morgOverlay && localStorage.getItem('morg_note_seen_v4') === 'true') {
         morgOverlay.remove();
     } else if (morgOverlay && morgCanvas) {
         document.body.style.overflow = 'hidden';
@@ -112,7 +112,7 @@
             if (scratched / total > 0.85) {
                 isRevealed = true;
                 cancelAnimationFrame(animId);
-                localStorage.setItem('morg_note_seen_v3', 'true');
+                localStorage.setItem('morg_note_seen_v4', 'true');
                 document.body.style.overflow = '';
                 morgCanvas.style.transition = 'opacity 0.6s ease';
                 morgCanvas.style.opacity = '0';
