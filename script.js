@@ -8,7 +8,7 @@
     var morgOverlay = document.getElementById('morg-overlay');
     var morgCanvas = document.getElementById('morg-canvas');
 
-    if (morgOverlay && localStorage.getItem('morg_note_seen_v2') === 'true') {
+    if (morgOverlay && localStorage.getItem('morg_note_seen_v3') === 'true') {
         morgOverlay.remove();
     } else if (morgOverlay && morgCanvas) {
         document.body.style.overflow = 'hidden';
@@ -21,60 +21,124 @@
         var W = morgCanvas.width;
         var H = morgCanvas.height;
 
-        // Pink-to-blue gradient background
-        var grad = ctx.createLinearGradient(0, 0, W, H);
-        grad.addColorStop(0, '#f4b4c4');
-        grad.addColorStop(0.4, '#e8839a');
-        grad.addColorStop(0.6, '#48cae4');
-        grad.addColorStop(1, '#0077b6');
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, W, H);
-
-        // Sparkle dust particles
-        for (var d = 0; d < 80; d++) {
-            var dx = Math.random() * W;
-            var dy = Math.random() * H;
-            var ds = Math.random() * 3 + 1;
-            ctx.beginPath();
-            ctx.arc(dx, dy, ds, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(255,255,255,' + (Math.random() * 0.5 + 0.3) + ')';
-            ctx.fill();
+        // Floating particles
+        var particles = [];
+        for (var d = 0; d < 60; d++) {
+            particles.push({
+                x: Math.random() * W,
+                y: Math.random() * H,
+                r: Math.random() * 3 + 1,
+                dx: (Math.random() - 0.5) * 0.6,
+                dy: (Math.random() - 0.5) * 0.6,
+                alpha: Math.random() * 0.5 + 0.3
+            });
         }
 
-        // "Scratch Me!" text
-        ctx.fillStyle = 'rgba(255,255,255,0.95)';
-        ctx.font = '700 28px Outfit, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('Scratch Me!', W / 2, H / 2 - 10);
+        function drawScratchLayer() {
+            // Pink-to-blue gradient
+            var grad = ctx.createLinearGradient(0, 0, W, H);
+            grad.addColorStop(0, '#f4b4c4');
+            grad.addColorStop(0.35, '#e8839a');
+            grad.addColorStop(0.65, '#48cae4');
+            grad.addColorStop(1, '#0077b6');
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, W, H);
 
-        // Smaller subtitle
-        ctx.font = '400 14px Outfit, sans-serif';
-        ctx.fillStyle = 'rgba(255,255,255,0.7)';
-        ctx.fillText('Use your finger', W / 2, H / 2 + 20);
+            // Draw floating particles
+            for (var i = 0; i < particles.length; i++) {
+                var p = particles[i];
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,' + p.alpha + ')';
+                ctx.fill();
+            }
 
-        var isDrawing = false;
-        var totalPixels = W * H;
-        var scratchCount = 0;
+            // "Scratch Me!" text
+            ctx.fillStyle = 'rgba(255,255,255,0.95)';
+            ctx.font = '700 28px Outfit, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('Scratch Me!', W / 2, H / 2 - 10);
 
-        function scratch(x, y) {
+            ctx.font = '400 13px Outfit, sans-serif';
+            ctx.fillStyle = 'rgba(255,255,255,0.6)';
+            ctx.fillText('Use your finger', W / 2, H / 2 + 22);
+        }
+
+        drawScratchLayer();
+
+        // Store scratched pixels in a separate tracking canvas
+        var scratchMap = document.createElement('canvas');
+        scratchMap.width = W;
+        scratchMap.height = H;
+        var scratchCtx = scratchMap.getContext('2d');
+
+        // Animate floating particles
+        var animId;
+        var isRevealed = false;
+
+        function animateParticles() {
+            if (isRevealed) return;
+
+            // Move particles
+            for (var i = 0; i < particles.length; i++) {
+                var p = particles[i];
+                p.x += p.dx;
+                p.y += p.dy;
+                if (p.x < 0 || p.x > W) p.dx *= -1;
+                if (p.y < 0 || p.y > H) p.dy *= -1;
+            }
+
+            // Redraw the gradient + particles, then re-erase scratched areas
+            drawScratchLayer();
             ctx.globalCompositeOperation = 'destination-out';
-            ctx.beginPath();
-            ctx.arc(x, y, 24, 0, Math.PI * 2);
-            ctx.fill();
-            scratchCount += 24 * 24 * Math.PI;
+            ctx.drawImage(scratchMap, 0, 0);
 
-            if (scratchCount / totalPixels > 0.35) {
-                localStorage.setItem('morg_note_seen_v2', 'true');
+            animId = requestAnimationFrame(animateParticles);
+        }
+
+        animId = requestAnimationFrame(animateParticles);
+
+        // Check how much has been scratched
+        function checkReveal() {
+            var imageData = scratchCtx.getImageData(0, 0, W, H);
+            var scratched = 0;
+            var total = imageData.data.length / 4;
+            for (var i = 3; i < imageData.data.length; i += 4) {
+                if (imageData.data[i] > 0) scratched++;
+            }
+            // Need 85% scratched to reveal
+            if (scratched / total > 0.85) {
+                isRevealed = true;
+                cancelAnimationFrame(animId);
+                localStorage.setItem('morg_note_seen_v3', 'true');
                 document.body.style.overflow = '';
-                // Fade out the canvas first, then the whole overlay
-                morgCanvas.style.transition = 'opacity 0.5s ease';
+                morgCanvas.style.transition = 'opacity 0.6s ease';
                 morgCanvas.style.opacity = '0';
                 setTimeout(function() {
                     morgOverlay.classList.add('bye');
                     setTimeout(function() { morgOverlay.remove(); }, 900);
-                }, 1500);
+                }, 2000);
             }
+        }
+
+        var isDrawing = false;
+
+        function scratch(x, y) {
+            // Draw on tracking canvas
+            scratchCtx.beginPath();
+            scratchCtx.arc(x, y, 28, 0, Math.PI * 2);
+            scratchCtx.fillStyle = 'rgba(255,255,255,1)';
+            scratchCtx.fill();
+
+            // Draw on visible canvas
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(x, y, 28, 0, Math.PI * 2);
+            ctx.fill();
+
+            checkReveal();
         }
 
         function getPos(e) {
