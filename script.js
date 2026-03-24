@@ -657,37 +657,68 @@
         });
     }
 
-    // ========== MORGAN PASSPORT ==========
-    var passportInput = document.getElementById('morgan-passport');
-    var passportSave = document.getElementById('morgan-passport-save');
-    var passportStatus = document.getElementById('morgan-passport-status');
+    // ========== MORGAN EMERGENCY CONTACT (Supabase) ==========
+    var EMERGENCY_TABLE = SUPA_URL + '/rest/v1/bahamas_emergency_contacts';
+    var emergencyName = document.getElementById('emergency-name');
+    var emergencyPhone = document.getElementById('emergency-phone');
+    var emergencySave = document.getElementById('emergency-save');
+    var emergencyStatus = document.getElementById('emergency-status');
 
-    // Load saved passport
-    if (passportInput) {
-        var savedPassport = localStorage.getItem('morgan_passport');
-        if (savedPassport) {
-            passportInput.value = savedPassport;
-        }
-    }
-
-    function savePassport() {
-        if (!passportInput) return;
-        var val = passportInput.value.trim();
-        if (!val) return;
-        localStorage.setItem('morgan_passport', val);
-        if (passportStatus) {
-            passportStatus.textContent = 'Saved!';
-            setTimeout(function() { passportStatus.textContent = ''; }, 2000);
-        }
-    }
-
-    if (passportSave) {
-        passportSave.addEventListener('click', savePassport);
-    }
-    if (passportInput) {
-        passportInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') savePassport();
+    // Load existing contacts
+    function loadEmergencyContacts() {
+        fetch(EMERGENCY_TABLE + '?order=created_at.asc', {
+            headers: supaHeaders
+        }).then(function(r) { return r.json(); })
+        .then(function(contacts) {
+            if (contacts.length > 0 && emergencyName && emergencyPhone) {
+                emergencyName.value = contacts[0].name;
+                emergencyPhone.value = contacts[0].phone;
+                emergencyName.dataset.id = contacts[0].id;
+            }
         });
+    }
+
+    loadEmergencyContacts();
+
+    function saveEmergencyContact() {
+        if (!emergencyName || !emergencyPhone) return;
+        var name = emergencyName.value.trim();
+        var phone = emergencyPhone.value.trim();
+        if (!name || !phone) return;
+
+        var existingId = emergencyName.dataset.id;
+
+        if (existingId) {
+            // Update existing
+            fetch(EMERGENCY_TABLE + '?id=eq.' + existingId, {
+                method: 'PATCH',
+                headers: supaHeaders,
+                body: JSON.stringify({ name: name, phone: phone })
+            }).then(function() {
+                if (emergencyStatus) {
+                    emergencyStatus.textContent = 'Saved!';
+                    setTimeout(function() { emergencyStatus.textContent = ''; }, 2000);
+                }
+            });
+        } else {
+            // Insert new
+            fetch(EMERGENCY_TABLE, {
+                method: 'POST',
+                headers: supaHeaders,
+                body: JSON.stringify({ name: name, phone: phone })
+            }).then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data && data[0]) emergencyName.dataset.id = data[0].id;
+                if (emergencyStatus) {
+                    emergencyStatus.textContent = 'Saved!';
+                    setTimeout(function() { emergencyStatus.textContent = ''; }, 2000);
+                }
+            });
+        }
+    }
+
+    if (emergencySave) {
+        emergencySave.addEventListener('click', saveEmergencyContact);
     }
 
     // ========== WEATHER WIDGET ==========

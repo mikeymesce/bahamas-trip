@@ -825,6 +825,46 @@ main {
     border-color: var(--pink);
 }
 
+.morgan-emergency-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+}
+
+.morgan-form-input {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    font-family: inherit;
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+}
+
+.morgan-form-input:focus {
+    border-color: var(--pink);
+}
+
+.morgan-form-save {
+    align-self: flex-start;
+    background: var(--text);
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.5rem 0.85rem;
+    border-radius: 8px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.morgan-form-status {
+    font-size: 0.75rem;
+    color: #2ecc71;
+    min-height: 1rem;
+}
+
 .morgan-export-btn {
     display: inline-block;
     margin-top: 0.5rem;
