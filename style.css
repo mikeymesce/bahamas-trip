@@ -568,6 +568,31 @@ main {
     color: var(--text);
 }
 
+.flight-pdf-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.flight-pdf-btn {
+    display: block;
+    text-align: center;
+    padding: 0.65rem 1rem;
+    background: var(--cat-transport);
+    color: var(--white);
+    border-radius: var(--radius-pill);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: opacity var(--transition);
+}
+
+.flight-pdf-btn:hover {
+    opacity: 0.85;
+}
+
 /* ========== ACCOMMODATION ========== */
 
 .accom-card {
