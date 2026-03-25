@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=12">
+    <link rel="stylesheet" href="style.css?v=13">
 </head>
 <body>
 
@@ -861,63 +861,21 @@
     <!-- ===== RESTAURANT GUIDE ===== -->
     <section class="content-section" id="restaurants">
         <h2 class="section-heading">Restaurant Guide</h2>
+        <div class="rest-tabs">
+            <button class="rest-tab active" data-rest-tab="dinner">Dinner</button>
+            <button class="rest-tab" data-rest-tab="lunch">Lunch</button>
+            <button class="rest-tab" data-rest-tab="gems">Hidden Gems</button>
+        </div>
+
+        <!-- DINNER TAB -->
+        <div class="rest-tab-content active" id="rest-dinner">
         <div class="restaurant-grid">
-            <div class="rest-card">
-                <div class="rest-day">Day 0 Dinner</div>
-                <h3 class="rest-name">Tippy's</h3>
-                <p class="rest-desc">Steps from cottage, lunch & dinner, weekend live music.</p>
-                <div class="rest-tags">
-                    <span class="rest-tag">Beach Bar</span>
-                    <span class="rest-tag">Live Music</span>
-                </div>
-                <a href="https://www.google.com/maps/search/Tippy's+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                    Open in Maps
-                </a>
-            </div>
-            <div class="rest-card">
-                <div class="rest-day">Day 1 Dinner</div>
-                <h3 class="rest-name">1648 An Island Restaurant</h3>
-                <p class="rest-desc">Waterfront dining with sunset cocktails. Named after the year Eleuthera was first settled.</p>
-                <div class="rest-tags">
-                    <span class="rest-tag">Waterfront</span>
-                    <span class="rest-tag">Sunset</span>
-                </div>
-                <a href="https://www.google.com/maps/search/1648+An+Island+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                    Open in Maps
-                </a>
-            </div>
-            <div class="rest-card">
-                <div class="rest-day">Day 2 Dinner</div>
-                <h3 class="rest-name">Pascal's Seafood Restaurant</h3>
-                <p class="rest-desc">Swim-up cocktail bar, infinity pool. Come for the food, stay for the pool.</p>
-                <div class="rest-tags">
-                    <span class="rest-tag">Swim-Up Bar</span>
-                    <span class="rest-tag">Pool</span>
-                </div>
-                <a href="https://www.google.com/maps/search/Pascal's+Seafood+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                    Open in Maps
-                </a>
-            </div>
-            <div class="rest-card">
-                <div class="rest-day">Day 2 Adventure</div>
-                <h3 class="rest-name">Buccaneer Club</h3>
-                <p class="rest-desc">Water sports rentals + beach bar. Jet skis, kayaks, snorkel gear.</p>
-                <div class="rest-tags">
-                    <span class="rest-tag">Water Sports</span>
-                    <span class="rest-tag">Beach Bar</span>
-                </div>
-                <a href="https://www.google.com/maps/search/Buccaneer+Club+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                    Open in Maps
-                </a>
-            </div>
             <div class="rest-card rest-card-highlight">
+                <div class="rest-rank">#1</div>
                 <div class="rest-day">Day 3 &mdash; DON'T MISS</div>
                 <h3 class="rest-name">Friday Fish Fry at Cupid's Cay</h3>
-                <p class="rest-desc">6PM&ndash;midnight, Fridays only. Fresh grilled everything, cold Kaliks, live Caribbean music. The whole island shows up.</p>
+                <p class="rest-distance">5&ndash;7 min drive</p>
+                <p class="rest-desc">6PM&ndash;midnight, Fridays only. Fresh grilled everything, cold Kaliks, live Caribbean music. The whole island shows up. This is THE event of the trip.</p>
                 <div class="rest-tags">
                     <span class="rest-tag tag-hot">Must Do</span>
                     <span class="rest-tag">Live Music</span>
@@ -928,6 +886,232 @@
                     Open in Maps
                 </a>
             </div>
+            <div class="rest-card">
+                <div class="rest-rank">#2</div>
+                <div class="rest-day">Day 1 Dinner</div>
+                <h3 class="rest-name">1648 An Island Restaurant</h3>
+                <p class="rest-distance">5 min drive</p>
+                <p class="rest-desc">Waterfront dining with sunset cocktails. Named after the year Eleuthera was first settled. The nicest sit-down dinner on the island.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag">Waterfront</span>
+                    <span class="rest-tag">Sunset</span>
+                    <span class="rest-tag">$$&ndash;$$$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/1648+An+Island+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+            <div class="rest-card">
+                <div class="rest-rank">#3</div>
+                <div class="rest-day">Day 0 Dinner</div>
+                <h3 class="rest-name">Tippy's</h3>
+                <p class="rest-distance">2 min drive &middot; walkable</p>
+                <p class="rest-desc">Iconic beach bar right on the sand. Featured in Food &amp; Wine, Bon App&eacute;tit, and The New York Times. Weekend live music. Book 24 hours ahead.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag">Beach Bar</span>
+                    <span class="rest-tag">Live Music</span>
+                    <span class="rest-tag">$$&ndash;$$$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Tippy's+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+            <div class="rest-card">
+                <div class="rest-rank">#4</div>
+                <div class="rest-day">Day 2 Dinner</div>
+                <h3 class="rest-name">Pascal's Seafood Restaurant</h3>
+                <p class="rest-distance">5 min drive</p>
+                <p class="rest-desc">Swim-up cocktail bar, infinity pool. Come for the food, stay for the pool. Great date night vibes.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag">Swim-Up Bar</span>
+                    <span class="rest-tag">Pool</span>
+                    <span class="rest-tag">$$&ndash;$$$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Pascal's+Seafood+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+        </div>
+        </div>
+
+        <!-- LUNCH TAB -->
+        <div class="rest-tab-content" id="rest-lunch">
+        <div class="restaurant-grid">
+            <div class="rest-card">
+                <div class="rest-rank">#1</div>
+                <h3 class="rest-name">Tippy's</h3>
+                <p class="rest-distance">2 min drive &middot; walkable</p>
+                <p class="rest-desc">The mahi mahi tacos and blackened fish tacos are legendary. Menu changes daily on a chalkboard. Open-air palapa right on the sand. Book 24 hours ahead.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag tag-hot">Best Lunch</span>
+                    <span class="rest-tag">Beach Bar</span>
+                    <span class="rest-tag">$$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Tippy's+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+            <div class="rest-card">
+                <div class="rest-rank">#2</div>
+                <h3 class="rest-name">Governor's Harbour Bakery</h3>
+                <p class="rest-distance">5 min drive</p>
+                <p class="rest-desc">Conch patties, beef patties, fresh bread. Flaky crust, slightly curried, perfect spice. Open since 1989. Get there early &mdash; stuff sells out. Closes 2PM Saturdays.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag tag-hot">Local Legend</span>
+                    <span class="rest-tag">Grab &amp; Go</span>
+                    <span class="rest-tag">$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Governor's+Harbour+Bakery+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+            <div class="rest-card">
+                <div class="rest-rank">#3</div>
+                <h3 class="rest-name">Bacchus Fine Foods</h3>
+                <p class="rest-distance">1&ndash;2 min drive &middot; walkable</p>
+                <p class="rest-desc">Gourmet deli on Banks Road. Fresh salads, sandwiches, charcuterie, baked breads. Perfect for grabbing beach picnic supplies. Also sells wine and specialty groceries.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag">Deli</span>
+                    <span class="rest-tag">Picnic Supplies</span>
+                    <span class="rest-tag">$$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Bacchus+Fine+Foods+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+            <div class="rest-card">
+                <div class="rest-rank">#4</div>
+                <h3 class="rest-name">Buccaneer Club</h3>
+                <p class="rest-distance">5&ndash;7 min drive</p>
+                <p class="rest-desc">Fish burgers, fried chicken, mac &amp; cheese, wraps. Outdoor patio under flowering trees. Open 7 days a week &mdash; the most reliable restaurant in the area. Vegan options available.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag">Always Open</span>
+                    <span class="rest-tag">Outdoor Patio</span>
+                    <span class="rest-tag">$&ndash;$$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Buccaneer+Club+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+            <div class="rest-card">
+                <div class="rest-rank">#5</div>
+                <h3 class="rest-name">Da Perk Coffee Shop</h3>
+                <p class="rest-distance">5 min drive</p>
+                <p class="rest-desc">Sandwiches, pizza, pastries, coffee. Quick and easy with a harbour view. Free WiFi. Good for a light lunch or afternoon pick-me-up.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag">Cafe</span>
+                    <span class="rest-tag">Quick Bite</span>
+                    <span class="rest-tag">$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Da+Perk+Coffee+Shop+Governors+Harbour+Eleuthera" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+            <div class="rest-card">
+                <div class="rest-rank">#6</div>
+                <h3 class="rest-name">Pammy's Take Away</h3>
+                <p class="rest-distance">5&ndash;7 min drive</p>
+                <p class="rest-desc">Bahamian comfort food, takeout style. Locals rave about it. Seriously good breakfast and lunch at cheap prices. Closes at 5PM.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag">Takeout</span>
+                    <span class="rest-tag">Local Favorite</span>
+                    <span class="rest-tag">$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Pammy's+Take+Away+Governors+Harbour+Eleuthera" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+        </div>
+        </div>
+
+        <!-- HIDDEN GEMS TAB -->
+        <div class="rest-tab-content" id="rest-gems">
+        <div class="restaurant-grid">
+            <div class="rest-card rest-card-highlight">
+                <div class="rest-rank">#1</div>
+                <h3 class="rest-name">Stubbs' BBQ</h3>
+                <p class="rest-distance">5&ndash;7 min drive</p>
+                <p class="rest-desc">Ribs, pork chops, and chicken served out of Billy &amp; Brenda Stubbs' front yard. Friday &amp; Saturday only, 10AM&ndash;2PM. Legendary local BBQ &mdash; if you see the smoke, pull over.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag tag-hot">Legendary</span>
+                    <span class="rest-tag">Fri &amp; Sat Only</span>
+                    <span class="rest-tag">$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Stubbs+BBQ+Governors+Harbour+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+            <div class="rest-card">
+                <div class="rest-rank">#2</div>
+                <h3 class="rest-name">Cupid's Bites at Ronnie's</h3>
+                <p class="rest-distance">5&ndash;7 min drive</p>
+                <p class="rest-desc">Downstairs from Ronnie's Bar on Cupid's Cay. Great Bahamian food, good vibes, local crowd. Described as a "hidden gem" by everyone who finds it.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag">Hidden Gem</span>
+                    <span class="rest-tag">Local Crowd</span>
+                    <span class="rest-tag">$&ndash;$$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Ronnie's+Bar+Cupid's+Cay+Governors+Harbour+Eleuthera" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+            <div class="rest-card rest-card-highlight">
+                <div class="rest-rank">#3</div>
+                <h3 class="rest-name">The Rainbow Inn</h3>
+                <p class="rest-distance">~15 min north &middot; Rainbow Bay</p>
+                <p class="rest-desc">One of the most praised restaurants on the entire island. Cracked conch and grouper are legendary. Monday night rib special is a local institution. Open-air dining, old-school Bahamian charm, great sunset views.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag tag-hot">Worth the Drive</span>
+                    <span class="rest-tag">Seafood</span>
+                    <span class="rest-tag">$$&ndash;$$$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Rainbow+Inn+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+            <div class="rest-card">
+                <div class="rest-rank">#4</div>
+                <h3 class="rest-name">Uniq Bar &amp; Grill</h3>
+                <p class="rest-distance">~10 min south &middot; Palmetto Point</p>
+                <p class="rest-desc">Jerk chicken, cracked lobster, mac and cheese. Fresh, flavorful, generous portions. Plastic chairs, maybe eating outside &mdash; that's the charm. You're eating where Bahamians eat. Tourists who stumble on it rave about it.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag tag-hot">Local Favorite</span>
+                    <span class="rest-tag">Bahamian</span>
+                    <span class="rest-tag">$&ndash;$$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Uniq+Bar+Grill+Palmetto+Point+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+            <div class="rest-card">
+                <div class="rest-rank">#5</div>
+                <h3 class="rest-name">The Surf Shack</h3>
+                <p class="rest-distance">~25 min north &middot; Gregory Town</p>
+                <p class="rest-desc">Casual beach food near Surfer's Beach &mdash; fish tacos, burgers, fresh catch. Eat-in-your-swimsuit energy. Pair it with a morning at Surfer's Beach for a perfect half-day trip. Gregory Town is the pineapple capital of the Bahamas.</p>
+                <div class="rest-tags">
+                    <span class="rest-tag">Surfer Vibes</span>
+                    <span class="rest-tag">Beach Day Combo</span>
+                    <span class="rest-tag">$&ndash;$$</span>
+                </div>
+                <a href="https://www.google.com/maps/search/Surfer's+Beach+Gregory+Town+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Open in Maps
+                </a>
+            </div>
+        </div>
         </div>
     </section>
 
@@ -1123,6 +1307,6 @@
     </div>
 </div>
 
-<script src="script.js?v=12"></script>
+<script src="script.js?v=13"></script>
 </body>
 </html>

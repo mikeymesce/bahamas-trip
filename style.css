@@ -1359,6 +1359,63 @@ main {
 
 /* ========== RESTAURANT GUIDE ========== */
 
+.rest-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.rest-tab {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border: 2px solid var(--cat-food);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--cat-food);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.rest-tab.active {
+    background: var(--cat-food);
+    color: var(--white);
+}
+
+.rest-tab-content {
+    display: none;
+}
+
+.rest-tab-content.active {
+    display: block;
+}
+
+.rest-rank {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--white);
+    background: var(--cat-food);
+    padding: 0.1rem 0.5rem;
+    border-radius: var(--radius-pill);
+    margin-bottom: 0.35rem;
+}
+
+.rest-card-highlight .rest-rank {
+    background: var(--cat-nightlife);
+}
+
+.rest-distance {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 0.35rem;
+    font-weight: 500;
+}
+
 .restaurant-grid {
     display: flex;
     flex-direction: column;

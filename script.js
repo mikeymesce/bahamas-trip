@@ -794,6 +794,19 @@
 
     loadWeather();
 
+    // ========== RESTAURANT TABS ==========
+    var restTabs = document.querySelectorAll('.rest-tab');
+    for (var rt = 0; rt < restTabs.length; rt++) {
+        restTabs[rt].addEventListener('click', function() {
+            var target = this.getAttribute('data-rest-tab');
+            for (var j = 0; j < restTabs.length; j++) restTabs[j].classList.remove('active');
+            this.classList.add('active');
+            var panels = document.querySelectorAll('.rest-tab-content');
+            for (var k = 0; k < panels.length; k++) panels[k].classList.remove('active');
+            document.getElementById('rest-' + target).classList.add('active');
+        });
+    }
+
     // ========== PRIVATE SECTION ==========
     var privateLocked = document.getElementById('private-locked');
     var privateContent = document.getElementById('private-content');
