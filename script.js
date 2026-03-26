@@ -64,7 +64,7 @@
         envelope.addEventListener('mouseup', onSwipeEnd);
         envelope.addEventListener('click', onEnvelopeClick);
 
-        // --- Scratch-off on postcard ---
+        // --- Scratch-off on postcard (sandy beach) ---
         function initScratchOff() {
             if (!morgCanvas) return;
             var card = morgCanvas.parentElement;
@@ -74,58 +74,164 @@
             var W = morgCanvas.width;
             var H = morgCanvas.height;
             var ctx = morgCanvas.getContext('2d');
+            var revealed = false;
 
-            // Draw scratch layer
-            function drawLayer() {
-                var grad = ctx.createLinearGradient(0, 0, W, H);
-                grad.addColorStop(0, '#f4b4c4');
-                grad.addColorStop(0.35, '#e8839a');
-                grad.addColorStop(0.65, '#48cae4');
-                grad.addColorStop(1, '#0077b6');
+            // Draw sandy beach scene
+            function drawBeach() {
                 ctx.globalCompositeOperation = 'source-over';
-                ctx.fillStyle = grad;
-                ctx.fillRect(0, 0, W, H);
 
-                ctx.fillStyle = 'rgba(255,255,255,0.95)';
-                ctx.font = '700 26px Outfit, sans-serif';
+                // Sky gradient (top half)
+                var sky = ctx.createLinearGradient(0, 0, 0, H * 0.55);
+                sky.addColorStop(0, '#87CEEB');
+                sky.addColorStop(0.6, '#B0E0E6');
+                sky.addColorStop(1, '#E0F7FA');
+                ctx.fillStyle = sky;
+                ctx.fillRect(0, 0, W, H * 0.55);
+
+                // Sun
+                ctx.beginPath();
+                ctx.arc(W * 0.8, H * 0.15, 30, 0, Math.PI * 2);
+                ctx.fillStyle = '#FFF3B0';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(W * 0.8, H * 0.15, 26, 0, Math.PI * 2);
+                ctx.fillStyle = '#FFE066';
+                ctx.fill();
+
+                // Ocean
+                var ocean = ctx.createLinearGradient(0, H * 0.45, 0, H * 0.6);
+                ocean.addColorStop(0, '#48cae4');
+                ocean.addColorStop(0.5, '#0096c7');
+                ocean.addColorStop(1, '#0077b6');
+                ctx.fillStyle = ocean;
+                ctx.fillRect(0, H * 0.45, W, H * 0.15);
+
+                // Gentle wave line
+                ctx.beginPath();
+                ctx.moveTo(0, H * 0.48);
+                for (var wx = 0; wx <= W; wx += 5) {
+                    ctx.lineTo(wx, H * 0.48 + Math.sin(wx * 0.03) * 4 + Math.sin(wx * 0.01) * 3);
+                }
+                ctx.lineTo(W, H * 0.6);
+                ctx.lineTo(0, H * 0.6);
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(0, 150, 199, 0.3)';
+                ctx.fill();
+
+                // Sand gradient (bottom half)
+                var sand = ctx.createLinearGradient(0, H * 0.55, 0, H);
+                sand.addColorStop(0, '#F5DEB3');
+                sand.addColorStop(0.3, '#EDC9A0');
+                sand.addColorStop(1, '#D4A574');
+                ctx.fillStyle = sand;
+                ctx.fillRect(0, H * 0.55, W, H * 0.45);
+
+                // Sand grain texture
+                for (var g = 0; g < 600; g++) {
+                    var gx = Math.random() * W;
+                    var gy = H * 0.55 + Math.random() * H * 0.45;
+                    ctx.beginPath();
+                    ctx.arc(gx, gy, Math.random() * 1.2, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(180,140,100,' + (Math.random() * 0.3) + ')';
+                    ctx.fill();
+                }
+
+                // Small shells scattered on sand
+                for (var s = 0; s < 5; s++) {
+                    var sx = 30 + Math.random() * (W - 60);
+                    var sy = H * 0.65 + Math.random() * (H * 0.25);
+                    ctx.beginPath();
+                    ctx.ellipse(sx, sy, 4, 3, Math.random() * Math.PI, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255,240,220,' + (0.4 + Math.random() * 0.3) + ')';
+                    ctx.fill();
+                }
+
+                // "Scratch the sand!" text written like a finger in sand
+                ctx.save();
+                ctx.fillStyle = 'rgba(180,130,80,0.8)';
+                ctx.font = '700 24px Outfit, sans-serif';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-                ctx.fillText('Scratch Me!', W / 2, H / 2 - 10);
-
+                // Text shadow to look etched into sand
+                ctx.shadowColor = 'rgba(255,240,210,0.6)';
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 2;
+                ctx.shadowBlur = 0;
+                ctx.fillText('Scratch the sand!', W / 2, H * 0.75);
+                ctx.shadowColor = 'transparent';
                 ctx.font = '400 13px Outfit, sans-serif';
-                ctx.fillStyle = 'rgba(255,255,255,0.6)';
-                ctx.fillText('Use your finger', W / 2, H / 2 + 22);
+                ctx.fillStyle = 'rgba(160,110,60,0.6)';
+                ctx.fillText('Use your finger', W / 2, H * 0.75 + 28);
+                ctx.restore();
             }
-            drawLayer();
+            drawBeach();
 
             var isDrawing = false;
+            var lastX = null;
+            var lastY = null;
             var scratchMap = document.createElement('canvas');
             scratchMap.width = W;
             scratchMap.height = H;
             var scratchCtx = scratchMap.getContext('2d');
+            var checkCounter = 0;
+
+            // Smooth line scratch between two points
+            function scratchLine(x1, y1, x2, y2) {
+                var dx = x2 - x1;
+                var dy = y2 - y1;
+                var dist = Math.sqrt(dx * dx + dy * dy);
+                var steps = Math.max(1, Math.floor(dist / 4));
+
+                for (var s = 0; s <= steps; s++) {
+                    var t = s / steps;
+                    var x = x1 + dx * t;
+                    var y = y1 + dy * t;
+
+                    // Scratch on tracking canvas
+                    scratchCtx.beginPath();
+                    scratchCtx.arc(x, y, 24, 0, Math.PI * 2);
+                    scratchCtx.fillStyle = 'rgba(255,255,255,1)';
+                    scratchCtx.fill();
+
+                    // Scratch on visible canvas
+                    ctx.globalCompositeOperation = 'destination-out';
+                    ctx.beginPath();
+                    ctx.arc(x, y, 24, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // Only check reveal every 8 scratches for performance
+                checkCounter++;
+                if (checkCounter % 8 === 0) checkReveal();
+            }
 
             function scratch(x, y) {
-                scratchCtx.beginPath();
-                scratchCtx.arc(x, y, 28, 0, Math.PI * 2);
-                scratchCtx.fillStyle = 'rgba(255,255,255,1)';
-                scratchCtx.fill();
-
-                ctx.globalCompositeOperation = 'destination-out';
-                ctx.beginPath();
-                ctx.arc(x, y, 28, 0, Math.PI * 2);
-                ctx.fill();
-
-                checkReveal();
+                if (lastX !== null) {
+                    scratchLine(lastX, lastY, x, y);
+                } else {
+                    scratchCtx.beginPath();
+                    scratchCtx.arc(x, y, 24, 0, Math.PI * 2);
+                    scratchCtx.fillStyle = 'rgba(255,255,255,1)';
+                    scratchCtx.fill();
+                    ctx.globalCompositeOperation = 'destination-out';
+                    ctx.beginPath();
+                    ctx.arc(x, y, 24, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                lastX = x;
+                lastY = y;
             }
 
             function checkReveal() {
+                if (revealed) return;
                 var data = scratchCtx.getImageData(0, 0, W, H);
                 var scratched = 0;
                 var total = data.data.length / 4;
                 for (var i = 3; i < data.data.length; i += 4) {
                     if (data.data[i] > 0) scratched++;
                 }
-                if (scratched / total > 0.5) {
+                if (scratched / total > 0.95) {
+                    revealed = true;
                     morgCanvas.style.transition = 'opacity 0.6s ease';
                     morgCanvas.style.opacity = '0';
                     setTimeout(function() {
@@ -140,13 +246,13 @@
                 return { x: touch.clientX - r.left, y: touch.clientY - r.top };
             }
 
-            morgCanvas.addEventListener('mousedown', function(e) { isDrawing = true; scratch(getPos(e).x, getPos(e).y); });
+            morgCanvas.addEventListener('mousedown', function(e) { isDrawing = true; lastX = null; lastY = null; scratch(getPos(e).x, getPos(e).y); });
             morgCanvas.addEventListener('mousemove', function(e) { if (isDrawing) scratch(getPos(e).x, getPos(e).y); });
-            morgCanvas.addEventListener('mouseup', function() { isDrawing = false; });
-            morgCanvas.addEventListener('mouseleave', function() { isDrawing = false; });
-            morgCanvas.addEventListener('touchstart', function(e) { e.preventDefault(); isDrawing = true; scratch(getPos(e).x, getPos(e).y); }, { passive: false });
+            morgCanvas.addEventListener('mouseup', function() { isDrawing = false; lastX = null; lastY = null; checkReveal(); });
+            morgCanvas.addEventListener('mouseleave', function() { isDrawing = false; lastX = null; lastY = null; });
+            morgCanvas.addEventListener('touchstart', function(e) { e.preventDefault(); isDrawing = true; lastX = null; lastY = null; scratch(getPos(e).x, getPos(e).y); }, { passive: false });
             morgCanvas.addEventListener('touchmove', function(e) { e.preventDefault(); if (isDrawing) scratch(getPos(e).x, getPos(e).y); }, { passive: false });
-            morgCanvas.addEventListener('touchend', function() { isDrawing = false; });
+            morgCanvas.addEventListener('touchend', function() { isDrawing = false; lastX = null; lastY = null; checkReveal(); });
         }
 
         // --- Skip button ---
