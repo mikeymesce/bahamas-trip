@@ -99,11 +99,17 @@ button {
 }
 
 /* ---- Envelope ---- */
+.morg-envelope-scene {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .morg-envelope {
     position: relative;
     width: 300px;
     height: 200px;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    cursor: pointer;
+    perspective: 600px;
 }
 .morg-envelope-body {
     position: absolute;
@@ -115,7 +121,8 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 1;
+    z-index: 2;
+    overflow: hidden;
 }
 .morg-envelope-flap {
     position: absolute;
@@ -125,121 +132,117 @@ button {
     height: 100px;
     background: #ebe5d9;
     clip-path: polygon(0 100%, 50% 0%, 100% 100%);
-    z-index: 2;
+    z-index: 3;
     transform-origin: bottom center;
-    transition: transform 0.6s ease;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .morg-envelope.open .morg-envelope-flap {
     transform: rotateX(180deg);
+    z-index: 1;
 }
 .morg-envelope-label {
     font-family: 'Pacifico', cursive;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: #0077b6;
 }
 .morg-envelope-heart {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: #e8839a;
     margin-top: 0.3rem;
+    animation: heartBeat 1.5s ease-in-out infinite;
+}
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.15); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.1); }
+}
+.morg-card-inside {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: 0;
+    height: 85%;
+    background: white;
+    border-radius: 6px 6px 0 0;
+    z-index: 1;
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+}
+.morg-envelope.open .morg-card-inside {
+    transform: translateY(-110%);
 }
 .morg-envelope-hint {
     text-align: center;
-    color: rgba(255,255,255,0.5);
-    font-size: 0.82rem;
-    margin-top: 1rem;
-    animation: hintPulse 2s ease-in-out infinite;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
 }
-@keyframes hintPulse {
-    0%, 100% { opacity: 0.5; transform: translateY(0); }
-    50% { opacity: 1; transform: translateY(-4px); }
+.morg-hint-arrow {
+    font-size: 1.8rem;
+    display: block;
+    animation: arrowBounce 1.2s ease-in-out infinite;
 }
-.morg-envelope.leaving {
-    transform: translateY(-120vh);
+@keyframes arrowBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(-12px); opacity: 1; }
+}
+.morg-envelope-scene.opening .morg-envelope-hint {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.morg-envelope-scene.leaving {
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+    transform: scale(0.8) translateY(-40px);
     opacity: 0;
 }
 
-/* ---- Postcard ---- */
+/* ---- Postcard with scratch-off ---- */
 .morg-postcard-wrap {
     display: none;
-    perspective: 1000px;
 }
 .morg-postcard-wrap.visible {
     display: block;
-    animation: postcardSlideIn 0.6s ease forwards;
+    animation: postcardSlideUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
-@keyframes postcardSlideIn {
-    from { transform: translateY(60px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+@keyframes postcardSlideUp {
+    from { transform: translateY(100px) scale(0.9); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
 }
 .morg-postcard {
-    width: 320px;
-    height: 420px;
     position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.7s ease;
-    cursor: pointer;
+    width: 320px;
+    min-height: 400px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    transform: rotate(-1deg);
 }
-.morg-postcard.flipped {
-    transform: rotateY(180deg);
-}
-.morg-postcard-front,
-.morg-postcard-back {
+.morg-postcard canvas {
     position: absolute;
     inset: 0;
-    backface-visibility: hidden;
-    border-radius: 16px;
-    box-shadow: 0 16px 50px rgba(0,0,0,0.25);
-    padding: 2rem 1.5rem;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    cursor: crosshair;
+    touch-action: none;
+}
+.morg-note-under {
+    position: relative;
+    z-index: 1;
+    background: #f5f0e8;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-.morg-postcard-front {
-    background: linear-gradient(160deg, #48cae4 0%, #0096c7 40%, #023e8a 100%);
-    color: white;
-}
-.morg-pc-stamp {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: rgba(255,255,255,0.2);
-    border: 2px dashed rgba(255,255,255,0.5);
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-}
-.morg-pc-front-text {
-    font-family: 'Pacifico', cursive;
-    font-size: 1.8rem;
-    text-align: center;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-.morg-pc-subtext {
-    margin-top: 1rem;
-    font-size: 0.85rem;
-    opacity: 0.6;
-}
-.morg-postcard-back {
-    background: #f5f0e8;
-    transform: rotateY(180deg);
-    text-align: center;
-}
-.morg-pc-lines {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    width: 2px;
-    height: 60%;
-    transform: translateY(-50%);
-    background: repeating-linear-gradient(
-        to bottom,
-        #ccc 0px, #ccc 1px,
-        transparent 1px, transparent 20px
-    );
-    opacity: 0.4;
 }
 .morg-hey {
     font-family: 'Pacifico', cursive;

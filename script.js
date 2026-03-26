@@ -4,11 +4,12 @@
 (function() {
     'use strict';
 
-    // ========== MORGAN WELCOME NOTE (Envelope + Postcard) ==========
+    // ========== MORGAN WELCOME NOTE (Envelope + Scratch-off Postcard) ==========
     var morgOverlay = document.getElementById('morg-overlay');
+    var envelopeScene = document.getElementById('morg-envelope-scene');
     var envelope = document.getElementById('morg-envelope');
     var postcardWrap = document.getElementById('morg-postcard-wrap');
-    var postcard = document.getElementById('morg-postcard');
+    var morgCanvas = document.getElementById('morg-canvas');
 
     if (morgOverlay && envelope) {
         document.body.style.overflow = 'hidden';
@@ -23,7 +24,7 @@
             }, 900);
         }
 
-        // --- Envelope swipe-up ---
+        // --- Envelope swipe-up / tap ---
         var swipeStartY = 0;
         var envelopeOpened = false;
 
@@ -36,23 +37,25 @@
             if (envelopeOpened) return;
             var touch = e.changedTouches ? e.changedTouches[0] : e;
             var diff = swipeStartY - touch.clientY;
-            if (diff > 50) openEnvelope();
+            if (diff > 40) openEnvelope();
         }
-        // Also open on click/tap for desktop
         function onEnvelopeClick() {
             if (!envelopeOpened) openEnvelope();
         }
 
         function openEnvelope() {
             envelopeOpened = true;
+            envelopeScene.classList.add('opening');
             envelope.classList.add('open');
+            // After flap opens and card slides out, fade envelope away and show postcard
             setTimeout(function() {
-                envelope.classList.add('leaving');
+                envelopeScene.classList.add('leaving');
                 setTimeout(function() {
-                    envelope.style.display = 'none';
+                    envelopeScene.style.display = 'none';
                     postcardWrap.classList.add('visible');
-                }, 500);
-            }, 600);
+                    initScratchOff();
+                }, 800);
+            }, 1200);
         }
 
         envelope.addEventListener('touchstart', onSwipeStart, { passive: true });
@@ -61,18 +64,89 @@
         envelope.addEventListener('mouseup', onSwipeEnd);
         envelope.addEventListener('click', onEnvelopeClick);
 
-        // --- Postcard flip ---
-        var postcardFlipped = false;
-        if (postcard) {
-            postcard.addEventListener('click', function() {
-                if (!postcardFlipped) {
-                    postcardFlipped = true;
-                    postcard.classList.add('flipped');
-                } else {
-                    // Second tap on back = dismiss
-                    dismissWelcome();
+        // --- Scratch-off on postcard ---
+        function initScratchOff() {
+            if (!morgCanvas) return;
+            var card = morgCanvas.parentElement;
+            var rect = card.getBoundingClientRect();
+            morgCanvas.width = rect.width;
+            morgCanvas.height = rect.height;
+            var W = morgCanvas.width;
+            var H = morgCanvas.height;
+            var ctx = morgCanvas.getContext('2d');
+
+            // Draw scratch layer
+            function drawLayer() {
+                var grad = ctx.createLinearGradient(0, 0, W, H);
+                grad.addColorStop(0, '#f4b4c4');
+                grad.addColorStop(0.35, '#e8839a');
+                grad.addColorStop(0.65, '#48cae4');
+                grad.addColorStop(1, '#0077b6');
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, W, H);
+
+                ctx.fillStyle = 'rgba(255,255,255,0.95)';
+                ctx.font = '700 26px Outfit, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('Scratch Me!', W / 2, H / 2 - 10);
+
+                ctx.font = '400 13px Outfit, sans-serif';
+                ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                ctx.fillText('Use your finger', W / 2, H / 2 + 22);
+            }
+            drawLayer();
+
+            var isDrawing = false;
+            var scratchMap = document.createElement('canvas');
+            scratchMap.width = W;
+            scratchMap.height = H;
+            var scratchCtx = scratchMap.getContext('2d');
+
+            function scratch(x, y) {
+                scratchCtx.beginPath();
+                scratchCtx.arc(x, y, 28, 0, Math.PI * 2);
+                scratchCtx.fillStyle = 'rgba(255,255,255,1)';
+                scratchCtx.fill();
+
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 28, 0, Math.PI * 2);
+                ctx.fill();
+
+                checkReveal();
+            }
+
+            function checkReveal() {
+                var data = scratchCtx.getImageData(0, 0, W, H);
+                var scratched = 0;
+                var total = data.data.length / 4;
+                for (var i = 3; i < data.data.length; i += 4) {
+                    if (data.data[i] > 0) scratched++;
                 }
-            });
+                if (scratched / total > 0.5) {
+                    morgCanvas.style.transition = 'opacity 0.6s ease';
+                    morgCanvas.style.opacity = '0';
+                    setTimeout(function() {
+                        dismissWelcome();
+                    }, 2000);
+                }
+            }
+
+            function getPos(e) {
+                var r = morgCanvas.getBoundingClientRect();
+                var touch = e.touches ? e.touches[0] : e;
+                return { x: touch.clientX - r.left, y: touch.clientY - r.top };
+            }
+
+            morgCanvas.addEventListener('mousedown', function(e) { isDrawing = true; scratch(getPos(e).x, getPos(e).y); });
+            morgCanvas.addEventListener('mousemove', function(e) { if (isDrawing) scratch(getPos(e).x, getPos(e).y); });
+            morgCanvas.addEventListener('mouseup', function() { isDrawing = false; });
+            morgCanvas.addEventListener('mouseleave', function() { isDrawing = false; });
+            morgCanvas.addEventListener('touchstart', function(e) { e.preventDefault(); isDrawing = true; scratch(getPos(e).x, getPos(e).y); }, { passive: false });
+            morgCanvas.addEventListener('touchmove', function(e) { e.preventDefault(); if (isDrawing) scratch(getPos(e).x, getPos(e).y); }, { passive: false });
+            morgCanvas.addEventListener('touchend', function() { isDrawing = false; });
         }
 
         // --- Skip button ---
