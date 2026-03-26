@@ -76,95 +76,107 @@
             var ctx = morgCanvas.getContext('2d');
             var revealed = false;
 
-            // Draw sandy beach scene
-            function drawBeach() {
+            // Draw ultra-realistic sand texture
+            function drawSand() {
                 ctx.globalCompositeOperation = 'source-over';
 
-                // Sky gradient (top half)
-                var sky = ctx.createLinearGradient(0, 0, 0, H * 0.55);
-                sky.addColorStop(0, '#87CEEB');
-                sky.addColorStop(0.6, '#B0E0E6');
-                sky.addColorStop(1, '#E0F7FA');
-                ctx.fillStyle = sky;
-                ctx.fillRect(0, 0, W, H * 0.55);
+                // Base sand color with warm gradient
+                var base = ctx.createRadialGradient(W * 0.4, H * 0.4, 0, W * 0.5, H * 0.5, W * 0.8);
+                base.addColorStop(0, '#E8CFA0');
+                base.addColorStop(0.4, '#DABB8A');
+                base.addColorStop(0.7, '#D1AD78');
+                base.addColorStop(1, '#C49B64');
+                ctx.fillStyle = base;
+                ctx.fillRect(0, 0, W, H);
 
-                // Sun
-                ctx.beginPath();
-                ctx.arc(W * 0.8, H * 0.15, 30, 0, Math.PI * 2);
-                ctx.fillStyle = '#FFF3B0';
-                ctx.fill();
-                ctx.beginPath();
-                ctx.arc(W * 0.8, H * 0.15, 26, 0, Math.PI * 2);
-                ctx.fillStyle = '#FFE066';
-                ctx.fill();
-
-                // Ocean
-                var ocean = ctx.createLinearGradient(0, H * 0.45, 0, H * 0.6);
-                ocean.addColorStop(0, '#48cae4');
-                ocean.addColorStop(0.5, '#0096c7');
-                ocean.addColorStop(1, '#0077b6');
-                ctx.fillStyle = ocean;
-                ctx.fillRect(0, H * 0.45, W, H * 0.15);
-
-                // Gentle wave line
-                ctx.beginPath();
-                ctx.moveTo(0, H * 0.48);
-                for (var wx = 0; wx <= W; wx += 5) {
-                    ctx.lineTo(wx, H * 0.48 + Math.sin(wx * 0.03) * 4 + Math.sin(wx * 0.01) * 3);
+                // Layer 1: Large soft color variation (wet/dry patches)
+                for (var p = 0; p < 15; p++) {
+                    var px = Math.random() * W;
+                    var py = Math.random() * H;
+                    var pr = 40 + Math.random() * 80;
+                    var pg = ctx.createRadialGradient(px, py, 0, px, py, pr);
+                    var shade = Math.random() > 0.5 ? 'rgba(200,170,120,' : 'rgba(230,200,150,';
+                    pg.addColorStop(0, shade + (0.15 + Math.random() * 0.15) + ')');
+                    pg.addColorStop(1, shade + '0)');
+                    ctx.fillStyle = pg;
+                    ctx.fillRect(0, 0, W, H);
                 }
-                ctx.lineTo(W, H * 0.6);
-                ctx.lineTo(0, H * 0.6);
-                ctx.closePath();
-                ctx.fillStyle = 'rgba(0, 150, 199, 0.3)';
-                ctx.fill();
 
-                // Sand gradient (bottom half)
-                var sand = ctx.createLinearGradient(0, H * 0.55, 0, H);
-                sand.addColorStop(0, '#F5DEB3');
-                sand.addColorStop(0.3, '#EDC9A0');
-                sand.addColorStop(1, '#D4A574');
-                ctx.fillStyle = sand;
-                ctx.fillRect(0, H * 0.55, W, H * 0.45);
-
-                // Sand grain texture
-                for (var g = 0; g < 600; g++) {
-                    var gx = Math.random() * W;
-                    var gy = H * 0.55 + Math.random() * H * 0.45;
+                // Layer 2: Medium grain clusters
+                for (var c = 0; c < 200; c++) {
+                    var cx = Math.random() * W;
+                    var cy = Math.random() * H;
                     ctx.beginPath();
-                    ctx.arc(gx, gy, Math.random() * 1.2, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(180,140,100,' + (Math.random() * 0.3) + ')';
+                    ctx.arc(cx, cy, 1 + Math.random() * 2.5, 0, Math.PI * 2);
+                    var colors = ['rgba(190,155,100,', 'rgba(170,135,85,', 'rgba(210,180,130,', 'rgba(160,120,70,', 'rgba(230,205,160,'];
+                    ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)] + (0.2 + Math.random() * 0.35) + ')';
                     ctx.fill();
                 }
 
-                // Small shells scattered on sand
-                for (var s = 0; s < 5; s++) {
-                    var sx = 30 + Math.random() * (W - 60);
-                    var sy = H * 0.65 + Math.random() * (H * 0.25);
+                // Layer 3: Fine grain texture (thousands of tiny dots)
+                var imgData = ctx.getImageData(0, 0, W, H);
+                var pixels = imgData.data;
+                for (var i = 0; i < pixels.length; i += 4) {
+                    var noise = (Math.random() - 0.5) * 25;
+                    pixels[i] = Math.min(255, Math.max(0, pixels[i] + noise));
+                    pixels[i + 1] = Math.min(255, Math.max(0, pixels[i + 1] + noise * 0.9));
+                    pixels[i + 2] = Math.min(255, Math.max(0, pixels[i + 2] + noise * 0.7));
+                }
+                ctx.putImageData(imgData, 0, 0);
+
+                // Layer 4: Highlights — tiny bright specks (like light catching grains)
+                for (var h = 0; h < 300; h++) {
+                    var hx = Math.random() * W;
+                    var hy = Math.random() * H;
                     ctx.beginPath();
-                    ctx.ellipse(sx, sy, 4, 3, Math.random() * Math.PI, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(255,240,220,' + (0.4 + Math.random() * 0.3) + ')';
+                    ctx.arc(hx, hy, Math.random() * 0.8, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255,250,230,' + (0.3 + Math.random() * 0.4) + ')';
                     ctx.fill();
                 }
 
-                // "Scratch the sand!" text written like a finger in sand
+                // Layer 5: Dark specks (small pebbles / dark grains)
+                for (var d = 0; d < 80; d++) {
+                    var dx = Math.random() * W;
+                    var dy = Math.random() * H;
+                    ctx.beginPath();
+                    ctx.arc(dx, dy, 0.5 + Math.random() * 1.2, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(120,85,45,' + (0.15 + Math.random() * 0.2) + ')';
+                    ctx.fill();
+                }
+
+                // Layer 6: Subtle ripple lines (like wind-blown sand)
+                ctx.globalAlpha = 0.06;
+                for (var ry = 20; ry < H; ry += 12 + Math.random() * 8) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, ry);
+                    for (var rx = 0; rx < W; rx += 3) {
+                        ctx.lineTo(rx, ry + Math.sin(rx * 0.02 + ry * 0.1) * 2.5);
+                    }
+                    ctx.strokeStyle = '#8B6914';
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+                ctx.globalAlpha = 1;
+
+                // "Scratch the sand!" text etched in
                 ctx.save();
-                ctx.fillStyle = 'rgba(180,130,80,0.8)';
+                // Shadow = indent effect
+                ctx.shadowColor = 'rgba(255,230,180,0.5)';
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 2;
+                ctx.shadowBlur = 1;
+                ctx.fillStyle = 'rgba(140,100,50,0.7)';
                 ctx.font = '700 24px Outfit, sans-serif';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-                // Text shadow to look etched into sand
-                ctx.shadowColor = 'rgba(255,240,210,0.6)';
-                ctx.shadowOffsetX = 1;
-                ctx.shadowOffsetY = 2;
-                ctx.shadowBlur = 0;
-                ctx.fillText('Scratch the sand!', W / 2, H * 0.75);
+                ctx.fillText('Scratch the sand!', W / 2, H / 2 - 10);
                 ctx.shadowColor = 'transparent';
                 ctx.font = '400 13px Outfit, sans-serif';
-                ctx.fillStyle = 'rgba(160,110,60,0.6)';
-                ctx.fillText('Use your finger', W / 2, H * 0.75 + 28);
+                ctx.fillStyle = 'rgba(140,100,50,0.5)';
+                ctx.fillText('Use your finger', W / 2, H / 2 + 22);
                 ctx.restore();
             }
-            drawBeach();
+            drawSand();
 
             var isDrawing = false;
             var lastX = null;

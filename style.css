@@ -114,15 +114,27 @@ button {
 .morg-envelope-body {
     position: absolute;
     inset: 0;
-    background: #f5f0e8;
-    border-radius: 8px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    background: linear-gradient(165deg, #D4A96A 0%, #C89B5E 30%, #B8894E 70%, #A87A42 100%);
+    border-radius: 6px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 2;
     overflow: hidden;
+    border: 1px solid #9E7038;
+}
+.morg-envelope-body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent, transparent 3px,
+        rgba(160,110,50,0.04) 3px, rgba(160,110,50,0.04) 4px
+    );
+    pointer-events: none;
 }
 .morg-envelope-flap {
     position: absolute;
@@ -130,11 +142,12 @@ button {
     left: 0;
     width: 100%;
     height: 100px;
-    background: #ebe5d9;
+    background: linear-gradient(180deg, #BF8E50 0%, #C89B5E 100%);
     clip-path: polygon(0 100%, 50% 0%, 100% 100%);
     z-index: 3;
     transform-origin: bottom center;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    border-top: 1px solid #9E7038;
 }
 .morg-envelope.open .morg-envelope-flap {
     transform: rotateX(180deg);
@@ -143,11 +156,12 @@ button {
 .morg-envelope-label {
     font-family: 'Pacifico', cursive;
     font-size: 1.5rem;
-    color: #0077b6;
+    color: #4A2800;
+    text-shadow: 0 1px 0 rgba(255,220,160,0.4);
 }
 .morg-envelope-heart {
     font-size: 1.8rem;
-    color: #e8839a;
+    color: #C0392B;
     margin-top: 0.3rem;
     animation: heartBeat 1.5s ease-in-out infinite;
 }
