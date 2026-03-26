@@ -14,18 +14,35 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=14">
+    <link rel="stylesheet" href="style.css?v=16">
 </head>
 <body>
 
 <!-- ========== MORGAN'S WELCOME NOTE ========== -->
 <div class="morg-overlay" id="morg-overlay">
-    <div class="morg-scratch-card" id="morg-scratch-card">
-        <canvas id="morg-canvas"></canvas>
-        <div class="morg-note-under">
-            <p class="morg-hey">Hey Morg,</p>
-            <p class="morg-body">I know decisions made already and good planning gets you wet,<br>so enjoy reading the itinerary and let's enjoy our first out of country trip together :)</p>
-            <p class="morg-sign">— Mike</p>
+    <!-- Envelope -->
+    <div class="morg-envelope" id="morg-envelope">
+        <div class="morg-envelope-flap"></div>
+        <div class="morg-envelope-body">
+            <div class="morg-envelope-label">For Morgan</div>
+            <div class="morg-envelope-heart">&hearts;</div>
+        </div>
+        <div class="morg-envelope-hint">Swipe up to open</div>
+    </div>
+    <!-- Postcard (hidden until envelope opened) -->
+    <div class="morg-postcard-wrap" id="morg-postcard-wrap">
+        <div class="morg-postcard" id="morg-postcard">
+            <div class="morg-postcard-front">
+                <div class="morg-pc-stamp">&#9992; BAHAMAS</div>
+                <div class="morg-pc-front-text">Wish you were here...</div>
+                <div class="morg-pc-subtext">( tap to flip )</div>
+            </div>
+            <div class="morg-postcard-back">
+                <div class="morg-pc-lines"></div>
+                <p class="morg-hey">Hey Morg,</p>
+                <p class="morg-body">I know decisions made already and good planning gets you wet,<br>so enjoy reading the itinerary and let's enjoy our first out of country trip together :)</p>
+                <p class="morg-sign">— Mike</p>
+            </div>
         </div>
     </div>
     <button class="morg-skip" id="morg-skip">Skip</button>
@@ -254,13 +271,6 @@
                             <button class="morgan-form-save" id="emergency-save">Save</button>
                             <p class="morgan-form-status" id="emergency-status"></p>
                         </div>
-                    </div>
-                </div>
-                <div class="morgan-todo-item" data-key="morgan_todo_passport">
-                    <div class="morgan-check" id="mcheck-2"></div>
-                    <div>
-                        <p class="morgan-todo-text">Fill in your passport info on American Airlines</p>
-                        <p class="morgan-todo-detail">&rarr; <a href="https://www.aa.com/reservation/view/find-your-reservation?recordLocator=UXGSTJ&ntf=cne,tkt,eml,cta" target="_blank" rel="noopener">Open AA Reservation &rarr;</a></p>
                     </div>
                 </div>
                 <div class="morgan-todo-item" data-key="morgan_todo_saveinfo">
@@ -1287,6 +1297,6 @@
     </div>
 </div>
 
-<script src="script.js?v=13"></script>
+<script src="script.js?v=16"></script>
 </body>
 </html>

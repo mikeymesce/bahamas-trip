@@ -80,6 +80,7 @@ button {
 
 /* ========== MORGAN WELCOME NOTE ========== */
 
+/* ---- Overlay ---- */
 .morg-overlay {
     position: fixed;
     inset: 0;
@@ -91,61 +92,168 @@ button {
     justify-content: center;
     padding: 1.5rem;
 }
-
 .morg-overlay.bye {
     opacity: 0;
     transition: opacity 0.8s ease;
     pointer-events: none;
 }
 
-.morg-scratch-card {
+/* ---- Envelope ---- */
+.morg-envelope {
     position: relative;
-    max-width: 340px;
-    width: 100%;
-    min-height: 360px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    transform: rotate(-1deg);
+    width: 300px;
+    height: 200px;
+    transition: transform 0.5s ease, opacity 0.5s ease;
 }
-
-.morg-scratch-card canvas {
+.morg-envelope-body {
     position: absolute;
     inset: 0;
+    background: #f5f0e8;
+    border-radius: 8px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+.morg-envelope-flap {
+    position: absolute;
+    top: -48px;
+    left: 0;
     width: 100%;
-    height: 100%;
+    height: 100px;
+    background: #ebe5d9;
+    clip-path: polygon(0 100%, 50% 0%, 100% 100%);
     z-index: 2;
-    cursor: crosshair;
-    touch-action: none;
+    transform-origin: bottom center;
+    transition: transform 0.6s ease;
+}
+.morg-envelope.open .morg-envelope-flap {
+    transform: rotateX(180deg);
+}
+.morg-envelope-label {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.4rem;
+    color: #0077b6;
+}
+.morg-envelope-heart {
+    font-size: 1.6rem;
+    color: #e8839a;
+    margin-top: 0.3rem;
+}
+.morg-envelope-hint {
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.82rem;
+    margin-top: 1rem;
+    animation: hintPulse 2s ease-in-out infinite;
+}
+@keyframes hintPulse {
+    0%, 100% { opacity: 0.5; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-4px); }
+}
+.morg-envelope.leaving {
+    transform: translateY(-120vh);
+    opacity: 0;
 }
 
-.morg-note-under {
+/* ---- Postcard ---- */
+.morg-postcard-wrap {
+    display: none;
+    perspective: 1000px;
+}
+.morg-postcard-wrap.visible {
+    display: block;
+    animation: postcardSlideIn 0.6s ease forwards;
+}
+@keyframes postcardSlideIn {
+    from { transform: translateY(60px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.morg-postcard {
+    width: 320px;
+    height: 420px;
     position: relative;
-    z-index: 1;
-    background: var(--white);
-    padding: 2.5rem 2rem;
-    text-align: center;
-    min-height: 360px;
+    transform-style: preserve-3d;
+    transition: transform 0.7s ease;
+    cursor: pointer;
+}
+.morg-postcard.flipped {
+    transform: rotateY(180deg);
+}
+.morg-postcard-front,
+.morg-postcard-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    box-shadow: 0 16px 50px rgba(0,0,0,0.25);
+    padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-
+.morg-postcard-front {
+    background: linear-gradient(160deg, #48cae4 0%, #0096c7 40%, #023e8a 100%);
+    color: white;
+}
+.morg-pc-stamp {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255,255,255,0.2);
+    border: 2px dashed rgba(255,255,255,0.5);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+.morg-pc-front-text {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.8rem;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.morg-pc-subtext {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
+.morg-postcard-back {
+    background: #f5f0e8;
+    transform: rotateY(180deg);
+    text-align: center;
+}
+.morg-pc-lines {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: 2px;
+    height: 60%;
+    transform: translateY(-50%);
+    background: repeating-linear-gradient(
+        to bottom,
+        #ccc 0px, #ccc 1px,
+        transparent 1px, transparent 20px
+    );
+    opacity: 0.4;
+}
 .morg-hey {
     font-family: 'Pacifico', cursive;
     font-size: 1.8rem;
     color: var(--pink);
     margin-bottom: 1rem;
 }
-
 .morg-body {
     font-size: 1rem;
     color: var(--text);
     line-height: 1.6;
     margin-bottom: 0.75rem;
+    max-width: 260px;
 }
-
 .morg-sign {
     font-family: 'Pacifico', cursive;
     font-size: 1.1rem;
@@ -153,6 +261,7 @@ button {
     margin-top: 0.5rem;
 }
 
+/* ---- Skip button ---- */
 .morg-skip {
     margin-top: 1.25rem;
     background: none;
@@ -165,7 +274,6 @@ button {
     padding: 0.5rem 1rem;
     transition: color 0.2s ease;
 }
-
 .morg-skip:hover {
     color: rgba(255,255,255,0.8);
 }
@@ -827,29 +935,6 @@ main {
     opacity: 0.85;
 }
 
-.morgan-passport-row {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-}
-
-.morgan-passport-input {
-    flex: 1;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.85rem;
-    font-family: inherit;
-    background: var(--bg);
-    color: var(--text);
-    outline: none;
-    letter-spacing: 1px;
-}
-
-.morgan-passport-input:focus {
-    border-color: var(--pink);
-}
-
 .morgan-emergency-form {
     display: flex;
     flex-direction: column;
@@ -909,22 +994,6 @@ main {
 }
 
 .morgan-export-status {
-    font-size: 0.75rem;
-    color: #2ecc71;
-    margin-top: 0.3rem;
-    min-height: 1rem;
-}
-
-.morgan-passport-save {
-    background: var(--text);
-    color: var(--white);
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.5rem 0.85rem;
-    border-radius: 8px;
-}
-
-.morgan-passport-status {
     font-size: 0.75rem;
     color: #2ecc71;
     margin-top: 0.3rem;
