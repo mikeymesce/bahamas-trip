@@ -1644,6 +1644,20 @@ main {
     box-shadow: var(--shadow);
 }
 
+.grocery-cat {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.05rem;
+    margin: 1.25rem 0 0.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--border);
+    color: var(--text);
+    font-weight: 600;
+}
+
+.grocery-cat:first-child {
+    margin-top: 0;
+}
+
 .packing-list {
     list-style: none;
     padding: 0;

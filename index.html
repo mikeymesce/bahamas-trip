@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=22">
+    <link rel="stylesheet" href="style.css?v=23">
 </head>
 <body>
 
@@ -347,7 +347,7 @@
                 </div>
             </div>
             <div class="tl-item">
-                <div class="tl-time">11:45 AM</div>
+                <div class="tl-time">11:15 AM</div>
                 <div class="tl-card border-transport">
                     <div class="tl-card-head">
                         <h3>Land in Eleuthera</h3>
@@ -361,7 +361,7 @@
                 </div>
             </div>
             <div class="tl-item">
-                <div class="tl-time">~12:15 PM</div>
+                <div class="tl-time">~11:45 AM</div>
                 <div class="tl-card border-transport">
                     <div class="tl-card-head">
                         <h3>Rental Car Pickup &mdash; Wilton Thomas</h3>
@@ -376,7 +376,7 @@
                 </div>
             </div>
             <div class="tl-item">
-                <div class="tl-time">~12:45 PM</div>
+                <div class="tl-time">~12:15 PM</div>
                 <div class="tl-card border-shopping">
                     <div class="tl-card-head">
                         <h3>Grocery Run</h3>
@@ -386,6 +386,9 @@
                     <div class="pro-tip">
                         <strong>Pro tip:</strong> Get enough water for the whole trip. Also grab snacks, coffee, eggs, bread basics.
                     </div>
+                    <a href="#grocery-list" class="maps-link" style="background:var(--cat-shopping); color:var(--white);">
+                        &#128722; Open Shopping List
+                    </a>
                     <a href="https://www.google.com/maps/search/Burrows+One+Stop+Governors+Harbour+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                         Burrows One Stop
@@ -1172,6 +1175,74 @@
         </div>
     </section>
 
+    <!-- ===== GROCERY LIST ===== -->
+    <section class="content-section" id="grocery-list">
+        <h2 class="section-heading">Grocery Run List</h2>
+        <p style="text-align:center; color:var(--text-muted); margin-bottom:1rem; font-size:0.95rem;">Tap to check off as you shop. Saves automatically.</p>
+        <div class="packing-card">
+            <h3 class="grocery-cat">&#127859; Breakfast</h3>
+            <ul class="packing-list" id="grocery-items">
+                <li><div class="packing-check" id="g-1"></div><span class="packing-text">Greek yogurt</span></li>
+                <li><div class="packing-check" id="g-2"></div><span class="packing-text">Blueberries</span></li>
+                <li><div class="packing-check" id="g-3"></div><span class="packing-text">Bananas + extra fresh fruit</span></li>
+                <li><div class="packing-check" id="g-4"></div><span class="packing-text">Eggs (dozen)</span></li>
+                <li><div class="packing-check" id="g-5"></div><span class="packing-text">Bread / toast</span></li>
+                <li><div class="packing-check" id="g-6"></div><span class="packing-text">Butter (stick)</span></li>
+                <li><div class="packing-check" id="g-7"></div><span class="packing-text">Jam or honey</span></li>
+                <li><div class="packing-check" id="g-8"></div><span class="packing-text">Coffee grounds</span></li>
+                <li><div class="packing-check" id="g-9"></div><span class="packing-text">Coffee filters</span></li>
+                <li><div class="packing-check" id="g-10"></div><span class="packing-text">Non-dairy milk (oat or almond)</span></li>
+            </ul>
+
+            <h3 class="grocery-cat">&#129386; Lunch / Sandwiches</h3>
+            <ul class="packing-list">
+                <li><div class="packing-check" id="g-11"></div><span class="packing-text">Sandwich bread or rolls</span></li>
+                <li><div class="packing-check" id="g-12"></div><span class="packing-text">Deli turkey or ham</span></li>
+                <li><div class="packing-check" id="g-13"></div><span class="packing-text">Cheese slices</span></li>
+                <li><div class="packing-check" id="g-14"></div><span class="packing-text">Lettuce</span></li>
+                <li><div class="packing-check" id="g-15"></div><span class="packing-text">Tomato</span></li>
+                <li><div class="packing-check" id="g-16"></div><span class="packing-text">Mayo</span></li>
+                <li><div class="packing-check" id="g-17"></div><span class="packing-text">Mustard</span></li>
+                <li><div class="packing-check" id="g-18"></div><span class="packing-text">Pickles</span></li>
+            </ul>
+
+            <h3 class="grocery-cat">&#127831; Snacks</h3>
+            <ul class="packing-list">
+                <li><div class="packing-check" id="g-19"></div><span class="packing-text">Tortilla chips</span></li>
+                <li><div class="packing-check" id="g-20"></div><span class="packing-text">Guacamole (or avocados to make fresh)</span></li>
+                <li><div class="packing-check" id="g-21"></div><span class="packing-text">Salsa or dip</span></li>
+                <li><div class="packing-check" id="g-22"></div><span class="packing-text">Popcorn</span></li>
+                <li><div class="packing-check" id="g-23"></div><span class="packing-text">Granola bars / trail mix (beach snacks)</span></li>
+            </ul>
+
+            <h3 class="grocery-cat">&#127865; Tropical Drinks (Goombay Smash + Painkiller)</h3>
+            <ul class="packing-list">
+                <li><div class="packing-check" id="g-24"></div><span class="packing-text">Coconut rum (Malibu)</span></li>
+                <li><div class="packing-check" id="g-25"></div><span class="packing-text">Dark rum (Mount Gay or Gosling's)</span></li>
+                <li><div class="packing-check" id="g-26"></div><span class="packing-text">Pineapple juice</span></li>
+                <li><div class="packing-check" id="g-27"></div><span class="packing-text">Orange juice</span></li>
+                <li><div class="packing-check" id="g-28"></div><span class="packing-text">Cream of coconut (Coco Lopez)</span></li>
+                <li><div class="packing-check" id="g-29"></div><span class="packing-text">Grenadine</span></li>
+                <li><div class="packing-check" id="g-30"></div><span class="packing-text">Limes</span></li>
+                <li><div class="packing-check" id="g-31"></div><span class="packing-text">Nutmeg (for Painkiller garnish)</span></li>
+                <li><div class="packing-check" id="g-32"></div><span class="packing-text">Kalik beer (local Bahamian &mdash; must-try)</span></li>
+            </ul>
+
+            <h3 class="grocery-cat">&#127774; Beach + Essentials</h3>
+            <ul class="packing-list">
+                <li><div class="packing-check" id="g-33"></div><span class="packing-text">Bottled water (a LOT &mdash; full trip supply)</span></li>
+                <li><div class="packing-check" id="g-34"></div><span class="packing-text">Ice (for the beach cooler)</span></li>
+                <li><div class="packing-check" id="g-35"></div><span class="packing-text">Salt &amp; pepper (if not at cottage)</span></li>
+                <li><div class="packing-check" id="g-36"></div><span class="packing-text">Hot sauce</span></li>
+            </ul>
+
+            <div class="pro-tip" style="margin-top:1.25rem;">
+                <strong>&#127865; Goombay Smash recipe:</strong> 1oz coconut rum + 1oz dark rum + 2oz pineapple juice + 2oz OJ + splash grenadine. Shake with ice. Float dark rum on top.<br><br>
+                <strong>&#127865; Painkiller recipe:</strong> 2oz dark rum + 4oz pineapple juice + 1oz OJ + 1oz cream of coconut. Shake with ice. Grate nutmeg on top.
+            </div>
+        </div>
+    </section>
+
     <!-- ===== MIKE'S PRIVATE TO-DO (Password Protected) ===== -->
     <section class="content-section" id="private-section">
         <div class="private-locked" id="private-locked">
@@ -1318,6 +1389,6 @@
     </div>
 </div>
 
-<script src="script.js?v=22"></script>
+<script src="script.js?v=23"></script>
 </body>
 </html>

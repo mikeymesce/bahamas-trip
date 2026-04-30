@@ -930,6 +930,34 @@
         });
     }
 
+    // Grocery list checkboxes (localStorage)
+    var groceryChecks = document.querySelectorAll('#grocery-list .packing-check');
+    for (var gc = 0; gc < groceryChecks.length; gc++) {
+        (function(check) {
+            var key = 'grocery_' + check.id;
+            var li = check.parentElement;
+            if (localStorage.getItem(key) === 'true') {
+                check.classList.add('done');
+                check.textContent = '✓';
+                li.classList.add('checked');
+            }
+            check.addEventListener('click', function() {
+                var isDone = check.classList.contains('done');
+                if (isDone) {
+                    check.classList.remove('done');
+                    check.textContent = '';
+                    li.classList.remove('checked');
+                    localStorage.setItem(key, 'false');
+                } else {
+                    check.classList.add('done');
+                    check.textContent = '✓';
+                    li.classList.add('checked');
+                    localStorage.setItem(key, 'true');
+                }
+            });
+        })(groceryChecks[gc]);
+    }
+
     // Private to-do checkboxes (localStorage)
     var privateChecks = document.querySelectorAll('#private-items .packing-check');
     for (var pc = 0; pc < privateChecks.length; pc++) {
