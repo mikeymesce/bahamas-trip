@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=19">
+    <link rel="stylesheet" href="style.css?v=20">
 </head>
 <body>
 
@@ -90,12 +90,12 @@
         <a href="#day-1" class="day-tab" data-target="day-1">
             <span class="day-tab-num">D1</span>
             <span class="day-tab-date">May 6</span>
-            <span class="day-tab-label">Explore</span>
+            <span class="day-tab-label">Beach</span>
         </a>
         <a href="#day-2" class="day-tab" data-target="day-2">
             <span class="day-tab-num">D2</span>
             <span class="day-tab-date">May 7</span>
-            <span class="day-tab-label">Beach</span>
+            <span class="day-tab-label">Explore</span>
         </a>
         <a href="#day-3" class="day-tab" data-target="day-3">
             <span class="day-tab-num">D3</span>
@@ -347,13 +347,13 @@
                 </div>
             </div>
             <div class="tl-item">
-                <div class="tl-time">11:15 AM</div>
+                <div class="tl-time">11:45 AM</div>
                 <div class="tl-card border-transport">
                     <div class="tl-card-head">
                         <h3>Land in Eleuthera</h3>
                         <span class="cat-pill cat-transport">Transport</span>
                     </div>
-                    <p>Welcome to paradise! Pick up the rental car near GHB airport (arranged through Mike's cousin).</p>
+                    <p>Welcome to paradise! Grab bags, clear customs, head to rental car pickup.</p>
                     <a href="https://www.google.com/maps/search/Governor's+Harbour+Airport+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                         Open in Maps
@@ -361,7 +361,20 @@
                 </div>
             </div>
             <div class="tl-item">
-                <div class="tl-time">~12:00 PM</div>
+                <div class="tl-time">~12:15 PM</div>
+                <div class="tl-card border-transport">
+                    <div class="tl-card-head">
+                        <h3>Rental Car Pickup &mdash; Wilton Thomas</h3>
+                        <span class="cat-pill cat-transport">Transport</span>
+                    </div>
+                    <p>Wilton will be at GHB airport with the car. Quick handoff &mdash; keys, paperwork, you're on your way.</p>
+                    <div class="pro-tip">
+                        <strong>Contact:</strong> Wilton Thomas &middot; <a href="mailto:wwtcarrental@outlook.com">wwtcarrental@outlook.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-time">~12:45 PM</div>
                 <div class="tl-card border-shopping">
                     <div class="tl-card-head">
                         <h3>Grocery Run</h3>
@@ -429,14 +442,14 @@
         </div>
     </section>
 
-    <!-- ===== DAY 1 — First Full Day ===== -->
+    <!-- ===== DAY 1 — Beach Day (relax after travel) ===== -->
     <section class="day-section" id="day-1">
         <div class="day-header day-toggle" data-target="day-1-content">
-            <div class="day-badge" style="background: var(--cat-adventure);">D1</div>
+            <div class="day-badge" style="background: var(--cat-beach);">D1</div>
             <div class="day-meta">
                 <span class="day-date-label">WEDNESDAY, MAY 6</span>
-                <h2 class="day-title">Explore the Island</h2>
-                <p class="day-subtitle">Cliffs, caves, or pink sand &mdash; your call</p>
+                <h2 class="day-title">Beach Day</h2>
+                <p class="day-subtitle">Recover from travel &mdash; pick a beach, stay all day</p>
                 <span class="location-tag tag-eleuthera">ELEUTHERA</span>
             </div>
             <div class="day-chevron">&#8250;</div>
@@ -451,31 +464,162 @@
                         <h3>Breakfast at the Cottage</h3>
                         <span class="cat-pill cat-food">Food</span>
                     </div>
-                    <p>Full kitchen, ocean view patio. Take your time.</p>
+                    <p>Sleep in. Coffee on the patio. Pack a cooler with water, snacks, and lunch supplies. You're spending today at the beach.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="mood-prompt">Pick your beach</p>
+        <div class="mood-selector mood-selector-3">
+            <button class="mood-card mood-adventure active" data-mood="adventure" data-day="1">
+                <span class="mood-emoji">&#127965;</span>
+                <span class="mood-name">French Leave</span>
+                <span class="mood-desc">5 min · Pink sand</span>
+            </button>
+            <button class="mood-card mood-chill" data-mood="chill" data-day="1">
+                <span class="mood-emoji">&#129343;</span>
+                <span class="mood-name">Ten Bay</span>
+                <span class="mood-desc">20 min · Snorkeling</span>
+            </button>
+            <button class="mood-card mood-ambitious" data-mood="ambitious" data-day="1">
+                <span class="mood-emoji">&#127964;</span>
+                <span class="mood-name">Twin Coves</span>
+                <span class="mood-desc">10 min · Hidden gem</span>
+            </button>
+        </div>
+
+        <div class="mood-content" id="mood-1-adventure">
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">10:00 AM</div>
+                    <div class="tl-card border-beach">
+                        <div class="tl-card-head">
+                            <h3>French Leave Beach</h3>
+                            <span class="cat-pill cat-beach">Beach</span>
+                        </div>
+                        <p>The crown jewel. Massive stretch of pink sand, turquoise water, rarely crowded. Consistently ranked one of the best beaches in the entire Bahamas. 5 min drive.</p>
+                        <div class="pro-tip">
+                            <strong>Pro tip:</strong> Best light for photos in the morning. Bring a chair, a book, and a cooler. You won't want to leave.
+                        </div>
+                        <a href="https://www.google.com/maps/search/French+Leave+Beach+Governors+Harbour+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Open in Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mood-content" id="mood-1-chill" style="display:none;">
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">10:00 AM</div>
+                    <div class="tl-card border-beach">
+                        <div class="tl-card-head">
+                            <h3>Ten Bay Beach</h3>
+                            <span class="cat-pill cat-beach">Beach</span>
+                        </div>
+                        <p>20 min south on the Caribbean side. Calm, shallow, crystal-clear water like a swimming pool. The best snorkeling within 30 min of the cottage &mdash; parrotfish, stingrays, turtles along the rock ledges.</p>
+                        <div class="pro-tip">
+                            <strong>Pro tip:</strong> Bring snorkel gear (or grab it from the cottage). Walk to either end of the beach for the best reef access.
+                        </div>
+                        <a href="https://www.google.com/maps/search/Ten+Bay+Beach+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Open in Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mood-content" id="mood-1-ambitious" style="display:none;">
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-time">10:00 AM</div>
+                    <div class="tl-card border-beach">
+                        <div class="tl-card-head">
+                            <h3>Twin Coves Beach</h3>
+                            <span class="cat-pill cat-beach">Beach</span>
+                        </div>
+                        <p>Two small coves connected by a sand bridge at low tide. Feels like your own private beach. Great snorkeling along the rocky edges. More intimate and adventurous than French Leave. 5-10 min drive.</p>
+                        <div class="pro-tip">
+                            <strong>Pro tip:</strong> Check the tide &mdash; low tide is when you can walk the sand bridge between the coves to the little cay. Bring water shoes.
+                        </div>
+                        <a href="https://www.google.com/maps/search/Twin+Coves+Beach+Governors+Harbour+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Open in Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-time">Evening</div>
+                <div class="tl-card border-food">
+                    <div class="tl-card-head">
+                        <h3>Dinner: Pascal's Seafood Restaurant</h3>
+                        <span class="cat-pill cat-food">Food</span>
+                    </div>
+                    <p>Infinity pool with a swim-up cocktail bar. Come for the food, stay for the pool.</p>
+                    <a href="https://www.google.com/maps/search/Pascal's+Seafood+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Open in Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- ===== DAY 2 — Explore the Island ===== -->
+    <section class="day-section" id="day-2">
+        <div class="day-header day-toggle" data-target="day-2-content">
+            <div class="day-badge" style="background: var(--cat-adventure);">D2</div>
+            <div class="day-meta">
+                <span class="day-date-label">THURSDAY, MAY 7</span>
+                <h2 class="day-title">Explore the Island</h2>
+                <p class="day-subtitle">Cliffs, caves, or pink sand &mdash; your call</p>
+                <span class="location-tag tag-eleuthera">ELEUTHERA</span>
+            </div>
+            <div class="day-chevron">&#8250;</div>
+        </div>
+
+        <div class="day-body" id="day-2-content">
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-time">Morning</div>
+                <div class="tl-card border-food">
+                    <div class="tl-card-head">
+                        <h3>Breakfast at the Cottage</h3>
+                        <span class="cat-pill cat-food">Food</span>
+                    </div>
+                    <p>Full kitchen, ocean view patio. Fuel up &mdash; today's an exploring day.</p>
                 </div>
             </div>
         </div>
 
         <p class="mood-prompt">What's the vibe?</p>
         <div class="mood-selector mood-selector-3">
-            <button class="mood-card mood-adventure active" data-mood="adventure" data-day="1">
+            <button class="mood-card mood-adventure active" data-mood="adventure" data-day="2">
                 <span class="mood-emoji">&#129343;</span>
                 <span class="mood-name">Adventure</span>
                 <span class="mood-desc">Cliffs, caves & bridges</span>
             </button>
-            <button class="mood-card mood-chill" data-mood="chill" data-day="1">
+            <button class="mood-card mood-chill" data-mood="chill" data-day="2">
                 <span class="mood-emoji">&#127958;</span>
                 <span class="mood-name">Chill</span>
                 <span class="mood-desc">Pink sand all day</span>
             </button>
-            <button class="mood-card mood-ambitious" data-mood="ambitious" data-day="1">
+            <button class="mood-card mood-ambitious" data-mood="ambitious" data-day="2">
                 <span class="mood-emoji">&#127796;</span>
                 <span class="mood-name">Ambitious</span>
                 <span class="mood-desc">Bucket list beach</span>
             </button>
         </div>
 
-        <div class="mood-content" id="mood-1-adventure">
+        <div class="mood-content" id="mood-2-adventure">
             <div class="timeline">
                 <div class="tl-item">
                     <div class="tl-time">10:00 AM</div>
@@ -522,7 +666,7 @@
             </div>
         </div>
 
-        <div class="mood-content" id="mood-1-chill" style="display:none;">
+        <div class="mood-content" id="mood-2-chill" style="display:none;">
             <div class="timeline">
                 <div class="tl-item">
                     <div class="tl-time">10:00 AM</div>
@@ -541,7 +685,7 @@
             </div>
         </div>
 
-        <div class="mood-content" id="mood-1-ambitious" style="display:none;">
+        <div class="mood-content" id="mood-2-ambitious" style="display:none;">
             <div class="timeline">
                 <div class="tl-item">
                     <div class="tl-time">8:00 AM</div>
@@ -573,137 +717,6 @@
                     </div>
                     <p>Waterfront dining with sunset cocktails. Named after the year Eleuthera was first settled.</p>
                     <a href="https://www.google.com/maps/search/1648+An+Island+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                        Open in Maps
-                    </a>
-                </div>
-            </div>
-        </div>
-        </div>
-    </section>
-
-    <!-- ===== DAY 2 — Beach Day ===== -->
-    <section class="day-section" id="day-2">
-        <div class="day-header day-toggle" data-target="day-2-content">
-            <div class="day-badge" style="background: var(--cat-beach);">D2</div>
-            <div class="day-meta">
-                <span class="day-date-label">THURSDAY, MAY 7</span>
-                <h2 class="day-title">Beach Day</h2>
-                <p class="day-subtitle">Pick a beach, pack a cooler, stay all day</p>
-                <span class="location-tag tag-eleuthera">ELEUTHERA</span>
-            </div>
-            <div class="day-chevron">&#8250;</div>
-        </div>
-
-        <div class="day-body" id="day-2-content">
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">Morning</div>
-                <div class="tl-card border-food">
-                    <div class="tl-card-head">
-                        <h3>Breakfast at the Cottage</h3>
-                        <span class="cat-pill cat-food">Food</span>
-                    </div>
-                    <p>Fuel up. Pack a cooler with water, snacks, and lunch supplies. You're spending today at the beach.</p>
-                </div>
-            </div>
-        </div>
-
-        <p class="mood-prompt">Pick your beach</p>
-        <div class="mood-selector mood-selector-3">
-            <button class="mood-card mood-adventure active" data-mood="adventure" data-day="2">
-                <span class="mood-emoji">&#127965;</span>
-                <span class="mood-name">French Leave</span>
-                <span class="mood-desc">5 min · Pink sand</span>
-            </button>
-            <button class="mood-card mood-chill" data-mood="chill" data-day="2">
-                <span class="mood-emoji">&#129343;</span>
-                <span class="mood-name">Ten Bay</span>
-                <span class="mood-desc">20 min · Snorkeling</span>
-            </button>
-            <button class="mood-card mood-ambitious" data-mood="ambitious" data-day="2">
-                <span class="mood-emoji">&#127964;</span>
-                <span class="mood-name">Twin Coves</span>
-                <span class="mood-desc">10 min · Hidden gem</span>
-            </button>
-        </div>
-
-        <div class="mood-content" id="mood-2-adventure">
-            <div class="timeline">
-                <div class="tl-item">
-                    <div class="tl-time">10:00 AM</div>
-                    <div class="tl-card border-beach">
-                        <div class="tl-card-head">
-                            <h3>French Leave Beach</h3>
-                            <span class="cat-pill cat-beach">Beach</span>
-                        </div>
-                        <p>The crown jewel. Massive stretch of pink sand, turquoise water, rarely crowded. Consistently ranked one of the best beaches in the entire Bahamas. 5 min drive.</p>
-                        <div class="pro-tip">
-                            <strong>Pro tip:</strong> Best light for photos in the morning. Bring a chair, a book, and a cooler. You won't want to leave.
-                        </div>
-                        <a href="https://www.google.com/maps/search/French+Leave+Beach+Governors+Harbour+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            Open in Maps
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="mood-content" id="mood-2-chill" style="display:none;">
-            <div class="timeline">
-                <div class="tl-item">
-                    <div class="tl-time">10:00 AM</div>
-                    <div class="tl-card border-beach">
-                        <div class="tl-card-head">
-                            <h3>Ten Bay Beach</h3>
-                            <span class="cat-pill cat-beach">Beach</span>
-                        </div>
-                        <p>20 min south on the Caribbean side. Calm, shallow, crystal-clear water like a swimming pool. The best snorkeling within 30 min of the cottage &mdash; parrotfish, stingrays, turtles along the rock ledges.</p>
-                        <div class="pro-tip">
-                            <strong>Pro tip:</strong> Bring snorkel gear (or grab it from the cottage). Walk to either end of the beach for the best reef access.
-                        </div>
-                        <a href="https://www.google.com/maps/search/Ten+Bay+Beach+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            Open in Maps
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="mood-content" id="mood-2-ambitious" style="display:none;">
-            <div class="timeline">
-                <div class="tl-item">
-                    <div class="tl-time">10:00 AM</div>
-                    <div class="tl-card border-beach">
-                        <div class="tl-card-head">
-                            <h3>Twin Coves Beach</h3>
-                            <span class="cat-pill cat-beach">Beach</span>
-                        </div>
-                        <p>Two small coves connected by a sand bridge at low tide. Feels like your own private beach. Great snorkeling along the rocky edges. More intimate and adventurous than French Leave. 5-10 min drive.</p>
-                        <div class="pro-tip">
-                            <strong>Pro tip:</strong> Check the tide &mdash; low tide is when you can walk the sand bridge between the coves to the little cay. Bring water shoes.
-                        </div>
-                        <a href="https://www.google.com/maps/search/Twin+Coves+Beach+Governors+Harbour+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            Open in Maps
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-time">Evening</div>
-                <div class="tl-card border-food">
-                    <div class="tl-card-head">
-                        <h3>Dinner: Pascal's Seafood Restaurant</h3>
-                        <span class="cat-pill cat-food">Food</span>
-                    </div>
-                    <p>Infinity pool with a swim-up cocktail bar. Come for the food, stay for the pool.</p>
-                    <a href="https://www.google.com/maps/search/Pascal's+Seafood+Restaurant+Eleuthera+Bahamas" target="_blank" rel="noopener" class="maps-link">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                         Open in Maps
                     </a>
@@ -1299,6 +1312,6 @@
     </div>
 </div>
 
-<script src="script.js?v=19"></script>
+<script src="script.js?v=20"></script>
 </body>
 </html>
